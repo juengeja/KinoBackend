@@ -1,0 +1,10 @@
+com\example\kinoticketreservierungssystem\entity\Showing.class
+com\example\kinoticketreservierungssystem\entity\Person.class
+com\example\kinoticketreservierungssystem\KinoticketreservierungssystemApplication.class
+com\example\kinoticketreservierungssystem\entity\Cinema.class
+com\example\kinoticketreservierungssystem\entity\Seat.class
+com\example\kinoticketreservierungssystem\entity\Auditorium.class
+com\example\kinoticketreservierungssystem\entity\Customer.class
+com\example\kinoticketreservierungssystem\repository\MovieRepository.class
+com\example\kinoticketreservierungssystem\entity\Movie.class
+com\example\kinoticketreservierungssystem\controller\MovieController.class
