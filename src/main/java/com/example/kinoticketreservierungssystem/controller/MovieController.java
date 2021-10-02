@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequestMapping("/api")
+@RequestMapping()
 @RestController
 @CrossOrigin(origins = "*")
 public class MovieController {
@@ -31,4 +31,18 @@ public class MovieController {
 
         return new ResponseEntity<>(movies, HttpStatus.OK);
     }
+    @GetMapping()
+    public ResponseEntity<Iterable<Movie>> getAllMovies1(
+    ) {
+        Movie movie = new Movie();
+        movie.setName("James Bond");
+        movie.setDuration(162);
+        movie.setDescription("Beschreibung des Films James Bond");
+        movie.setGenre("Action");
+
+        movies.add(movie);
+
+        return new ResponseEntity<>(movies, HttpStatus.OK);
+    }
+
 }

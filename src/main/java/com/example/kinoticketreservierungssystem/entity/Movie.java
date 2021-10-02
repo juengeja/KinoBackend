@@ -1,18 +1,14 @@
 package com.example.kinoticketreservierungssystem.entity;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
+
 public class Movie {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int movieId;
     private String name;
     private String genre;
     private int duration;
     private LocalDate dateOfPublish;
-    @Column(length = 1000)
     private String description;
 
 
