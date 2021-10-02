@@ -1,5 +1,6 @@
 package com.example.kinoticketreservierungssystem.entity;
 
+import java.io.File;
 import java.time.LocalDate;
 
 
@@ -15,6 +16,8 @@ public class Movie {
     private boolean night_event;
     private boolean featured;
     private String trailer;
+
+    private File img;
 
 
     public int getDuration() {
@@ -80,4 +83,8 @@ public class Movie {
     public String getTrailer() { return trailer; }
 
     public void setTrailer(String trailer) { this.trailer = trailer; }
+
+    public File getImg() { return img; }
+
+    public void setImg(File img) { this.img = img; }
 }
