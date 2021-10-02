@@ -36,7 +36,7 @@ public class MovieController {
     ) {
         Movie movie = new Movie();
         movie.setName("James Bond");
-        movie.setDuration(165);
+        movie.setDuration(170);
         movie.setDescription("Beschreibung des Films James Bond");
         movie.setGenre("Action");
 
