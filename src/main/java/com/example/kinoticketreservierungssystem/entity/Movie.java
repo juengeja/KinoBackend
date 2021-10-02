@@ -6,10 +6,15 @@ import java.time.LocalDate;
 public class Movie {
     private int movieId;
     private String name;
+    private String domain;
     private String genre;
     private int duration;
-    private LocalDate dateOfPublish;
+    private LocalDate release_date;
     private String description;
+    private boolean menu;
+    private boolean night_event;
+    private boolean featured;
+    private String trailer;
 
 
     public int getDuration() {
@@ -24,12 +29,12 @@ public class Movie {
 
     public void setGenre(String genre) { this.genre = genre; }
 
-    public LocalDate getDateOfPublish() {
-        return dateOfPublish;
+    public LocalDate getRelease_date() {
+        return release_date;
     }
 
-    public void setDateOfPublish(LocalDate dateOfPublish) {
-        this.dateOfPublish = dateOfPublish;
+    public void setRelease_date(LocalDate release_date) {
+        this.release_date = release_date;
     }
 
     public String getDescription() {
@@ -55,4 +60,24 @@ public class Movie {
     public void setName(String title) {
         this.name = title;
     }
+
+    public String getDomain() { return domain; }
+
+    public void setDomain(String domain) { this.domain = domain; }
+
+    public boolean isMenu() { return menu; }
+
+    public void setMenu(boolean menu) { this.menu = menu; }
+
+    public boolean isNight_event() { return night_event; }
+
+    public void setNight_event(boolean night_event) { this.night_event = night_event; }
+
+    public boolean isFeatured() { return featured; }
+
+    public void setFeatured(boolean featured) { this.featured = featured; }
+
+    public String getTrailer() { return trailer; }
+
+    public void setTrailer(String trailer) { this.trailer = trailer; }
 }
