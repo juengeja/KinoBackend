@@ -17,7 +17,7 @@ public class Movie {
     private boolean featured;
     private String trailer;
 
-    private File img;
+    private String img;
 
 
     public int getDuration() {
@@ -84,7 +84,7 @@ public class Movie {
 
     public void setTrailer(String trailer) { this.trailer = trailer; }
 
-    public File getImg() { return img; }
+    public String getImg() { return img; }
 
-    public void setImg(File img) { this.img = img; }
+    public void setImg(String img) { this.img = img; }
 }
