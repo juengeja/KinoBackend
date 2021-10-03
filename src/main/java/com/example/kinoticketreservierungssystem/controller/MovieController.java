@@ -87,6 +87,22 @@ public class MovieController {
             movie4.setImg("https://i0.wp.com/teaser-trailer.com/wp-content/uploads/Candyman-movie-2021-poster.jpg?ssl=1");
 
             movies.add(movie4);
+
+            Movie movie5 = new Movie();
+            movie5.setMovieId(4);
+            movie5.setName("The Letter");
+            movie5.setDomain("TheLetter");
+            movie5.setGenre("Action, Thriller, Spionage");
+            movie5.setDuration(164);
+            movie5.setRelease_date(LocalDate.of(2021, 9, 30));
+            movie5.setMenu(false);
+            movie5.setNight_event(true);
+            movie5.setFeatured(true);
+            movie5.setDescription("The Letter ist ein Dokumentarfilm aus dem Jahr 2019 von Maia Lekow und Chris King.");
+            movie5.setTrailer("https://www.youtube.com/embed/kxW-897DkSk");
+            movie5.setImg("https://premium-films.com/sites/default/files/styles/large/public/poster_the-love-letter_low.jpg?itok=q5u9qOW9");
+
+            movies.add(movie5);
         }
 
         return new ResponseEntity<>(movies, HttpStatus.OK);
