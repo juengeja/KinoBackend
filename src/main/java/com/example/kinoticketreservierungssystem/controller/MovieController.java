@@ -52,7 +52,7 @@ public class MovieController {
             movie2.setFeatured(true);
             movie2.setDescription("Paul Atreides (Timothee Chalamet) siedelt gemeinsam mit seinem Vater Herzog Leto (Oscar Isaac), seiner Mutter Lady Jessica (Rebecca Ferguson) und dem gesamten Hauststand des Adelshauses Atreides auf den Planeten Arrakis um, der auch als Dune bekannt ist. Dort sollen die Atreides sicherstellen, dass das Spice, eine Droge, die intergalaktische Reisen erst möglich macht und nur auf Arrakis zu finden ist, weiter abgebaut wird. Doch die Reise nach Arrakis entpuppt sich als Falle, die Baron Vladimir Harkonnen (Stellan Skarsgård) den Atreides gemeinsam mit dem Herrscher des galaktischen Imperiums gestellt hat. Paul muss gemeinsam mit seiner Mutter in die endlosen Wüsten von Dune fliehen, wo er auf die geheimnisvollen Fremen um deren Anführer Stilgar (Javier Bardem) und die furchtlose Chani (Zendaya) trifft, ein nomadisches Wüstenvolk, das auf die Ankunft eines prophezeiten Erlösers wartet...");
             movie2.setTrailer("https://www.youtube.com/watch?v=RYp8xMRaIMQ");
-            movie2.setImg("https://filmyhotspot.com/wp-content/uploads/2020/11/ea28ca6c-9ed3-4e8c-bd04-552ceb311f38.jpg");
+            movie2.setImg("https://alternativemovieposters.com/wp-content/uploads/2021/02/ClaireCurtis_Dune.jpg");
 
             movies.add(movie2);
 
