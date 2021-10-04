@@ -9,8 +9,8 @@ import com.azure.spring.data.cosmos.config.CosmosConfig;
 import com.azure.spring.data.cosmos.core.ResponseDiagnostics;
 import com.azure.spring.data.cosmos.core.ResponseDiagnosticsProcessor;
 import com.azure.spring.data.cosmos.repository.config.EnableCosmosRepositories;
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,7 @@ import org.springframework.lang.Nullable;
 @EnableCosmosRepositories
 public class ConfigDB extends AbstractCosmosConfiguration {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ConfigDB.class);
+    private static final Logger LOGGER  = LoggerFactory.getLogger(ConfigDB.class);
 
     @Value("https://dhbw-kino-sql.documents.azure.com:443/")
     private String uri;

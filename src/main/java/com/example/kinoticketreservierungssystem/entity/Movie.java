@@ -1,53 +1,59 @@
 package com.example.kinoticketreservierungssystem.entity;
 
-import java.io.File;
+import com.azure.spring.data.cosmos.core.mapping.Container;
+import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
+import org.springframework.data.annotation.Id;
 import java.time.LocalDate;
 
+@Container(containerName = "Movies", ru = "400")
 
 public class Movie {
+    @Id
     private int movieId;
-    private String name;
-    private String domain;
-    private String genre;
-    private int duration;
-    private LocalDate release_date;
-    private String description;
-    private boolean menu;
-    private boolean night_event;
-    private boolean featured;
-    private String trailer;
-
-    private String img;
-    private String[] presentation_date = new String[4];
+    @PartitionKey
+    private String movieName;
+        private String genre;
+        private int duration;
+        private LocalDate releaseDate;
+        private boolean liveStatus;
+        private String description;
 
 
-    public int getDuration() {
-        return duration;
-    }
+        public Movie() {
 
-    public void setDuration(int length) {
-        this.duration = length;
-    }
+        }
 
-    public String getGenre() { return genre; }
-
-    public void setGenre(String genre) { this.genre = genre; }
-
-    public LocalDate getRelease_date() {
-        return release_date;
-    }
-
-    public void setRelease_date(LocalDate release_date) {
-        this.release_date = release_date;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
+        public Movie(int movieId, String movieName, String genre, int duration, LocalDate releaseDate, boolean liveStatus, String description) {
+        this.movieId = movieId;
+        this.movieName = movieName;
+        this.genre = genre;
+        this.duration = duration;
+        this.releaseDate = releaseDate;
+        this.liveStatus = liveStatus;
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "movieId=" + movieId +
+                ", movieName='" + movieName + '\'' +
+                ", genre='" + genre + '\'' +
+                ", duration=" + duration +
+                ", releaseDate=" + releaseDate +
+                ", liveStatus=" + liveStatus +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
+    public String getMovieName() {
+            return movieName;
+        }
+
+        public void setMovieName(String movieName) {
+            this.movieName = movieName;
+        }
+
 
     public int getMovieId() {
         return movieId;
@@ -57,39 +63,43 @@ public class Movie {
         this.movieId = movieId;
     }
 
-    public String getName() {
-        return name;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setName(String title) {
-        this.name = title;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
-    public String getDomain() { return domain; }
+    public int getDuration() {
+        return duration;
+    }
 
-    public void setDomain(String domain) { this.domain = domain; }
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 
-    public boolean isMenu() { return menu; }
+    public LocalDate getReleaseDate() {
+        return releaseDate;
+    }
 
-    public void setMenu(boolean menu) { this.menu = menu; }
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
+    }
 
-    public boolean isNight_event() { return night_event; }
+    public boolean isLiveStatus() {
+        return liveStatus;
+    }
 
-    public void setNight_event(boolean night_event) { this.night_event = night_event; }
+    public void setLiveStatus(boolean liveStatus) {
+        this.liveStatus = liveStatus;
+    }
 
-    public boolean isFeatured() { return featured; }
+    public String getDescription() {
+        return description;
+    }
 
-    public void setFeatured(boolean featured) { this.featured = featured; }
-
-    public String getTrailer() { return trailer; }
-
-    public void setTrailer(String trailer) { this.trailer = trailer; }
-
-    public String getImg() { return img; }
-
-    public void setImg(String img) { this.img = img; }
-
-    public String[] getPresentation_date() { return presentation_date; }
-
-    public void setPresentation_date(String[] presentation_date) { this.presentation_date = presentation_date; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
