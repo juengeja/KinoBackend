@@ -18,6 +18,7 @@ public class Movie {
     private String trailer;
 
     private String img;
+    private String[] presentation_date = new String[4];
 
 
     public int getDuration() {
@@ -87,4 +88,8 @@ public class Movie {
     public String getImg() { return img; }
 
     public void setImg(String img) { this.img = img; }
+
+    public String[] getPresentation_date() { return presentation_date; }
+
+    public void setPresentation_date(String[] presentation_date) { this.presentation_date = presentation_date; }
 }
