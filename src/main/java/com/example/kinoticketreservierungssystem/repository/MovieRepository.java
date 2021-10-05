@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface MovieRepository extends CosmosRepository<Movie, String> {
 
+
 }
