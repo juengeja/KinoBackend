@@ -1,0 +1,17 @@
+com\example\kinoticketreservierungssystem\config\ConfigDB$ResponseDiagnosticsProcessorImplementation.class
+com\example\kinoticketreservierungssystem\config\MovieRepositoryConfig$ResponseDiagnosticsProcessorImplementation.class
+com\example\kinoticketreservierungssystem\entity\Showing.class
+com\example\kinoticketreservierungssystem\entity\Person.class
+com\example\kinoticketreservierungssystem\KinoticketreservierungssystemApplication.class
+com\example\kinoticketreservierungssystem\entity\Auditorium.class
+com\example\kinoticketreservierungssystem\entity\Customer.class
+com\example\kinoticketreservierungssystem\entity\Movie.class
+com\example\kinoticketreservierungssystem\config\ConfigDB$1.class
+com\example\kinoticketreservierungssystem\config\ConfigDB.class
+com\example\kinoticketreservierungssystem\config\MovieRepositoryConfig$1.class
+com\example\kinoticketreservierungssystem\entity\Cinema.class
+com\example\kinoticketreservierungssystem\entity\Seat.class
+com\example\kinoticketreservierungssystem\repository\MovieRepository.class
+com\example\kinoticketreservierungssystem\config\CosmosProperties.class
+com\example\kinoticketreservierungssystem\config\MovieRepositoryConfig.class
+com\example\kinoticketreservierungssystem\controller\MovieController.class
