@@ -1,4 +1,4 @@
-package com.example.kinoticketreservierungssystem.config;
+package com.example.kinoticketreservierungssystem.exclude;
 
 import com.azure.core.credential.AzureKeyCredential;
 import com.azure.cosmos.CosmosClientBuilder;

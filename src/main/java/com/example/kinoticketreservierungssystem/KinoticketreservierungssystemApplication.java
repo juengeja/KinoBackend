@@ -3,11 +3,15 @@ package com.example.kinoticketreservierungssystem;
 import com.example.kinoticketreservierungssystem.config.MovieRepositoryConfig;
 import com.example.kinoticketreservierungssystem.entity.Movie;
 import com.example.kinoticketreservierungssystem.repository.MovieRepository;
+import com.example.kinoticketreservierungssystem.repository.MovieRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 
 import java.time.LocalDate;
@@ -16,7 +20,7 @@ import java.time.LocalDate;
 public class KinoticketreservierungssystemApplication implements CommandLineRunner {
 
     @Autowired
-    private MovieRepository repository;
+    private MovieRepositoryImpl repository;
     @Autowired
     private ApplicationContext applicationContext;
 
@@ -39,7 +43,8 @@ public class KinoticketreservierungssystemApplication implements CommandLineRunn
         MovieRepositoryConfig bean =
                 applicationContext.getBean(MovieRepositoryConfig.class);
         bean.switchToSecondaryKey();
-        repository.save(movie1);
+
+
 
     }
 
