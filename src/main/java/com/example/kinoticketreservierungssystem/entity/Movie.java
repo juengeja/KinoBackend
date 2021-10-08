@@ -14,7 +14,6 @@ public class Movie {
     private String movieName;
         private String genre;
         private int duration;
-        private LocalDate releaseDate;
         private boolean liveStatus;
         private String description;
 
@@ -23,12 +22,11 @@ public class Movie {
 
         }
 
-        public Movie(int movieId, String movieName, String genre, int duration, LocalDate releaseDate, boolean liveStatus, String description) {
+        public Movie(int movieId, String movieName, String genre, int duration, boolean liveStatus, String description) {
         this.movieId = movieId;
         this.movieName = movieName;
         this.genre = genre;
         this.duration = duration;
-        this.releaseDate = releaseDate;
         this.liveStatus = liveStatus;
         this.description = description;
     }
@@ -40,7 +38,6 @@ public class Movie {
                 ", movieName='" + movieName + '\'' +
                 ", genre='" + genre + '\'' +
                 ", duration=" + duration +
-                ", releaseDate=" + releaseDate +
                 ", liveStatus=" + liveStatus +
                 ", description='" + description + '\'' +
                 '}';
@@ -77,14 +74,6 @@ public class Movie {
 
     public void setDuration(int duration) {
         this.duration = duration;
-    }
-
-    public LocalDate getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(LocalDate releaseDate) {
-        this.releaseDate = releaseDate;
     }
 
     public boolean isLiveStatus() {
