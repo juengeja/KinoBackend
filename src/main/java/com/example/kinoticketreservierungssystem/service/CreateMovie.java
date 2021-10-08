@@ -1,5 +1,5 @@
 package com.example.kinoticketreservierungssystem.service;
-
+/*
 import com.azure.spring.data.cosmos.core.ReactiveCosmosTemplate;
 import com.example.kinoticketreservierungssystem.entity.Movie;
 import com.example.kinoticketreservierungssystem.repository.MovieRepository;
@@ -38,3 +38,4 @@ public class CreateMovie {
 
     }
 }
+*/
