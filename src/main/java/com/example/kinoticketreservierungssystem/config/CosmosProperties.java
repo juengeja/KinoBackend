@@ -2,7 +2,7 @@ package com.example.kinoticketreservierungssystem.config;
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-
+/*
 @ConfigurationProperties(prefix = "azure.cosmos")
     public class CosmosProperties {
 
@@ -56,3 +56,4 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
             this.queryMetricsEnabled = enableQueryMetrics;
         }
     }
+    */
