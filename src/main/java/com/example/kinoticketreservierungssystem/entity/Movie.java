@@ -3,7 +3,6 @@ package com.example.kinoticketreservierungssystem.entity;
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
 import org.springframework.data.annotation.Id;
-import java.util.ArrayList;
 import java.util.List;
 
 @Container(containerName = "Movies", ru = "400")
@@ -15,7 +14,7 @@ public class Movie {
     //Genre naming convention: Action, Thriller, Drama, Comedy...
     @PartitionKey
     private String mainGenre;
-    private List<String> genres = new ArrayList<String>();
+    private List<String> genres;
     private int duration;
     private boolean liveStatus;
     private String img;

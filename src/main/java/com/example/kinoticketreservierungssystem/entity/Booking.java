@@ -3,18 +3,18 @@ package com.example.kinoticketreservierungssystem.entity;
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
 import org.springframework.data.annotation.Id;
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Container(containerName = "Bookings", ru = "400")
 public class Booking {
     @Id
     private String bookingID;
-    private Customer customerInfo = new Customer();
+    private Customer customerInfo;
     @PartitionKey
-    private ShowEvent showEventInfo = new ShowEvent();
-    private List<Seat> seatInfo = new ArrayList<Seat>();
-    private Coupon couponInfo = new Coupon();
+    private ShowEvent showEventInfo;
+    private List<Seat> seatInfo;
+    private Coupon couponInfo;
     private String paymentMethod;
     private float totalPrice;
     private boolean paid;

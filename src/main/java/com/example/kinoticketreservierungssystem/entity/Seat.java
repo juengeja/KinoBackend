@@ -9,9 +9,9 @@ public class Seat {
     // seatID naming convention: RoomID + Row + SeatNumber
     @Id
     private String seatID;
-    private EventRoom eventRoomInfo = new EventRoom();
-    // row naming convention: A,B,C,D...
     @PartitionKey
+    private EventRoom eventRoomInfo;
+    // row naming convention: A,B,C,D...
     private char row;
     private int seatNumber;
     private boolean booked;

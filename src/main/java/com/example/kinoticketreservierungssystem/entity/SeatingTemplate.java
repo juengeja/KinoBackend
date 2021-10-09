@@ -12,8 +12,8 @@ public class SeatingTemplate {
     @Id
     private String seatingTemplateID;
     @PartitionKey
-    private EventRoom eventRoomInfo = new EventRoom();
-    private Map<Seat,Float> seatPricingMap = new TreeMap<Seat,Float>();
+    private EventRoom eventRoomInfo;
+    private Map<Seat,Float> seatPricingMap;
 
     public SeatingTemplate(String seatingTemplateID, EventRoom eventRoomInfo, Map<Seat, Float> seatPricingMap) {
         this.seatingTemplateID = seatingTemplateID;

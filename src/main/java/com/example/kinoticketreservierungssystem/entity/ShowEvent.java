@@ -18,7 +18,7 @@ public class ShowEvent {
     @PartitionKey
     private boolean is3D;
     private boolean hasFreeSeats;
-    private Map<Seat,Float> seatPricingMap = new TreeMap<Seat,Float>();
+    private Map<Seat,Float> seatPricingMap;
 
     public ShowEvent(String showEventID, EventRoom eventRoomInfo, Movie movieInfo, LocalDateTime eventStart, int duration, boolean is3D, boolean hasFreeSeats, Map<Seat, Float> seatPricingMap) {
         this.showEventID = showEventID;
