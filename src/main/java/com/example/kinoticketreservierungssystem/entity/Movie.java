@@ -3,69 +3,78 @@ package com.example.kinoticketreservierungssystem.entity;
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
 import org.springframework.data.annotation.Id;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Container(containerName = "Movies", ru = "400")
-
 public class Movie {
     @Id
-    private int movieId;
-    @PartitionKey
+    private String movieId;
     private String movieName;
-        private String genre;
-        private int duration;
-        private boolean liveStatus;
-        private String description;
+    private String movieDomain;
+    //Genre naming convention: Action, Thriller, Drama, Comedy...
+    @PartitionKey
+    private String mainGenre;
+    private List<String> genres = new ArrayList<String>();
+    private int duration;
+    private boolean liveStatus;
+    private String img;
+    private String description;
 
-
-        public Movie() {
-
-        }
-
-        public Movie(int movieId, String movieName, String genre, int duration, boolean liveStatus, String description) {
+    public Movie(String movieId, String movieName, String movieDomain, String mainGenre, List<String> genres, int duration, boolean liveStatus, String img, String description) {
         this.movieId = movieId;
         this.movieName = movieName;
-        this.genre = genre;
+        this.movieDomain = movieDomain;
+        this.mainGenre = mainGenre;
+        this.genres = genres;
         this.duration = duration;
         this.liveStatus = liveStatus;
+        this.img = img;
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "movieId=" + movieId +
-                ", movieName='" + movieName + '\'' +
-                ", genre='" + genre + '\'' +
-                ", duration=" + duration +
-                ", liveStatus=" + liveStatus +
-                ", description='" + description + '\'' +
-                '}';
+    public Movie() {
+
     }
 
-    public String getMovieName() {
-            return movieName;
-        }
-
-        public void setMovieName(String movieName) {
-            this.movieName = movieName;
-        }
-
-
-    public int getMovieId() {
+    public String getMovieId() {
         return movieId;
     }
 
-    public void setMovieId(int movieId) {
+    public void setMovieId(String movieId) {
         this.movieId = movieId;
     }
 
-    public String getGenre() {
-        return genre;
+    public String getMovieName() {
+        return movieName;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
+
+    public String getMovieDomain() {
+        return movieDomain;
+    }
+
+    public void setMovieDomain(String movieDomain) {
+        this.movieDomain = movieDomain;
+    }
+
+    public String getMainGenre() {
+        return mainGenre;
+    }
+
+    public void setMainGenre(String mainGenre) {
+        this.mainGenre = mainGenre;
+    }
+
+    public List<String> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
     }
 
     public int getDuration() {
@@ -84,6 +93,14 @@ public class Movie {
         this.liveStatus = liveStatus;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -92,3 +109,5 @@ public class Movie {
         this.description = description;
     }
 }
+
+

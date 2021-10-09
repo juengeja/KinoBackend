@@ -32,7 +32,7 @@ public class CreateMovie {
 
 
     public static void createMovie(Movie movie){
-        database1Template.upsert("Movies", movie).block();
+       // database1Template.upsert("Movies", movie).block();
         movieRepository.save(movie).block();
 
 
