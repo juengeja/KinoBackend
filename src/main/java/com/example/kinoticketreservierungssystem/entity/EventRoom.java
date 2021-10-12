@@ -10,6 +10,7 @@ public class EventRoom {
     private String eventRoomID;
     @PartitionKey
     private Cinema cinemaInfo = new Cinema();
+
     public EventRoom(String eventRoomID, Cinema cinemaInfo) {
         this.eventRoomID = eventRoomID;
         this.cinemaInfo = cinemaInfo;

@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 
 @Container(containerName = "Seats", ru= "400" )
 public class Seat {
-    // seatID naming convention: RoomID + Row + SeatNumber
+    // seatID naming convention: EventRoomID + Row + SeatNumber
     @Id
     private String seatID;
     @PartitionKey

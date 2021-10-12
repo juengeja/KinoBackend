@@ -16,7 +16,7 @@ public class CreateMovie {
 
 
 
-    private static ReactiveCosmosTemplate database1Template;
+    //private static ReactiveCosmosTemplate database1Template;
 
     private static MovieRepository movieRepository;
 
@@ -25,10 +25,10 @@ public class CreateMovie {
         this.movieRepository = movieRepository;
     }
 
-    @Autowired
-    public void setDependencyB(ReactiveCosmosTemplate database1Template) {
-        this.database1Template = database1Template;
-    }
+   // @Autowired
+    //public void setDependencyB(ReactiveCosmosTemplate database1Template) {
+       // this.database1Template = database1Template;
+    //}
 
 
     public static void createMovie(Movie movie){

@@ -13,10 +13,10 @@ public class Coupon {
     // Type a -> Flat; Type b -> Percent
     @PartitionKey
     private char couponType;
-    private float flatAmount;
-    private float percentAmount;
+    private double flatAmount;
+    private double percentAmount;
 
-    public Coupon(String couponID, String couponCode, char couponType, float flatAmount, float percentAmount) {
+    public Coupon(String couponID, String couponCode, char couponType, double flatAmount, double percentAmount) {
         this.couponID = couponID;
         this.couponCode = couponCode;
         this.couponType = couponType;
@@ -52,19 +52,19 @@ public class Coupon {
         this.couponType = couponType;
     }
 
-    public float getFlatAmount() {
+    public double getFlatAmount() {
         return flatAmount;
     }
 
-    public void setFlatAmount(float flatAmount) {
+    public void setFlatAmount(double flatAmount) {
         this.flatAmount = flatAmount;
     }
 
-    public float getPercentAmount() {
+    public double getPercentAmount() {
         return percentAmount;
     }
 
-    public void setPercentAmount(float percentAmount) {
+    public void setPercentAmount(double percentAmount) {
         this.percentAmount = percentAmount;
     }
 }

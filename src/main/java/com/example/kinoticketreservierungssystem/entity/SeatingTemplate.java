@@ -13,9 +13,9 @@ public class SeatingTemplate {
     private String seatingTemplateID;
     @PartitionKey
     private EventRoom eventRoomInfo;
-    private Map<Seat,Float> seatPricingMap;
+    private Map<Seat,Boolean> seatPricingMap;
 
-    public SeatingTemplate(String seatingTemplateID, EventRoom eventRoomInfo, Map<Seat, Float> seatPricingMap) {
+    public SeatingTemplate(String seatingTemplateID, EventRoom eventRoomInfo, Map<Seat,Double> seatPricingMap) {
         this.seatingTemplateID = seatingTemplateID;
         this.eventRoomInfo = eventRoomInfo;
         this.seatPricingMap = seatPricingMap;
@@ -37,11 +37,11 @@ public class SeatingTemplate {
         this.eventRoomInfo = eventRoomInfo;
     }
 
-    public Map<Seat, Float> getSeatPricingMap() {
+    public Map<Seat, Double> getSeatPricingMap() {
         return seatPricingMap;
     }
 
-    public void setSeatPricingMap(Map<Seat, Float> seatPricingMap) {
+    public void setSeatPricingMap(Map<Seat, Double> seatPricingMap) {
         this.seatPricingMap = seatPricingMap;
     }
 }

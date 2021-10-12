@@ -16,10 +16,10 @@ public class Booking {
     private List<Seat> seatInfo;
     private Coupon couponInfo;
     private String paymentMethod;
-    private float totalPrice;
+    private double totalPrice;
     private boolean paid;
 
-    public Booking(String bookingID, Customer customerInfo, ShowEvent showEventInfo, List<Seat> seatInfo, Coupon couponInfo, String paymentMethod, float totalPrice, boolean paid) {
+    public Booking(String bookingID, Customer customerInfo, ShowEvent showEventInfo, List<Seat> seatInfo, Coupon couponInfo, String paymentMethod, double totalPrice, boolean paid) {
         this.bookingID = bookingID;
         this.customerInfo = customerInfo;
         this.showEventInfo = showEventInfo;
@@ -78,11 +78,11 @@ public class Booking {
         this.paymentMethod = paymentMethod;
     }
 
-    public float getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(float totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 

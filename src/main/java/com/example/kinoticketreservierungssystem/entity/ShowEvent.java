@@ -5,34 +5,27 @@ import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
 import org.springframework.data.annotation.Id;
 import java.time.LocalDateTime;
 import java.util.Map;
-import java.util.TreeMap;
 
 @Container(containerName = "ShowEvents", ru = "400")
 public class ShowEvent {
     @Id
     private String showEventID;
-    private EventRoom eventRoomInfo = new EventRoom();
-    private Movie movieInfo = new Movie();
+    @PartitionKey
+    private Movie movieInfo;
+    private SeatingTemplate seatingTemplateInfo;
     private LocalDateTime eventStart;
     private int duration;
-    @PartitionKey
     private boolean is3D;
-    private boolean hasFreeSeats;
-    private Map<Seat,Float> seatPricingMap;
+    private boolean isLive;
 
-    public ShowEvent(String showEventID, EventRoom eventRoomInfo, Movie movieInfo, LocalDateTime eventStart, int duration, boolean is3D, boolean hasFreeSeats, Map<Seat, Float> seatPricingMap) {
+    public ShowEvent(String showEventID, Movie movieInfo, SeatingTemplate seatingTemplateInfo, LocalDateTime eventStart, int duration, boolean is3D, boolean isLive) {
         this.showEventID = showEventID;
-        this.eventRoomInfo = eventRoomInfo;
         this.movieInfo = movieInfo;
+        this.seatingTemplateInfo = seatingTemplateInfo;
         this.eventStart = eventStart;
         this.duration = duration;
         this.is3D = is3D;
-        this.hasFreeSeats = hasFreeSeats;
-        this.seatPricingMap = seatPricingMap;
-    }
-
-    public ShowEvent() {
-
+        this.isLive = isLive;
     }
 
     public String getShowEventID() {
@@ -43,20 +36,20 @@ public class ShowEvent {
         this.showEventID = showEventID;
     }
 
-    public EventRoom getEventRoomInfo() {
-        return eventRoomInfo;
-    }
-
-    public void setEventRoomInfo(EventRoom eventRoomInfo) {
-        this.eventRoomInfo = eventRoomInfo;
-    }
-
     public Movie getMovieInfo() {
         return movieInfo;
     }
 
     public void setMovieInfo(Movie movieInfo) {
         this.movieInfo = movieInfo;
+    }
+
+    public SeatingTemplate getSeatingTemplateInfo() {
+        return seatingTemplateInfo;
+    }
+
+    public void setSeatingTemplateInfo(SeatingTemplate seatingTemplateInfo) {
+        this.seatingTemplateInfo = seatingTemplateInfo;
     }
 
     public LocalDateTime getEventStart() {
@@ -83,19 +76,11 @@ public class ShowEvent {
         this.is3D = is3D;
     }
 
-    public boolean isHasFreeSeats() {
-        return hasFreeSeats;
+    public boolean isLive() {
+        return isLive;
     }
 
-    public void setHasFreeSeats(boolean hasFreeSeats) {
-        this.hasFreeSeats = hasFreeSeats;
-    }
-
-    public Map<Seat, Float> getSeatPricingMap() {
-        return seatPricingMap;
-    }
-
-    public void setSeatPricingMap(Map<Seat, Float> seatPricingMap) {
-        this.seatPricingMap = seatPricingMap;
+    public void setLive(boolean live) {
+        isLive = live;
     }
 }

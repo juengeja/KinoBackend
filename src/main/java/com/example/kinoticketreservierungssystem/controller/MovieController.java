@@ -21,7 +21,7 @@ public class MovieController {
     }
 
     @GetMapping("/moviedata")
-    public ResponseEntity<Iterable<Movie>> getAllMovies(
+    public ResponseEntity<Iterable<Movie>> frontAllMovies(
     ) {
         if(movies.isEmpty()) {
 
