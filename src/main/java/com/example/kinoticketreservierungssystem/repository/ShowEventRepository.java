@@ -12,9 +12,8 @@ import java.util.List;
 
 @Repository
 public interface ShowEventRepository extends ReactiveCosmosRepository<ShowEvent, String> {
-    Mono<ShowEvent> findByShowEventID(String showEventID);
-
-    @Query("SELECT distinct movieInfo FROM ShowEvents s WHERE s.isLive = true ORDER BY s.eventStart")
+    @Query("SELECT DISTINCT movieInfo FROM ShowEvents s WHERE s.isLive = true")
     Flux<ShowEvent> queryShowEventSchedule();
-
+    Mono<ShowEvent> findByShowEventID(String showEventID);
+    Mono<ShowEvent> findBy(ShowEvent showEvent);
 }

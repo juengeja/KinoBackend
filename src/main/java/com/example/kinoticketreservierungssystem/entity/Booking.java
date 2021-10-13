@@ -30,6 +30,9 @@ public class Booking {
         this.paid = paid;
     }
 
+    public Booking(List<Seat> seats, ShowEvent showEvent) {
+    }
+
     public String getBookingID() {
         return bookingID;
     }

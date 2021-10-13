@@ -5,13 +5,10 @@ import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ShowEventSchedule {
+public class ShowEventMovies {
 
 
     private static ShowEventRepository showEventRepository;

@@ -2,10 +2,10 @@ package com.example.kinoticketreservierungssystem.entity;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
+import com.example.kinoticketreservierungssystem.blSupport.SeatMod;
 import org.springframework.data.annotation.Id;
 
 import java.util.Map;
-import java.util.TreeMap;
 
 @Container(containerName = "SeatingTemplates", ru = "400")
 public class SeatingTemplate {
@@ -13,12 +13,12 @@ public class SeatingTemplate {
     private String seatingTemplateID;
     @PartitionKey
     private EventRoom eventRoomInfo;
-    private Map<Seat,Boolean> seatPricingMap;
+    private Map<Seat, SeatMod> seatMap;
 
-    public SeatingTemplate(String seatingTemplateID, EventRoom eventRoomInfo, Map<Seat,Double> seatPricingMap) {
+    public SeatingTemplate(String seatingTemplateID, EventRoom eventRoomInfo, Map<Seat, SeatMod> seatMap) {
         this.seatingTemplateID = seatingTemplateID;
         this.eventRoomInfo = eventRoomInfo;
-        this.seatPricingMap = seatPricingMap;
+        this.seatMap = seatMap;
     }
 
     public String getSeatingTemplateID() {
@@ -37,11 +37,11 @@ public class SeatingTemplate {
         this.eventRoomInfo = eventRoomInfo;
     }
 
-    public Map<Seat, Double> getSeatPricingMap() {
-        return seatPricingMap;
+    public Map<Seat, SeatMod> getSeatMap() {
+        return seatMap;
     }
 
-    public void setSeatPricingMap(Map<Seat, Double> seatPricingMap) {
-        this.seatPricingMap = seatPricingMap;
+    public void setSeatMap(Map<Seat, SeatMod> seatMap) {
+        this.seatMap = seatMap;
     }
 }

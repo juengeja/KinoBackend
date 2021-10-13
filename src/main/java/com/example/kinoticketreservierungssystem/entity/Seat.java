@@ -14,13 +14,15 @@ public class Seat {
     // row naming convention: A,B,C,D...
     private char row;
     private int seatNumber;
+    private double price;
     private boolean booked;
 
-    public Seat(String seatID, EventRoom eventRoomInfo, char row, int seatNumber, boolean booked) {
+    public Seat(String seatID, EventRoom eventRoomInfo, char row, int seatNumber, double price, boolean booked) {
         this.seatID = seatID;
         this.eventRoomInfo = eventRoomInfo;
         this.row = row;
         this.seatNumber = seatNumber;
+        this.price = price;
         this.booked = booked;
     }
 
@@ -54,6 +56,14 @@ public class Seat {
 
     public void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public boolean isBooked() {

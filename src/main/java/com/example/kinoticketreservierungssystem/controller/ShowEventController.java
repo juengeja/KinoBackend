@@ -1,10 +1,11 @@
 package com.example.kinoticketreservierungssystem.controller;
 
 import com.example.kinoticketreservierungssystem.entity.Seat;
+import com.example.kinoticketreservierungssystem.blSupport.SeatMod;
 import com.example.kinoticketreservierungssystem.entity.ShowEvent;
 import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
 import com.example.kinoticketreservierungssystem.service.SeatingPlan;
-import com.example.kinoticketreservierungssystem.service.ShowEventSchedule;
+import com.example.kinoticketreservierungssystem.service.ShowEventMovies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
@@ -27,7 +28,7 @@ public class ShowEventController {
 
     @GetMapping
     public List<ShowEvent> frontShowAllMovies(){
-        return ShowEventSchedule.getAllShowEventData();
+        return ShowEventMovies.getAllShowEventData();
     }
 
     private static List<ShowEvent> showEvents;
@@ -38,7 +39,7 @@ public class ShowEventController {
     }
 
     @GetMapping(value = "/seatreservation")
-    public Map<Seat,Double> frontSeatingPlan(@RequestBody ShowEvent showEvent){
+    public Map<Seat, SeatMod> frontSeatingPlan(@RequestBody ShowEvent showEvent){
         return SeatingPlan.saveSeatingPlan(showEvent);
     }
 }
