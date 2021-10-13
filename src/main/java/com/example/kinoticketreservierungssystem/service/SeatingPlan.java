@@ -1,7 +1,5 @@
 package com.example.kinoticketreservierungssystem.service;
 
-import com.example.kinoticketreservierungssystem.blSupport.SeatsSelected;
-import com.example.kinoticketreservierungssystem.entity.Booking;
 import com.example.kinoticketreservierungssystem.entity.Seat;
 import com.example.kinoticketreservierungssystem.blSupport.SeatMod;
 import com.example.kinoticketreservierungssystem.entity.SeatingTemplate;
@@ -13,9 +11,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Semaphore;
 
 @Service
 public class SeatingPlan {

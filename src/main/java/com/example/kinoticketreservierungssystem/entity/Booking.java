@@ -17,7 +17,7 @@ public class Booking {
     private Coupon couponInfo;
     private String paymentMethod;
     private double totalPrice;
-    private boolean paid;
+    private boolean paid = false;
 
     public Booking(String bookingID, Customer customerInfo, ShowEvent showEventInfo, List<Seat> seatInfo, Coupon couponInfo, String paymentMethod, double totalPrice, boolean paid) {
         this.bookingID = bookingID;

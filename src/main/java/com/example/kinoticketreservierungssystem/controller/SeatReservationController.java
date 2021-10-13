@@ -1,11 +1,9 @@
 package com.example.kinoticketreservierungssystem.controller;
 
-import com.example.kinoticketreservierungssystem.blSupport.SeatsSelected;
 import com.example.kinoticketreservierungssystem.entity.Booking;
 import com.example.kinoticketreservierungssystem.entity.Seat;
 import com.example.kinoticketreservierungssystem.entity.ShowEvent;
 import com.example.kinoticketreservierungssystem.service.BookingProcess;
-import com.example.kinoticketreservierungssystem.service.SeatingPlan;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
