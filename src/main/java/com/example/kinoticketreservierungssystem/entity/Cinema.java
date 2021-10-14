@@ -28,9 +28,6 @@ public class Cinema {
         this.businessPhoneNumber = businessPhoneNumber;
     }
 
-    public Cinema() {
-
-    }
 
     public String getCinemaID() {
         return cinemaID;

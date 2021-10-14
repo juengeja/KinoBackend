@@ -9,5 +9,5 @@ import reactor.core.publisher.Flux;
 @Repository
 public interface SeatRepository extends ReactiveCosmosRepository<Seat, String> {
 
-    Flux<Seat> findAll(EventRoom eventRoom);
+    Flux<Seat> findAllBy(EventRoom eventRoom);
 }
