@@ -9,21 +9,30 @@ public class Seat {
     // seatID naming convention: EventRoomID + Row + SeatNumber
     @Id
     private String seatID;
-    @PartitionKey
     private EventRoom eventRoomInfo;
     // row naming convention: A,B,C,D...
+    @PartitionKey
     private char row;
     private int seatNumber;
-    private double price;
     private boolean booked;
 
-    public Seat(String seatID, EventRoom eventRoomInfo, char row, int seatNumber, double price, boolean booked) {
+    public Seat(String seatID, EventRoom eventRoomInfo, char row, int seatNumber, boolean booked) {
         this.seatID = seatID;
         this.eventRoomInfo = eventRoomInfo;
         this.row = row;
         this.seatNumber = seatNumber;
-        this.price = price;
         this.booked = booked;
+    }
+
+    @Override
+    public String toString() {
+        return "Seat{" +
+                "seatID='" + seatID + '\'' +
+                ", eventRoomInfo=" + eventRoomInfo +
+                ", row=" + row +
+                ", seatNumber=" + seatNumber +
+                ", booked=" + booked +
+                '}';
     }
 
     public String getSeatID() {
@@ -56,14 +65,6 @@ public class Seat {
 
     public void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public boolean isBooked() {

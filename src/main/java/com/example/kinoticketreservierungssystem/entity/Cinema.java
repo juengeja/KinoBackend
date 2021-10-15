@@ -11,23 +11,24 @@ public class Cinema {
     private String country;
     @PartitionKey
     private String state;
+    private String city;
     private String street;
     private int houseNumber;
     private int postalNumber;
     private String businessEmail;
     private String businessPhoneNumber;
 
-    public Cinema(String cinemaID, String country, String state, String street, int houseNumber, int postalNumber, String businessEmail, String businessPhoneNumber) {
+    public Cinema(String cinemaID, String country, String state, String city, String street, int houseNumber, int postalNumber, String businessEmail, String businessPhoneNumber) {
         this.cinemaID = cinemaID;
         this.country = country;
         this.state = state;
+        this.city = city;
         this.street = street;
         this.houseNumber = houseNumber;
         this.postalNumber = postalNumber;
         this.businessEmail = businessEmail;
         this.businessPhoneNumber = businessPhoneNumber;
     }
-
 
     public String getCinemaID() {
         return cinemaID;
@@ -51,6 +52,14 @@ public class Cinema {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getStreet() {

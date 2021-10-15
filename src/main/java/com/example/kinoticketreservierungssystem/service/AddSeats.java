@@ -19,14 +19,14 @@ public class AddSeats {
         this.seatRepository = seatRepository;
     }
 
-    public static List<Seat> addSeats(EventRoom eventRoom, int amtRows, int amtSeatNumbers, double price){
+    public static List<Seat> addSeats(EventRoom eventRoom, int amtRows, int amtSeatNumbers){
         char rows[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
         String eventRoomID = eventRoom.getEventRoomID();
         List<Seat> seats = new ArrayList<>();
         for (int a = 0; a < amtRows; a++){
             char currentRow = rows[a];
             for (int b = 1; b <= amtSeatNumbers; b++){
-                Seat addedSeat = new Seat((eventRoomID+currentRow+b).toString(), eventRoom, currentRow, b, price, false);
+                Seat addedSeat = new Seat((eventRoomID+currentRow+b).toString(), eventRoom, currentRow, b, false);
                 seats.add(addedSeat);
             }
         }

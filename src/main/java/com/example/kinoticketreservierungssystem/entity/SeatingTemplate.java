@@ -9,14 +9,17 @@ import java.util.Map;
 
 @Container(containerName = "SeatingTemplates", ru = "400")
 public class SeatingTemplate {
+    // seatingTemplateID naming convention: eventroomID+Template+(localdatetime now .toString)
     @Id
     private String seatingTemplateID;
     @PartitionKey
+    private boolean bookedOut = false;
     private EventRoom eventRoomInfo;
     private Map<Seat, SeatMod> seatMap;
 
-    public SeatingTemplate(String seatingTemplateID, EventRoom eventRoomInfo, Map<Seat, SeatMod> seatMap) {
+    public SeatingTemplate(String seatingTemplateID, boolean bookedOut, EventRoom eventRoomInfo, Map<Seat, SeatMod> seatMap) {
         this.seatingTemplateID = seatingTemplateID;
+        this.bookedOut = bookedOut;
         this.eventRoomInfo = eventRoomInfo;
         this.seatMap = seatMap;
     }
@@ -27,6 +30,14 @@ public class SeatingTemplate {
 
     public void setSeatingTemplateID(String seatingTemplateID) {
         this.seatingTemplateID = seatingTemplateID;
+    }
+
+    public boolean isBookedOut() {
+        return bookedOut;
+    }
+
+    public void setBookedOut(boolean bookedOut) {
+        this.bookedOut = bookedOut;
     }
 
     public EventRoom getEventRoomInfo() {

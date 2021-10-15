@@ -10,11 +10,11 @@ import java.util.Map;
 public class ShowEvent {
     @Id
     private String showEventID;
-    @PartitionKey
     private Movie movieInfo;
     private SeatingTemplate seatingTemplateInfo;
     private LocalDateTime eventStart;
     private int duration;
+    @PartitionKey
     private boolean is3D;
     private boolean isLive;
 

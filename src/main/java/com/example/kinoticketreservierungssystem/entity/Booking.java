@@ -11,11 +11,11 @@ public class Booking {
     @Id
     private String bookingID;
     private Customer customerInfo;
-    @PartitionKey
     private ShowEvent showEventInfo;
     private List<Seat> seatInfo;
     private Coupon couponInfo;
-    private String paymentMethod;
+    @PartitionKey
+    private String paymentMethod = "not paid yet";
     private double totalPrice;
     private boolean paid = false;
 

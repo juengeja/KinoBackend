@@ -8,16 +8,15 @@ import org.springframework.data.annotation.Id;
 public class EventRoom {
     @Id
     private String eventRoomID;
+    //screenSizes: small, medium, big
     @PartitionKey
-    private Cinema cinemaInfo = new Cinema();
+    private String screenSize;
+    private Cinema cinemaInfo;
 
-    public EventRoom(String eventRoomID, Cinema cinemaInfo) {
+    public EventRoom(String eventRoomID, String screenSize, Cinema cinemaInfo) {
         this.eventRoomID = eventRoomID;
+        this.screenSize = screenSize;
         this.cinemaInfo = cinemaInfo;
-    }
-
-    public EventRoom() {
-
     }
 
     public String getEventRoomID() {
@@ -26,6 +25,14 @@ public class EventRoom {
 
     public void setEventRoomID(String eventRoomID) {
         this.eventRoomID = eventRoomID;
+    }
+
+    public String getScreenSize() {
+        return screenSize;
+    }
+
+    public void setScreenSize(String screenSize) {
+        this.screenSize = screenSize;
     }
 
     public Cinema getCinemaInfo() {
