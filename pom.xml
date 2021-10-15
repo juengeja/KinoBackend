@@ -33,7 +33,13 @@
                 <artifactId>azure-spring-data-cosmos</artifactId>
                 <version>3.12.0</version>
             </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.5</version>
+        </dependency>
     </dependencies>
+
 
 
     <build>

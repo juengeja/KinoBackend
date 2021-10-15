@@ -2,7 +2,10 @@ package com.example.kinoticketreservierungssystem.entity;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
+import com.example.kinoticketreservierungssystem.blSupport.ObjectUtils;
 import com.example.kinoticketreservierungssystem.blSupport.SeatMod;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 
 import java.util.Map;
@@ -14,13 +17,12 @@ public class SeatingTemplate {
     private String seatingTemplateID;
     @PartitionKey
     private boolean bookedOut = false;
-    private EventRoom eventRoomInfo;
+    @JsonIgnore
     private Map<Seat, SeatMod> seatMap;
 
-    public SeatingTemplate(String seatingTemplateID, boolean bookedOut, EventRoom eventRoomInfo, Map<Seat, SeatMod> seatMap) {
+    public SeatingTemplate(String seatingTemplateID, boolean bookedOut, Map<Seat, SeatMod> seatMap) {
         this.seatingTemplateID = seatingTemplateID;
         this.bookedOut = bookedOut;
-        this.eventRoomInfo = eventRoomInfo;
         this.seatMap = seatMap;
     }
 
@@ -40,18 +42,12 @@ public class SeatingTemplate {
         this.bookedOut = bookedOut;
     }
 
-    public EventRoom getEventRoomInfo() {
-        return eventRoomInfo;
-    }
 
-    public void setEventRoomInfo(EventRoom eventRoomInfo) {
-        this.eventRoomInfo = eventRoomInfo;
-    }
-
+    @JsonProperty("seatMap")
     public Map<Seat, SeatMod> getSeatMap() {
-        return seatMap;
+        return ObjectUtils.toList(seatMap);
     }
-
+    @JsonProperty("seatMap")
     public void setSeatMap(Map<Seat, SeatMod> seatMap) {
         this.seatMap = seatMap;
     }

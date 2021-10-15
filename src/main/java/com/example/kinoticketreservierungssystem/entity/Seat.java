@@ -9,6 +9,8 @@ public class Seat {
     // seatID naming convention: EventRoomID + Row + SeatNumber
     @Id
     private String seatID;
+    @DBRef
+    @CascadeSave
     private EventRoom eventRoomInfo;
     // row naming convention: A,B,C,D...
     @PartitionKey
@@ -22,6 +24,10 @@ public class Seat {
         this.row = row;
         this.seatNumber = seatNumber;
         this.booked = booked;
+    }
+
+    public Seat() {
+
     }
 
     @Override

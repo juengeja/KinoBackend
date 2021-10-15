@@ -19,6 +19,15 @@ public class EventRoom {
         this.cinemaInfo = cinemaInfo;
     }
 
+    @Override
+    public String toString() {
+        return "EventRoom{" +
+                "eventRoomID='" + eventRoomID + '\'' +
+                ", screenSize='" + screenSize + '\'' +
+                ", cinemaInfo=" + cinemaInfo +
+                '}';
+    }
+
     public String getEventRoomID() {
         return eventRoomID;
     }

@@ -7,6 +7,7 @@ import com.example.kinoticketreservierungssystem.entity.SeatingTemplate;
 import com.example.kinoticketreservierungssystem.entity.ShowEvent;
 import com.example.kinoticketreservierungssystem.repository.SeatingTemplateRepository;
 import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -52,15 +53,15 @@ public class SeatingPlan {
             return showEvent;
     }
 
-
-    public static SeatingTemplate createSeatingTemplate(EventRoom eventRoom, List<Seat> seats, SeatMod seatMod){
+    @JsonProperty("seatMap")
+    public static void createSeatingTemplate(EventRoom eventRoom, List<Seat> seats, SeatMod seatMod){
         String creationDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin")).toString();
         String eventRoomID = eventRoom.getEventRoomID();
         Map<Seat,SeatMod> seatMap = new HashMap<>();
         for(Seat seat : seats){
             seatMap.put(seat,seatMod);
-        }
-        return seatingTemplateRepository.save(new SeatingTemplate((eventRoomID+"Template"+creationDateTime), false, eventRoom, seatMap)).block();
+        };
+        seatingTemplateRepository.save(new SeatingTemplate((eventRoomID+"Template"+creationDateTime), false, seatMap)).block();
     }
 
     public static Map<Seat,SeatMod> getSeatingPlan(ShowEvent showEvent){
