@@ -37,6 +37,7 @@ public class AddDBItemsController {
         List<Seat> seats = AddSeats.addSeats(eventRoom,10,15);
         AddSeats.createSeats(seats);
     }
+
     @PostMapping("/createseatingtemplate")
     public void backCreateSeatingTemplate(){
         SeatingPlan.createSeatingTemplate(CreateEntities.getEventRoom("Astra"), CreateEntities.getSeatsPerRoom("Astra"), new SeatMod(8.00,false));
