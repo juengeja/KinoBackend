@@ -2,6 +2,7 @@ package com.example.kinoticketreservierungssystem.entity;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
+import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
 import java.time.LocalDate;
 
@@ -33,6 +34,12 @@ public class Customer{
 
     public Customer() {
 
+    }
+
+    @Override
+    public String toString() {
+        Gson gson = new Gson();
+        return gson.toJson(this, Customer.class);
     }
 
     public String getCustomerID() {

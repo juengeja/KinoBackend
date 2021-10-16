@@ -5,22 +5,22 @@ import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ShowEventMovies {
 
-
-    private static ShowEventRepository showEventRepository;
     @Autowired
-    public void setDependencyA(ShowEventRepository showEventRepository) {
-        this.showEventRepository = showEventRepository;
-    }
+    ShowEventRepository showEventRepository;
 
 
-    public static List<ShowEvent> getAllShowEventData() {
-        Flux<ShowEvent> showEventFlux = showEventRepository.queryShowEventSchedule();
-        List<ShowEvent> showEventSchedule = showEventFlux.collectList().block();
+
+
+    public List<ShowEvent> getAllShowEventData() {
+        List<ShowEvent> showEventSchedule = new ArrayList<>();
+        showEventRepository.queryShowEventSchedule().forEach(showEventSchedule::add);
         return showEventSchedule;
     }
 

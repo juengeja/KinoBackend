@@ -13,13 +13,11 @@ import java.util.List;
 @Service
 public class AddSeats {
 
-    private static SeatRepository seatRepository;
     @Autowired
-    public void setDependencyA(SeatRepository seatRepository) {
-        this.seatRepository = seatRepository;
-    }
+    SeatRepository seatRepository;
 
-    public static List<Seat> addSeats(EventRoom eventRoom, int amtRows, int amtSeatNumbers){
+
+    public List<Seat> addSeats(EventRoom eventRoom, int amtRows, int amtSeatNumbers){
         char rows[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
         String eventRoomID = eventRoom.getEventRoomID();
         List<Seat> seats = new ArrayList<>();
@@ -33,10 +31,9 @@ public class AddSeats {
         return seats;
     }
 
-    public static void createSeats(List<Seat> seats){
+    public void createSeats(List<Seat> seats){
         for(Seat seat:seats){
-
-    seatRepository.save(seat).block();
+    seatRepository.save(seat);
         }
     }
 }

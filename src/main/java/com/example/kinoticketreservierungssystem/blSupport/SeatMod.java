@@ -1,5 +1,7 @@
 package com.example.kinoticketreservierungssystem.blSupport;
 
+import com.google.gson.Gson;
+
 public class SeatMod {
     private double price;
     private boolean booked = false;
@@ -7,6 +9,12 @@ public class SeatMod {
     public SeatMod(double price, boolean booked) {
         this.price = price;
         this.booked = booked;
+    }
+
+    @Override
+    public String toString() {
+        Gson gson = new Gson();
+        return gson.toJson(this, SeatMod.class);
     }
 
     public double getPrice() {

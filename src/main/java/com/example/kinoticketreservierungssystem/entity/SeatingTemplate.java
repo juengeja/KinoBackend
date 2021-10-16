@@ -2,10 +2,11 @@ package com.example.kinoticketreservierungssystem.entity;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
-import com.example.kinoticketreservierungssystem.blSupport.ObjectUtils;
 import com.example.kinoticketreservierungssystem.blSupport.SeatMod;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
 
 import java.util.Map;
@@ -17,13 +18,18 @@ public class SeatingTemplate {
     private String seatingTemplateID;
     @PartitionKey
     private boolean bookedOut = false;
-    @JsonIgnore
-    private Map<Seat, SeatMod> seatMap;
+    private Map<String, SeatMod> seatMap;
 
-    public SeatingTemplate(String seatingTemplateID, boolean bookedOut, Map<Seat, SeatMod> seatMap) {
+    public SeatingTemplate(String seatingTemplateID, boolean bookedOut, Map<String, SeatMod> seatMap) {
         this.seatingTemplateID = seatingTemplateID;
         this.bookedOut = bookedOut;
         this.seatMap = seatMap;
+    }
+
+    @Override
+    public String toString() {
+        Gson gson = new Gson();
+        return gson.toJson(this, SeatingTemplate.class);
     }
 
     public String getSeatingTemplateID() {
@@ -42,13 +48,11 @@ public class SeatingTemplate {
         this.bookedOut = bookedOut;
     }
 
-
-    @JsonProperty("seatMap")
-    public Map<Seat, SeatMod> getSeatMap() {
-        return ObjectUtils.toList(seatMap);
+    public Map<String, SeatMod> getSeatMap() {
+        return seatMap;
     }
-    @JsonProperty("seatMap")
-    public void setSeatMap(Map<Seat, SeatMod> seatMap) {
+
+    public void setSeatMap(Map<String, SeatMod> seatMap) {
         this.seatMap = seatMap;
     }
 }

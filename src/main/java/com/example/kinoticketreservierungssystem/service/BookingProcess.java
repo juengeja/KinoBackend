@@ -16,18 +16,14 @@ import java.util.concurrent.Semaphore;
 @Service
 public class BookingProcess {
 
-    private static ShowEventRepository showEventRepository;
     @Autowired
-    public void setDependencyA(ShowEventRepository showEventRepository) {
-        this.showEventRepository = showEventRepository;
-    }
-
-    private static BookingRepository bookingRepository;
+    BookingProcess bookingProcess;
     @Autowired
-    public void setDependencyB(BookingRepository bookingRepository) {
-        this.bookingRepository = bookingRepository;
-    }
-
+    ShowEventRepository showEventRepository;
+    @Autowired
+    BookingRepository bookingRepository;
+    @Autowired
+    SeatingPlan seatingPlan;
 
 
     private static Semaphore semaphore;
@@ -36,30 +32,30 @@ public class BookingProcess {
         semaphore = new Semaphore(1);
     }
 
-    public static Booking reserveSeats(List<Seat> seats, ShowEvent showEvent) {
+    public Booking reserveSeats(List<Seat> seats, ShowEvent showEvent) {
         Booking reserveBooking = new Booking(seats, showEvent);
         try {
             semaphore.acquire();
-            SeatingPlan.selectSeats(seats,showEvent);
+            seatingPlan.selectSeats(seats,showEvent);
             reserveBooking.setSeatInfo(seats);
-            SeatingPlan.saveSeatingPlan(showEvent);
+            seatingPlan.saveSeatingPlan(showEvent);
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             semaphore.release();
-            BookingProcess.seatsReservedTimer(reserveBooking);
+            bookingProcess.seatsReservedTimer(reserveBooking);
             return reserveBooking;
         }
     }
 
 
 
-    public static void seatsReservedTimer(Booking reservedBooking){
+    public void seatsReservedTimer(Booking reservedBooking){
         Timer reservedTimer = new Timer();
         TimerTask deselectSeatsTimerTask = new TimerTask(){
             public void run(){
-                SeatingPlan.deselectSeats(reservedBooking.getSeatInfo(), reservedBooking.getShowEventInfo());
+                seatingPlan.deselectSeats(reservedBooking.getSeatInfo(), reservedBooking.getShowEventInfo());
                 if(reservedBooking.isPaid()==true){ reservedTimer.cancel();}
             }
         };
@@ -68,13 +64,13 @@ public class BookingProcess {
 
 
 
-    public static Booking bookSeats(Booking paidBooking){
+    public Booking bookSeats(Booking paidBooking){
         paidBooking.setPaid(true);
         return paidBooking;
     }
 
 
-    public static void saveBooking(Booking savedBooking){
+    public void saveBooking(Booking savedBooking){
         bookingRepository.save(savedBooking);
     }
 

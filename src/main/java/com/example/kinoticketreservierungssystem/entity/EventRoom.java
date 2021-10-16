@@ -2,7 +2,12 @@ package com.example.kinoticketreservierungssystem.entity;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Reference;
+
 
 @Container(containerName = "EventRooms", ru = "400")
 public class EventRoom {
@@ -21,11 +26,8 @@ public class EventRoom {
 
     @Override
     public String toString() {
-        return "EventRoom{" +
-                "eventRoomID='" + eventRoomID + '\'' +
-                ", screenSize='" + screenSize + '\'' +
-                ", cinemaInfo=" + cinemaInfo +
-                '}';
+        Gson gson = new Gson();
+        return gson.toJson(this, EventRoom.class);
     }
 
     public String getEventRoomID() {

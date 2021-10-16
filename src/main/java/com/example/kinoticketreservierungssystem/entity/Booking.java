@@ -2,8 +2,10 @@ package com.example.kinoticketreservierungssystem.entity;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
-
 import java.util.List;
 
 @Container(containerName = "Bookings", ru = "400")
@@ -31,6 +33,12 @@ public class Booking {
     }
 
     public Booking(List<Seat> seats, ShowEvent showEvent) {
+    }
+
+    @Override
+    public String toString() {
+        Gson gson = new Gson();
+        return gson.toJson(this, Booking.class);
     }
 
     public String getBookingID() {

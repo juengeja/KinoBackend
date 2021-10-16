@@ -2,6 +2,7 @@ package com.example.kinoticketreservierungssystem.entity;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
+import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
 
 @Container(containerName = "Admins", ru = "400")
@@ -16,6 +17,12 @@ public class Admin {
         this.adminID = adminID;
         this.username = username;
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        Gson gson = new Gson();
+        return gson.toJson(this, Admin.class);
     }
 
     public String getAdminID() {

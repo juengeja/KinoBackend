@@ -2,15 +2,18 @@ package com.example.kinoticketreservierungssystem.entity;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Reference;
+
 
 @Container(containerName = "Seats", ru= "400" )
 public class Seat {
     // seatID naming convention: EventRoomID + Row + SeatNumber
     @Id
     private String seatID;
-    @DBRef
-    @CascadeSave
     private EventRoom eventRoomInfo;
     // row naming convention: A,B,C,D...
     @PartitionKey
@@ -32,13 +35,8 @@ public class Seat {
 
     @Override
     public String toString() {
-        return "Seat{" +
-                "seatID='" + seatID + '\'' +
-                ", eventRoomInfo=" + eventRoomInfo +
-                ", row=" + row +
-                ", seatNumber=" + seatNumber +
-                ", booked=" + booked +
-                '}';
+        Gson gson = new Gson();
+        return gson.toJson(this, Seat.class);
     }
 
     public String getSeatID() {

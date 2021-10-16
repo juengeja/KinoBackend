@@ -2,6 +2,7 @@ package com.example.kinoticketreservierungssystem.entity;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
+import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
 import java.util.List;
 
@@ -20,12 +21,11 @@ public class Movie {
     private String img;
     private String description;
 
-    public Movie(String movieId, String movieName, String movieDomain, String mainGenre, List<String> genres, int duration, boolean liveStatus, String img, String description) {
+    public Movie(String movieId, String movieName, String movieDomain, String mainGenre, int duration, boolean liveStatus, String img, String description) {
         this.movieId = movieId;
         this.movieName = movieName;
         this.movieDomain = movieDomain;
         this.mainGenre = mainGenre;
-        this.genres = genres;
         this.duration = duration;
         this.liveStatus = liveStatus;
         this.img = img;
@@ -34,6 +34,12 @@ public class Movie {
 
     public Movie() {
 
+    }
+
+    @Override
+    public String toString() {
+        Gson gson = new Gson();
+        return gson.toJson(this, Movie.class);
     }
 
     public String getMovieId() {

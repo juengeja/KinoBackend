@@ -6,6 +6,7 @@ import com.azure.spring.data.cosmos.config.AbstractCosmosConfiguration;
 import com.azure.spring.data.cosmos.config.CosmosConfig;
 import com.azure.spring.data.cosmos.core.ReactiveCosmosTemplate;
 import com.azure.spring.data.cosmos.core.convert.MappingCosmosConverter;
+import com.azure.spring.data.cosmos.repository.config.EnableCosmosRepositories;
 import com.azure.spring.data.cosmos.repository.config.EnableReactiveCosmosRepositories;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,8 +31,7 @@ public class ConfigDatasource {
                 .endpoint(cosmosProperties.getUri());
     }
 
-    @EnableReactiveCosmosRepositories(basePackages = "com.example.kinoticketreservierungssystem.repository",
-            reactiveCosmosTemplateRef = "database1Template")
+    @EnableCosmosRepositories(basePackages = "com.example.kinoticketreservierungssystem.repository")
     public static class Database1Configuration extends AbstractCosmosConfiguration {
 
         @Primary
