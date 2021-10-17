@@ -56,13 +56,6 @@ public class SeatingPlan {
         seatingTemplateRepository.save(new SeatingTemplate((eventRoomID+"Template"+creationDateTime), eventRoomID, seatMap));
     }
 
-    public Map<String,SeatMod> getSeatingPlan(ShowEvent showEvent){
-        ShowEvent savedShowEvent = showEventRepository.findBy(showEvent).get();
-        SeatingTemplate seatingTemplate = savedShowEvent.getSeatingTemplateInfo();
-        return seatingTemplate.getSeatMap();
-    }
-
-
     public Map<String,SeatMod> saveSeatingPlan(ShowEvent showEvent){
         ShowEvent savedShowEvent = showEventRepository.save(showEvent);
         SeatingTemplate seatingTemplate = savedShowEvent.getSeatingTemplateInfo();

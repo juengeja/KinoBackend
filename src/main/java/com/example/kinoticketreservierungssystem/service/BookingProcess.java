@@ -1,13 +1,13 @@
 package com.example.kinoticketreservierungssystem.service;
 
-import com.example.kinoticketreservierungssystem.entity.Booking;
-import com.example.kinoticketreservierungssystem.entity.Seat;
-import com.example.kinoticketreservierungssystem.entity.ShowEvent;
+import com.example.kinoticketreservierungssystem.entity.*;
 import com.example.kinoticketreservierungssystem.repository.BookingRepository;
 import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -33,11 +33,17 @@ public class BookingProcess {
         semaphore = new Semaphore(1);
     }
 
-    public Booking reserveSeats(String bookingID, List<Seat> seats, ShowEvent showEvent) {
-        Booking reserveBooking = new Booking(bookingID, seats, showEvent.getShowEventID());
+    public Booking reserveSeats(List<Seat> seats, ShowEvent showEvent) {
+        String creationDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin")).toString();
+        int totalAmount = 0;
+        Booking reserveBooking = new Booking("booking"+creationDateTime, seats, showEvent.getShowEventID());
         try {
             semaphore.acquire();
             reserveBooking.setSeatInfo(seats);
+            for(Seat seat:seats){
+                totalAmount += showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).getPrice();
+            }
+            reserveBooking.setTotalPrice(totalAmount);
             reserveBooking.setShowEventInfo(seatingPlan.selectSeats(seats,showEvent).getShowEventID());
 
         } catch (InterruptedException e) {
@@ -68,14 +74,10 @@ public class BookingProcess {
 
 
 
-    public Booking bookSeats(Booking paidBooking){
+    public Booking bookSeats(Booking paidBooking, Customer customer, Coupon coupon){
+        paidBooking.setCustomerInfo(customer);
+        paidBooking.setCouponInfo(coupon);
         paidBooking.setPaid(true);
-        return paidBooking;
+        return bookingRepository.save(paidBooking);
     }
-
-
-    public void saveBooking(Booking savedBooking){
-        bookingRepository.save(savedBooking);
-    }
-
 }

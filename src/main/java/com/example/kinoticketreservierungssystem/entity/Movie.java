@@ -11,23 +11,19 @@ public class Movie {
     @Id
     private String movieId;
     private String movieName;
-    private String movieDomain;
     //Genre naming convention: Action, Thriller, Drama, Comedy...
     @PartitionKey
     private String mainGenre;
     private List<String> genres;
     private int duration;
-    private boolean liveStatus;
     private String img;
     private String description;
 
-    public Movie(String movieId, String movieName, String movieDomain, String mainGenre, int duration, boolean liveStatus, String img, String description) {
+    public Movie(String movieId, String movieName, String mainGenre, int duration, String img, String description) {
         this.movieId = movieId;
         this.movieName = movieName;
-        this.movieDomain = movieDomain;
         this.mainGenre = mainGenre;
         this.duration = duration;
-        this.liveStatus = liveStatus;
         this.img = img;
         this.description = description;
     }
@@ -58,14 +54,6 @@ public class Movie {
         this.movieName = movieName;
     }
 
-    public String getMovieDomain() {
-        return movieDomain;
-    }
-
-    public void setMovieDomain(String movieDomain) {
-        this.movieDomain = movieDomain;
-    }
-
     public String getMainGenre() {
         return mainGenre;
     }
@@ -88,14 +76,6 @@ public class Movie {
 
     public void setDuration(int duration) {
         this.duration = duration;
-    }
-
-    public boolean isLiveStatus() {
-        return liveStatus;
-    }
-
-    public void setLiveStatus(boolean liveStatus) {
-        this.liveStatus = liveStatus;
     }
 
     public String getImg() {
