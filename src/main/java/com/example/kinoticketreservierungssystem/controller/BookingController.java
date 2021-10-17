@@ -31,7 +31,7 @@ public class BookingController {
         return bookingProcess.reserveSeats(seats,showEvent);
     }
 
-    @PutMapping
+    @PutMapping("/successfulpayment")
     public Booking seatsBooked(@RequestBody Booking booking, Customer customer, Coupon coupon){
         return bookingProcess.bookSeats(booking, customer, coupon);
     }
