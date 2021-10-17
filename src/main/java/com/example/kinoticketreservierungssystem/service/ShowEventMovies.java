@@ -11,7 +11,9 @@ import reactor.core.publisher.Flux;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ShowEventMovies {
@@ -21,19 +23,19 @@ public class ShowEventMovies {
     @Autowired
     MovieRepository movieRepository;
 
-    public List<Movie> getAllShowEventMovies(){
+    public Set<Movie> getAllShowEventMovies(){
         List<ShowEvent> showEvents = new ArrayList<>();
         showEventRepository.findAllByLive(true).forEach(showEvents::add);
-        List<Movie> movieList = new ArrayList<>();
+        Set<Movie> movieSet = new HashSet<>();
         for (ShowEvent showEvent:showEvents){
             if(showEvent.getEventStart().isAfter(LocalDateTime.now(ZoneId.of("Europe/Berlin")))){
-                movieList.add(showEvent.getMovieInfo());
+                movieSet.add(showEvent.getMovieInfo());
             }else {
                 showEvent.setLive(false);
                 showEventRepository.save(showEvent);
             }
         }
-        return movieList;
+        return movieSet;
     }
 
     public List<ShowEvent> getAllShowEventDates(String movieID){

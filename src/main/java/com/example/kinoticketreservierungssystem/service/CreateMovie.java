@@ -15,20 +15,10 @@ import java.util.List;
 public class CreateMovie {
 
 
-
-    //private static ReactiveCosmosTemplate database1Template;
     @Autowired
     MovieRepository movieRepository;
 
-
-   // @Autowired
-    //public void setDependencyB(ReactiveCosmosTemplate database1Template) {
-       // this.database1Template = database1Template;
-    //}
-
-
     public void createMovie(Movie movie){
-       // database1Template.upsert("Movies", movie).block();
         movieRepository.save(movie);
 
 

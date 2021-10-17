@@ -1,5 +1,6 @@
 package com.example.kinoticketreservierungssystem.service;
 
+import com.example.kinoticketreservierungssystem.blSupport.SeatMod;
 import com.example.kinoticketreservierungssystem.entity.*;
 import com.example.kinoticketreservierungssystem.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CreateEntities {
@@ -60,5 +63,15 @@ public class CreateEntities {
         SeatingTemplate seatingTemplate = seatingTemplateRepository.findBySeatingTemplateID(seatingTemplateID).get();
     ShowEvent showEvent = new ShowEvent(showEventId, movie, seatingTemplate, eventStart,duration,is3D,isLive);
         showEventRepository.save(showEvent);
+    }
+
+    public void createSeatingTemplate(EventRoom eventRoom, List<Seat> seats, SeatMod seatMod){
+        String creationDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin")).toString();
+        String eventRoomID = eventRoom.getEventRoomID();
+        Map<String, SeatMod> seatMap = new HashMap<>();
+        for(Seat seat : seats){
+            seatMap.put(seat.getSeatID(),seatMod);
+        }
+        seatingTemplateRepository.save(new SeatingTemplate((eventRoomID+"Template"+creationDateTime), eventRoomID, seatMap));
     }
 }

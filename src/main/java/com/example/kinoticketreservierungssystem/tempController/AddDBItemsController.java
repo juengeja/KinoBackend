@@ -68,7 +68,7 @@ public class AddDBItemsController {
 
     @PostMapping("/createseatingtemplate")
     public void backCreateSeatingTemplate(){
-        seatingPlan.createSeatingTemplate(createEntities.getEventRoom("Astra"), createEntities.getSeatsPerRoom("Astra"), new SeatMod(8.00,false));
+        createEntities.createSeatingTemplate(createEntities.getEventRoom("Astra"), createEntities.getSeatsPerRoom("Astra"), new SeatMod(8.00,false));
     }
 
     @PostMapping("createmovies")

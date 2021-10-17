@@ -56,8 +56,6 @@ public class BookingProcess {
         }
     }
 
-
-
     public void seatsReservedTimer(Booking reservedBooking){
         Timer reservedTimer = new Timer();
         TimerTask deselectSeatsTimerTask = new TimerTask(){
@@ -72,8 +70,6 @@ public class BookingProcess {
         };
         reservedTimer.schedule(deselectSeatsTimerTask, 900000);
     }
-
-
 
     public Booking bookSeats(Booking paidBooking, Customer customer){
         paidBooking.setCustomerInfo(customer);
