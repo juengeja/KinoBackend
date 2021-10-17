@@ -32,7 +32,13 @@ public class Booking {
         this.paid = paid;
     }
 
-    public Booking(List<Seat> seats, ShowEvent showEvent) {
+    public Booking(String bookingID, List<Seat> seats, ShowEvent showEvent) {
+        this.bookingID = bookingID;
+        this.seatInfo = seats;
+        this.showEventInfo = showEvent;
+    }
+
+    public Booking() {
     }
 
     @Override

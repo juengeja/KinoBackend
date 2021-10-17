@@ -8,10 +8,11 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface SeatRepository extends CosmosRepository<Seat, String> {
 
     Iterable<Seat> findAllByEventRoomInfo(EventRoom eventRoom);
-
+    Optional<Seat> findBySeatID(String seatID);
 }

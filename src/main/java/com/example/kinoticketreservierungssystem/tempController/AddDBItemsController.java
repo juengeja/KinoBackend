@@ -3,10 +3,7 @@ package com.example.kinoticketreservierungssystem.tempController;
 import com.example.kinoticketreservierungssystem.blSupport.SeatMod;
 import com.example.kinoticketreservierungssystem.entity.*;
 import com.example.kinoticketreservierungssystem.repository.*;
-import com.example.kinoticketreservierungssystem.service.AddSeats;
-import com.example.kinoticketreservierungssystem.service.CreateEntities;
-import com.example.kinoticketreservierungssystem.service.CreateMovie;
-import com.example.kinoticketreservierungssystem.service.SeatingPlan;
+import com.example.kinoticketreservierungssystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.kinoticketreservierungssystem.entity.Movie;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping(value = "/dbitems")
@@ -44,6 +43,8 @@ public class AddDBItemsController {
     AddSeats addSeats;
     @Autowired
     CreateMovie createMovie;
+    @Autowired
+    BookingProcess bookingProcess;
 
 
     @PostMapping("createcinema")
@@ -83,4 +84,18 @@ public class AddDBItemsController {
         createMovie.createMovie(movie4);
         createMovie.createMovie(movie5);
     }
-}
+
+    @PostMapping("createshowevent")
+    public void backCreateShowEvent() {
+        createEntities.createShowEvent("secondEvent","Dune","AstraTemplate2021-10-16T23:12:16.495896700", LocalDateTime.of(2021, 1, 14, 15, 56), 123, true, true);
+        createEntities.createShowEvent("secondEvent","Candyman","AstraTemplate2021-10-16T23:12:16.495896700",LocalDateTime.of(2020, 3, 13, 15, 56),134,true,true);
+    }
+    @PostMapping("reserveseat")
+    public void backReserveSeatTest(){
+        List<Seat> seats = new ArrayList<>();
+        seats.add(seatRepository.findBySeatID("AstraA1").get());
+        ShowEvent showEvent = showEventRepository.findByShowEventID("firstEvent").get();
+        bookingProcess.saveBooking(bookingProcess.reserveSeats("firstBooking",seats,showEvent));
+    }
+    }
+

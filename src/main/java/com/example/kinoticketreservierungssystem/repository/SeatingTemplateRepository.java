@@ -6,6 +6,9 @@ import com.example.kinoticketreservierungssystem.entity.SeatingTemplate;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
+
 @Repository
 public interface SeatingTemplateRepository extends CosmosRepository<SeatingTemplate, String> {
+    Optional<SeatingTemplate> findBySeatingTemplateID(String seatingTemplateID);
 }

@@ -8,6 +8,7 @@ import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -32,20 +33,19 @@ public class BookingProcess {
         semaphore = new Semaphore(1);
     }
 
-    public Booking reserveSeats(List<Seat> seats, ShowEvent showEvent) {
-        Booking reserveBooking = new Booking(seats, showEvent);
+    public Booking reserveSeats(String bookingID, List<Seat> seats, ShowEvent showEvent) {
+        Booking reserveBooking = new Booking(bookingID, seats, showEvent);
         try {
             semaphore.acquire();
-            seatingPlan.selectSeats(seats,showEvent);
             reserveBooking.setSeatInfo(seats);
-            seatingPlan.saveSeatingPlan(showEvent);
+            reserveBooking.setShowEventInfo(seatingPlan.selectSeats(seats,showEvent));
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             semaphore.release();
             bookingProcess.seatsReservedTimer(reserveBooking);
-            return reserveBooking;
+            return bookingRepository.save(reserveBooking);
         }
     }
 
@@ -55,9 +55,13 @@ public class BookingProcess {
         Timer reservedTimer = new Timer();
         TimerTask deselectSeatsTimerTask = new TimerTask(){
             public void run(){
-                seatingPlan.deselectSeats(reservedBooking.getSeatInfo(), reservedBooking.getShowEventInfo());
+                ShowEvent deselectedSeatingPlan = seatingPlan.deselectSeats(reservedBooking.getSeatInfo(), reservedBooking.getShowEventInfo());
+                List<Seat> clearSeats = new ArrayList<>();
+                reservedBooking.setSeatInfo(clearSeats);
+                reservedBooking.setShowEventInfo(deselectedSeatingPlan);
+                bookingRepository.save(reservedBooking);
                 if(reservedBooking.isPaid()==true){ reservedTimer.cancel();}
-            }
+                }
         };
         reservedTimer.schedule(deselectSeatsTimerTask, 900000);
     }

@@ -4,6 +4,9 @@ import com.example.kinoticketreservierungssystem.entity.*;
 import com.example.kinoticketreservierungssystem.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +25,8 @@ public class CreateEntities {
     SeatingTemplateRepository seatingTemplateRepository;
     @Autowired
     CreateEntities createEntities;
+    @Autowired
+    ShowEventRepository showEventRepository;
 
 
     public void createCinema(String cinemaID, String country, String state, String city, String street, int houseNumber, int postalNumber, String businessEmail, String businessPhoneNumber) {
@@ -48,5 +53,12 @@ public class CreateEntities {
         List<Seat> seatsPerRoomList = new ArrayList<Seat>();
         seatRepository.findAllByEventRoomInfo(createEntities.getEventRoom(eventRoomID)).forEach(seatsPerRoomList::add);
         return seatsPerRoomList;
+    }
+
+    public void createShowEvent(String showEventId, String movieID, String seatingTemplateID, LocalDateTime eventStart, int duration, boolean is3D, boolean isLive){
+        Movie movie = movieRepository.findByMovieId(movieID).get();
+        SeatingTemplate seatingTemplate = seatingTemplateRepository.findBySeatingTemplateID(seatingTemplateID).get();
+    ShowEvent showEvent = new ShowEvent(showEventId, movie, seatingTemplate, eventStart,duration,is3D,isLive);
+        showEventRepository.save(showEvent);
     }
 }

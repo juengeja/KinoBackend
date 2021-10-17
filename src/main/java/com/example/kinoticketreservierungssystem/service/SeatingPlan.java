@@ -30,19 +30,19 @@ public class SeatingPlan {
     public ShowEvent selectSeats(List<Seat> seats, ShowEvent showEvent){
         Map<String, SeatMod> selectSeatingPlanMap = showEvent.getSeatingTemplateInfo().getSeatMap();
         for(Seat seat : seats){
-            SeatMod seatMod = selectSeatingPlanMap.get(seat);
+            SeatMod seatMod = selectSeatingPlanMap.get(seat.getSeatID());
             seatMod.setBooked(true);
             showEvent.getSeatingTemplateInfo().setSeatMap(selectSeatingPlanMap);}
-            return showEvent;
+            return showEventRepository.save(showEvent);
     }
 
     public ShowEvent deselectSeats(List<Seat> seats, ShowEvent showEvent){
-        Map<String, SeatMod> deselectSeatingPlanMap = seatingPlan.getSeatingPlan(showEvent);
+        Map<String, SeatMod> deselectSeatingPlanMap = showEvent.getSeatingTemplateInfo().getSeatMap();
         for(Seat seat : seats){
-            SeatMod seatMod = deselectSeatingPlanMap.get(seat);
+            SeatMod seatMod = deselectSeatingPlanMap.get(seat.getSeatID());
             seatMod.setBooked(false);
             showEvent.getSeatingTemplateInfo().setSeatMap(deselectSeatingPlanMap);}
-            return showEvent;
+            return showEventRepository.save(showEvent);
     }
 
 

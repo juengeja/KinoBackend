@@ -16,8 +16,8 @@ public class ShowEvent {
     private Movie movieInfo;
     private SeatingTemplate seatingTemplateInfo;
     private LocalDateTime eventStart;
-    private int duration;
     @PartitionKey
+    private int duration;
     private boolean is3D;
     private boolean isLive;
 
@@ -25,6 +25,17 @@ public class ShowEvent {
         this.showEventID = showEventID;
         this.movieInfo = movieInfo;
         this.seatingTemplateInfo = seatingTemplateInfo;
+        this.eventStart = eventStart;
+        this.duration = duration;
+        this.is3D = is3D;
+        this.isLive = isLive;
+    }
+
+    public ShowEvent() {
+    }
+
+    public ShowEvent(String showEventID, LocalDateTime eventStart, int duration, boolean is3D, boolean isLive) {
+        this.showEventID = showEventID;
         this.eventStart = eventStart;
         this.duration = duration;
         this.is3D = is3D;
