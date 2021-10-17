@@ -16,8 +16,8 @@ public class ShowEvent {
     private Movie movieInfo;
     private SeatingTemplate seatingTemplateInfo;
     private LocalDateTime eventStart;
-    @PartitionKey
     private int duration;
+    @PartitionKey
     private boolean is3D;
     private boolean isLive;
 

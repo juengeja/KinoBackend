@@ -53,7 +53,7 @@ public class SeatingPlan {
         for(Seat seat : seats){
             seatMap.put(seat.getSeatID(),seatMod);
         };
-        seatingTemplateRepository.save(new SeatingTemplate((eventRoomID+"Template"+creationDateTime), false, seatMap));
+        seatingTemplateRepository.save(new SeatingTemplate((eventRoomID+"Template"+creationDateTime), eventRoomID, seatMap));
     }
 
     public Map<String,SeatMod> getSeatingPlan(ShowEvent showEvent){

@@ -34,11 +34,11 @@ public class BookingProcess {
     }
 
     public Booking reserveSeats(String bookingID, List<Seat> seats, ShowEvent showEvent) {
-        Booking reserveBooking = new Booking(bookingID, seats, showEvent);
+        Booking reserveBooking = new Booking(bookingID, seats, showEvent.getShowEventID());
         try {
             semaphore.acquire();
             reserveBooking.setSeatInfo(seats);
-            reserveBooking.setShowEventInfo(seatingPlan.selectSeats(seats,showEvent));
+            reserveBooking.setShowEventInfo(seatingPlan.selectSeats(seats,showEvent).getShowEventID());
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -55,10 +55,10 @@ public class BookingProcess {
         Timer reservedTimer = new Timer();
         TimerTask deselectSeatsTimerTask = new TimerTask(){
             public void run(){
-                ShowEvent deselectedSeatingPlan = seatingPlan.deselectSeats(reservedBooking.getSeatInfo(), reservedBooking.getShowEventInfo());
+                ShowEvent deselectedSeatingPlan = seatingPlan.deselectSeats(reservedBooking.getSeatInfo(), showEventRepository.findByShowEventID(reservedBooking.getShowEventInfo()).get());
                 List<Seat> clearSeats = new ArrayList<>();
                 reservedBooking.setSeatInfo(clearSeats);
-                reservedBooking.setShowEventInfo(deselectedSeatingPlan);
+                reservedBooking.setShowEventInfo(deselectedSeatingPlan.getShowEventID());
                 bookingRepository.save(reservedBooking);
                 if(reservedBooking.isPaid()==true){ reservedTimer.cancel();}
                 }

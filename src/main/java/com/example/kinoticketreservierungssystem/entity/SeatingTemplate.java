@@ -17,12 +17,12 @@ public class SeatingTemplate {
     @Id
     private String seatingTemplateID;
     @PartitionKey
-    private boolean bookedOut = false;
+    private String eventRoomID;
     private Map<String, SeatMod> seatMap;
 
-    public SeatingTemplate(String seatingTemplateID, boolean bookedOut, Map<String, SeatMod> seatMap) {
+    public SeatingTemplate(String seatingTemplateID, String eventRoomID, Map<String, SeatMod> seatMap) {
         this.seatingTemplateID = seatingTemplateID;
-        this.bookedOut = bookedOut;
+        this.eventRoomID = eventRoomID;
         this.seatMap = seatMap;
     }
 
@@ -40,12 +40,12 @@ public class SeatingTemplate {
         this.seatingTemplateID = seatingTemplateID;
     }
 
-    public boolean isBookedOut() {
-        return bookedOut;
+    public String getEventRoomID() {
+        return eventRoomID;
     }
 
-    public void setBookedOut(boolean bookedOut) {
-        this.bookedOut = bookedOut;
+    public void setEventRoomID(String eventRoomID) {
+        this.eventRoomID = eventRoomID;
     }
 
     public Map<String, SeatMod> getSeatMap() {

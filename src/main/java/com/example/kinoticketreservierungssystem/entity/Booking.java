@@ -13,15 +13,15 @@ public class Booking {
     @Id
     private String bookingID;
     private Customer customerInfo;
-    private ShowEvent showEventInfo;
+    @PartitionKey
+    private String showEventInfo;
     private List<Seat> seatInfo;
     private Coupon couponInfo;
-    @PartitionKey
     private String paymentMethod = "not paid yet";
     private double totalPrice;
     private boolean paid = false;
 
-    public Booking(String bookingID, Customer customerInfo, ShowEvent showEventInfo, List<Seat> seatInfo, Coupon couponInfo, String paymentMethod, double totalPrice, boolean paid) {
+    public Booking(String bookingID, Customer customerInfo, String showEventInfo, List<Seat> seatInfo, Coupon couponInfo, String paymentMethod, double totalPrice, boolean paid) {
         this.bookingID = bookingID;
         this.customerInfo = customerInfo;
         this.showEventInfo = showEventInfo;
@@ -32,10 +32,10 @@ public class Booking {
         this.paid = paid;
     }
 
-    public Booking(String bookingID, List<Seat> seats, ShowEvent showEvent) {
+    public Booking(String bookingID, List<Seat> seats, String showEventID) {
         this.bookingID = bookingID;
         this.seatInfo = seats;
-        this.showEventInfo = showEvent;
+        this.showEventInfo = showEventID;
     }
 
     public Booking() {
@@ -63,11 +63,11 @@ public class Booking {
         this.customerInfo = customerInfo;
     }
 
-    public ShowEvent getShowEventInfo() {
+    public String getShowEventInfo() {
         return showEventInfo;
     }
 
-    public void setShowEventInfo(ShowEvent showEventInfo) {
+    public void setShowEventInfo(String showEventInfo) {
         this.showEventInfo = showEventInfo;
     }
 

@@ -45,7 +45,8 @@ public class AddDBItemsController {
     CreateMovie createMovie;
     @Autowired
     BookingProcess bookingProcess;
-
+    @Autowired
+    BookingRepository bookingRepository;
 
     @PostMapping("createcinema")
     public void backCreateCinema(){
@@ -87,8 +88,8 @@ public class AddDBItemsController {
 
     @PostMapping("createshowevent")
     public void backCreateShowEvent() {
-        createEntities.createShowEvent("secondEvent","Dune","AstraTemplate2021-10-16T23:12:16.495896700", LocalDateTime.of(2021, 1, 14, 15, 56), 123, true, true);
-        createEntities.createShowEvent("secondEvent","Candyman","AstraTemplate2021-10-16T23:12:16.495896700",LocalDateTime.of(2020, 3, 13, 15, 56),134,true,true);
+        createEntities.createShowEvent("firstEvent","Dune","AstraTemplate2021-10-17T05:26:10.390228100", LocalDateTime.of(2021, 1, 14, 15, 56), 123, true, true);
+        createEntities.createShowEvent("secondEvent","Candyman","AstraTemplate2021-10-17T05:26:10.390228100",LocalDateTime.of(2020, 3, 13, 15, 56),134,true,true);
     }
     @PostMapping("reserveseat")
     public void backReserveSeatTest(){
@@ -96,6 +97,12 @@ public class AddDBItemsController {
         seats.add(seatRepository.findBySeatID("AstraA1").get());
         ShowEvent showEvent = showEventRepository.findByShowEventID("firstEvent").get();
         bookingProcess.saveBooking(bookingProcess.reserveSeats("firstBooking",seats,showEvent));
+    }
+    @PostMapping("temptest")
+    public void backTest(){
+        Booking booking = bookingRepository.findByBookingID("firstBooking").get();
+        booking.setPaymentMethod("Paypal");
+        bookingRepository.save(booking);
     }
     }
 
