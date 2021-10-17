@@ -33,19 +33,20 @@ public class BookingProcess {
         semaphore = new Semaphore(1);
     }
 
-    public Booking reserveSeats(List<Seat> seats, ShowEvent showEvent) {
+    public Booking reserveSeats(List<String> seats, ShowEvent showEvent) {
         String creationDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin")).toString();
         int totalAmount = 0;
         Booking reserveBooking = new Booking("booking"+creationDateTime, seats, showEvent.getShowEventID());
         try {
             semaphore.acquire();
             reserveBooking.setSeatInfo(seats);
-            for(Seat seat:seats){
+            for(String seat:seats){
                 totalAmount += showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).getPrice();
             }
             reserveBooking.setTotalPrice(totalAmount);
-            reserveBooking.setShowEventInfo(seatingPlan.selectSeats(seats,showEvent).getShowEventID());
-
+            ShowEvent reservedShowEvent = seatingPlan.selectSeats(seats,showEvent);
+            reserveBooking.setShowEventInfo(reservedShowEvent.getShowEventID());
+            reserveBooking.setReservedSeatMap(reservedShowEvent.getSeatingTemplateInfo().getSeatMap());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
@@ -62,7 +63,7 @@ public class BookingProcess {
         TimerTask deselectSeatsTimerTask = new TimerTask(){
             public void run(){
                 ShowEvent deselectedSeatingPlan = seatingPlan.deselectSeats(reservedBooking.getSeatInfo(), showEventRepository.findByShowEventID(reservedBooking.getShowEventInfo()).get());
-                List<Seat> clearSeats = new ArrayList<>();
+                List<String> clearSeats = new ArrayList<>();
                 reservedBooking.setSeatInfo(clearSeats);
                 reservedBooking.setShowEventInfo(deselectedSeatingPlan.getShowEventID());
                 bookingRepository.save(reservedBooking);
@@ -74,9 +75,9 @@ public class BookingProcess {
 
 
 
-    public Booking bookSeats(Booking paidBooking, Customer customer, Coupon coupon){
+    public Booking bookSeats(Booking paidBooking, Customer customer){
         paidBooking.setCustomerInfo(customer);
-        paidBooking.setCouponInfo(coupon);
+        paidBooking.setReservedSeatMap(null);
         paidBooking.setPaid(true);
         return bookingRepository.save(paidBooking);
     }

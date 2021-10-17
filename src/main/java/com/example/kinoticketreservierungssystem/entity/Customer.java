@@ -32,6 +32,16 @@ public class Customer{
         this.password = password;
     }
 
+    public Customer(String customerID, String lastName, String firstName, LocalDate dateOfBirth, String email, String phoneNumber, boolean user) {
+        this.customerID = customerID;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.user = user;
+    }
+
     public Customer() {
 
     }

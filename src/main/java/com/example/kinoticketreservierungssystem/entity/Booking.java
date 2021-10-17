@@ -2,11 +2,11 @@ package com.example.kinoticketreservierungssystem.entity;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.example.kinoticketreservierungssystem.blSupport.SeatMod;
 import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
 import java.util.List;
+import java.util.Map;
 
 @Container(containerName = "Bookings", ru = "400")
 public class Booking {
@@ -15,13 +15,14 @@ public class Booking {
     private Customer customerInfo;
     @PartitionKey
     private String showEventInfo;
-    private List<Seat> seatInfo;
+    private Map<String, SeatMod> reservedSeatMap;
+    private List<String> seatInfo;
     private Coupon couponInfo;
     private String paymentMethod = "not paid yet";
     private double totalPrice;
     private boolean paid = false;
 
-    public Booking(String bookingID, Customer customerInfo, String showEventInfo, List<Seat> seatInfo, Coupon couponInfo, String paymentMethod, double totalPrice, boolean paid) {
+    public Booking(String bookingID, Customer customerInfo, String showEventInfo, List<String> seatInfo, Coupon couponInfo, String paymentMethod, double totalPrice, boolean paid) {
         this.bookingID = bookingID;
         this.customerInfo = customerInfo;
         this.showEventInfo = showEventInfo;
@@ -32,7 +33,7 @@ public class Booking {
         this.paid = paid;
     }
 
-    public Booking(String bookingID, List<Seat> seats, String showEventID) {
+    public Booking(String bookingID, List<String> seats, String showEventID) {
         this.bookingID = bookingID;
         this.seatInfo = seats;
         this.showEventInfo = showEventID;
@@ -71,11 +72,11 @@ public class Booking {
         this.showEventInfo = showEventInfo;
     }
 
-    public List<Seat> getSeatInfo() {
+    public List<String> getSeatInfo() {
         return seatInfo;
     }
 
-    public void setSeatInfo(List<Seat> seatInfo) {
+    public void setSeatInfo(List<String> seatInfo) {
         this.seatInfo = seatInfo;
     }
 
@@ -109,5 +110,13 @@ public class Booking {
 
     public void setPaid(boolean paid) {
         this.paid = paid;
+    }
+
+    public Map<String, SeatMod> getReservedSeatMap() {
+        return reservedSeatMap;
+    }
+
+    public void setReservedSeatMap(Map<String, SeatMod> reservedSeatMap) {
+        this.reservedSeatMap = reservedSeatMap;
     }
 }

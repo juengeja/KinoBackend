@@ -93,14 +93,20 @@ public class AddDBItemsController {
     }
     @PostMapping("reserveseat")
     public void backReserveSeatTest(){
-        List<Seat> seats = new ArrayList<>();
-        seats.add(seatRepository.findBySeatID("AstraA1").get());
+        List<String> seats = new ArrayList<>();
+        seats.add("AstraC12");
+        seats.add("AstraA3");
         ShowEvent showEvent = showEventRepository.findByShowEventID("firstEvent").get();
         bookingRepository.save(bookingProcess.reserveSeats(seats,showEvent));
     }
+    @PostMapping("bookseat")
+    public void backBookSeatTest(){
+        Booking booking = bookingRepository.findByBookingID("booking2021-10-17T20:59:07.772063900").get();
+        bookingRepository.save(bookingProcess.bookSeats(booking, new Customer()));
+    }
     @PostMapping("temptest")
     public void backTest(){
-        Booking booking = bookingRepository.findByBookingID("firstBooking").get();
+        Booking booking = bookingRepository.findByBookingID("secondEvent").get();
         booking.setPaymentMethod("Paypal");
         bookingRepository.save(booking);
     }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping(value = "/seatreservation")
+@RequestMapping(value = "/reservation")
 @RestController
 @CrossOrigin(origins = "*")
 public class BookingController {
@@ -27,13 +27,13 @@ public class BookingController {
 
 
     @PostMapping
-    public Booking seatsReserved(@RequestBody List<Seat> seats, ShowEvent showEvent){
+    public Booking seatsReserved(@RequestBody List<String> seats, ShowEvent showEvent){
         return bookingProcess.reserveSeats(seats,showEvent);
     }
 
     @PutMapping("/successfulpayment")
-    public Booking seatsBooked(@RequestBody Booking booking, Customer customer, Coupon coupon){
-        return bookingProcess.bookSeats(booking, customer, coupon);
+    public Booking seatsBooked(@RequestBody Booking booking, Customer customer){
+        return bookingProcess.bookSeats(booking, customer);
     }
 
 }

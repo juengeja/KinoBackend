@@ -31,7 +31,7 @@ public class ShowEventController {
         return showEventMovies.getAllShowEventMovies();
     }
 
-    @GetMapping("/moviedates")
+    @GetMapping("/showeventdates")
     public List<ShowEvent> frontShowEventDates(@PathVariable String movie){
         return showEventMovies.getAllShowEventDates(movie);
     }
