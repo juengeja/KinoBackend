@@ -2,8 +2,6 @@ package com.example.kinoticketreservierungssystem.entity;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
 import java.time.LocalDateTime;
@@ -19,7 +17,7 @@ public class ShowEvent {
     private int duration;
     @PartitionKey
     private boolean is3D;
-    private boolean isLive;
+    private boolean live;
 
     public ShowEvent(String showEventID, Movie movieInfo, SeatingTemplate seatingTemplateInfo, LocalDateTime eventStart, int duration, boolean is3D, boolean isLive) {
         this.showEventID = showEventID;
@@ -28,7 +26,7 @@ public class ShowEvent {
         this.eventStart = eventStart;
         this.duration = duration;
         this.is3D = is3D;
-        this.isLive = isLive;
+        this.live = isLive;
     }
 
     public ShowEvent() {
@@ -39,7 +37,7 @@ public class ShowEvent {
         this.eventStart = eventStart;
         this.duration = duration;
         this.is3D = is3D;
-        this.isLive = isLive;
+        this.live = isLive;
     }
 
     @Override
@@ -97,10 +95,10 @@ public class ShowEvent {
     }
 
     public boolean isLive() {
-        return isLive;
+        return live;
     }
 
     public void setLive(boolean live) {
-        isLive = live;
+        this.live = live;
     }
 }

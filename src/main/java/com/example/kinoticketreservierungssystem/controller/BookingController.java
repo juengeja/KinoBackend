@@ -6,9 +6,12 @@ import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
 import com.example.kinoticketreservierungssystem.service.BookingProcess;
 import com.example.kinoticketreservierungssystem.service.SeatingPlan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping(value = "/reservation")
 @RestController
@@ -27,13 +30,13 @@ public class BookingController {
 
 
     @PostMapping
-    public Booking seatsReserved(@RequestBody List<String> seats, ShowEvent showEvent){
-        return bookingProcess.reserveSeats(seats,showEvent);
+    public ResponseEntity<Booking> seatsReserved(@RequestBody List<String> seats, ShowEvent showEvent){
+        return new ResponseEntity<Booking>( bookingProcess.reserveSeats(seats,showEvent), HttpStatus.OK);
     }
 
     @PutMapping("/successfulpayment")
-    public Booking seatsBooked(@RequestBody Booking booking, Customer customer){
-        return bookingProcess.bookSeats(booking, customer);
+    public ResponseEntity<Booking> seatsBooked(@RequestBody Booking booking, Customer customer){
+        return new ResponseEntity<Booking>( bookingProcess.bookSeats(booking, customer), HttpStatus.OK);
     }
 
 }

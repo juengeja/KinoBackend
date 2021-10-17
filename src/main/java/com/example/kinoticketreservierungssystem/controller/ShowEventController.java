@@ -9,6 +9,8 @@ import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
 import com.example.kinoticketreservierungssystem.service.SeatingPlan;
 import com.example.kinoticketreservierungssystem.service.ShowEventMovies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,13 +29,13 @@ public class ShowEventController {
     MovieRepository movieRepository;
 
     @GetMapping
-    public List<Movie> frontShowAllMovies(){
-        return showEventMovies.getAllShowEventMovies();
+    public ResponseEntity<Iterable<Movie>> frontShowAllMovies(){
+        return new ResponseEntity<>(showEventMovies.getAllShowEventMovies(), HttpStatus.OK);
     }
 
     @GetMapping("/showeventdates")
-    public List<ShowEvent> frontShowEventDates(@PathVariable String movie){
-        return showEventMovies.getAllShowEventDates(movie);
+    public ResponseEntity<Iterable<ShowEvent>> frontShowEventDates(@PathVariable String movie){
+        return new ResponseEntity<>(showEventMovies.getAllShowEventDates(movie), HttpStatus.OK);
     }
 
 
