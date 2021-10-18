@@ -33,7 +33,7 @@ public class ShowEventController {
         return new ResponseEntity<>(showEventMovies.getAllShowEventMovies(), HttpStatus.OK);
     }
 
-    @GetMapping("/showeventdates")
+    @GetMapping("/showeventdates/{movie}")
     public ResponseEntity<Iterable<ShowEvent>> frontShowEventDates(@PathVariable String movie){
         return new ResponseEntity<>(showEventMovies.getAllShowEventDates(movie), HttpStatus.OK);
     }
