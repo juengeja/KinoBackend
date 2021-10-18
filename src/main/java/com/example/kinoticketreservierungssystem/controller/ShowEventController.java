@@ -37,16 +37,4 @@ public class ShowEventController {
     public ResponseEntity<Iterable<ShowEvent>> frontShowEventDates(@PathVariable String movie){
         return new ResponseEntity<>(showEventMovies.getAllShowEventDates(movie), HttpStatus.OK);
     }
-
-
-
-  //  @GetMapping
-    //public ShowEvent frontShowEvent(@PathVariable String showEventID){
-      //  return showEventRepository.findByShowEventID(showEventID).get();
-   // }
-
-//    @GetMapping(value = "/seatreservation")
-  //  public Map<Seat, SeatMod> frontSeatingPlan(@RequestBody ShowEvent showEvent){
-    //    return SeatingPlan.saveSeatingPlan(showEvent);
-    //}
 }
