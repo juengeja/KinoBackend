@@ -16,14 +16,13 @@ public class Booking {
     private Customer customerInfo;
     @PartitionKey
     private String showEventInfo;
-    private Map<String, SeatMod> reservedSeatMap;
     private Set<String> seatInfo;
+    private String bookingStatus;
     private Coupon couponInfo;
     private String paymentMethod = "not paid yet";
     private double totalPrice;
-    private boolean paid = false;
 
-    public Booking(String bookingID, Customer customerInfo, String showEventInfo, Set<String> seatInfo, Coupon couponInfo, String paymentMethod, double totalPrice, boolean paid) {
+    public Booking(String bookingID, Customer customerInfo, String showEventInfo, Set<String> seatInfo, Coupon couponInfo, String paymentMethod, double totalPrice) {
         this.bookingID = bookingID;
         this.customerInfo = customerInfo;
         this.showEventInfo = showEventInfo;
@@ -31,7 +30,6 @@ public class Booking {
         this.couponInfo = couponInfo;
         this.paymentMethod = paymentMethod;
         this.totalPrice = totalPrice;
-        this.paid = paid;
     }
 
     public Booking(String bookingID, String showEventID) {
@@ -104,19 +102,11 @@ public class Booking {
         this.totalPrice = totalPrice;
     }
 
-    public boolean isPaid() {
-        return paid;
+    public String getBookingStatus() {
+        return bookingStatus;
     }
 
-    public void setPaid(boolean paid) {
-        this.paid = paid;
-    }
-
-    public Map<String, SeatMod> getReservedSeatMap() {
-        return reservedSeatMap;
-    }
-
-    public void setReservedSeatMap(Map<String, SeatMod> reservedSeatMap) {
-        this.reservedSeatMap = reservedSeatMap;
+    public void setBookingStatus(String bookingStatus) {
+        this.bookingStatus = bookingStatus;
     }
 }

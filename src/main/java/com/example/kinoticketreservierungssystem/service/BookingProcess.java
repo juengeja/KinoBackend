@@ -30,12 +30,11 @@ public class BookingProcess {
         semaphore = new Semaphore(1);
     }
 
-    public Booking reserveSeats(Booking booking) {
-        ShowEvent showEvent = showEventRepository.findByShowEventID(booking.getShowEventInfo()).get();
-        Set<String> seats = new HashSet<>(booking.getSeatInfo());
+    public Booking reserveSeats(Booking reserveBooking) {
+        ShowEvent showEvent = showEventRepository.findByShowEventID(reserveBooking.getShowEventInfo()).get();
+        Set<String> seats = reserveBooking.getSeatInfo();
         String creationDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin")).toString();
         int totalAmount = 0;
-        Booking reserveBooking = new Booking("booking"+creationDateTime, showEvent.getShowEventID());
         try {
             semaphore.acquire();
             reserveBooking.setSeatInfo(seats);
@@ -44,8 +43,12 @@ public class BookingProcess {
             }
             reserveBooking.setTotalPrice(totalAmount);
             ShowEvent reservedShowEvent = seatingPlan.selectSeats(seats,showEvent);
+            if(showEvent.getSeatingTemplateInfo().getSeatMap().equals(reservedShowEvent.getSeatingTemplateInfo().getSeatMap())) {
+            reserveBooking.setBookingStatus("denied");
+            }else{
+                reserveBooking.setBookingStatus("reserved");
+            }
             reserveBooking.setShowEventInfo(reservedShowEvent.getShowEventID());
-            reserveBooking.setReservedSeatMap(reservedShowEvent.getSeatingTemplateInfo().getSeatMap());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
@@ -64,15 +67,14 @@ public class BookingProcess {
                 reservedBooking.setSeatInfo(clearSeats);
                 reservedBooking.setShowEventInfo(deselectedSeatingPlan.getShowEventID());
                 bookingRepository.save(reservedBooking);
-                if(reservedBooking.isPaid()==true){ reservedTimer.cancel();}
+                if(reservedBooking.getBookingStatus()=="paid"){ reservedTimer.cancel();}
                 }
         };
         reservedTimer.schedule(deselectSeatsTimerTask, 900000);
     }
 
     public Booking bookSeats(Booking paidBooking){
-        paidBooking.setReservedSeatMap(null);
-        paidBooking.setPaid(true);
+        paidBooking.setBookingStatus("paid");
         return bookingRepository.save(paidBooking);
     }
 }
