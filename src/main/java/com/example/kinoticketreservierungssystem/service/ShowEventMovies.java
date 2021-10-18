@@ -6,8 +6,6 @@ import com.example.kinoticketreservierungssystem.repository.MovieRepository;
 import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
-
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -24,7 +22,7 @@ public class ShowEventMovies {
     MovieRepository movieRepository;
 
     public Set<Movie> getAllShowEventMovies(){
-        List<ShowEvent> showEvents = new ArrayList<>();
+        Set<ShowEvent> showEvents = new HashSet<>();
         showEventRepository.findAllByLive(true).forEach(showEvents::add);
         Set<Movie> movieSet = new HashSet<>();
         for (ShowEvent showEvent:showEvents){
@@ -38,8 +36,8 @@ public class ShowEventMovies {
         return movieSet;
     }
 
-    public List<ShowEvent> getAllShowEventDates(String movieID){
-        List<ShowEvent> showEventSchedule = new ArrayList<>();
+    public Set<ShowEvent> getAllShowEventDates(String movieID){
+        Set<ShowEvent> showEventSchedule = new HashSet<>();
         Movie movie = movieRepository.findByMovieId(movieID).get();
         showEventRepository.findAllByMovieInfoAndLive(movie,true).forEach(showEventSchedule::add);
         return showEventSchedule;
