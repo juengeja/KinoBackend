@@ -65,6 +65,8 @@ public class BookingProcess {
                 ShowEvent deselectedSeatingPlan = seatingPlan.deselectSeats(reservedBooking.getSeatInfo(), showEventRepository.findByShowEventID(reservedBooking.getShowEventInfo()).get());
                 Set<String> clearSeats = new HashSet<>();
                 reservedBooking.setSeatInfo(clearSeats);
+                reservedBooking.setBookingStatus("no seats selected");
+                reservedBooking.setTotalPrice(0);
                 reservedBooking.setShowEventInfo(deselectedSeatingPlan.getShowEventID());
                 bookingRepository.save(reservedBooking);
                 if(reservedBooking.getBookingStatus()=="paid"){ reservedTimer.cancel();}
