@@ -97,12 +97,12 @@ public class AddDBItemsController {
         seats.add("AstraC12");
         seats.add("AstraA3");
         ShowEvent showEvent = showEventRepository.findByShowEventID("firstEvent").get();
-        bookingRepository.save(bookingProcess.reserveSeats(seats,showEvent));
+        bookingRepository.save(bookingProcess.reserveSeats(new Booking()));
     }
     @PostMapping("bookseat")
     public void backBookSeatTest(){
         Booking booking = bookingRepository.findByBookingID("booking2021-10-17T20:59:07.772063900").get();
-        bookingRepository.save(bookingProcess.bookSeats(booking, new Customer()));
+        bookingRepository.save(bookingProcess.bookSeats(booking));
     }
     @PostMapping("temptest")
     public void backTest(){

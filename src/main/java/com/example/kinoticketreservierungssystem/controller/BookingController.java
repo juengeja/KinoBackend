@@ -30,13 +30,13 @@ public class BookingController {
 
 
     @PostMapping
-    public ResponseEntity<Booking> seatsReserved(@RequestBody List<String> seats, ShowEvent showEvent){
-        return new ResponseEntity<Booking>( bookingProcess.reserveSeats(seats,showEvent), HttpStatus.OK);
+    public ResponseEntity<Booking> seatsReserved(@RequestBody Booking booking){
+        return new ResponseEntity<Booking>( bookingProcess.reserveSeats(booking), HttpStatus.OK);
     }
 
     @PutMapping("/successfulpayment")
-    public ResponseEntity<Booking> seatsBooked(@RequestBody Booking booking, Customer customer){
-        return new ResponseEntity<Booking>( bookingProcess.bookSeats(booking, customer), HttpStatus.OK);
+    public ResponseEntity<Booking> seatsBooked(@RequestBody Booking booking){
+        return new ResponseEntity<Booking>( bookingProcess.bookSeats(booking), HttpStatus.OK);
     }
 
 }

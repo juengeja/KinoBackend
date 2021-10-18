@@ -8,10 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 import java.util.concurrent.Semaphore;
 
 @Service
@@ -33,10 +30,12 @@ public class BookingProcess {
         semaphore = new Semaphore(1);
     }
 
-    public Booking reserveSeats(List<String> seats, ShowEvent showEvent) {
+    public Booking reserveSeats(Booking booking) {
+        ShowEvent showEvent = showEventRepository.findByShowEventID(booking.getShowEventInfo()).get();
+        Set<String> seats = new HashSet<>(booking.getSeatInfo());
         String creationDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin")).toString();
         int totalAmount = 0;
-        Booking reserveBooking = new Booking("booking"+creationDateTime, seats, showEvent.getShowEventID());
+        Booking reserveBooking = new Booking("booking"+creationDateTime, showEvent.getShowEventID());
         try {
             semaphore.acquire();
             reserveBooking.setSeatInfo(seats);
@@ -61,7 +60,7 @@ public class BookingProcess {
         TimerTask deselectSeatsTimerTask = new TimerTask(){
             public void run(){
                 ShowEvent deselectedSeatingPlan = seatingPlan.deselectSeats(reservedBooking.getSeatInfo(), showEventRepository.findByShowEventID(reservedBooking.getShowEventInfo()).get());
-                List<String> clearSeats = new ArrayList<>();
+                Set<String> clearSeats = new HashSet<>();
                 reservedBooking.setSeatInfo(clearSeats);
                 reservedBooking.setShowEventInfo(deselectedSeatingPlan.getShowEventID());
                 bookingRepository.save(reservedBooking);
@@ -71,8 +70,7 @@ public class BookingProcess {
         reservedTimer.schedule(deselectSeatsTimerTask, 900000);
     }
 
-    public Booking bookSeats(Booking paidBooking, Customer customer){
-        paidBooking.setCustomerInfo(customer);
+    public Booking bookSeats(Booking paidBooking){
         paidBooking.setReservedSeatMap(null);
         paidBooking.setPaid(true);
         return bookingRepository.save(paidBooking);
