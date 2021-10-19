@@ -37,7 +37,6 @@ public class BookingProcess {
         int totalAmount = 0;
         try {
             semaphore.acquire();
-            reserveBooking.setSeatInfo(seats);
             Set<String> seatsAdded = new HashSet<>();
             for(String seat:seats){
                 if(showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).isBooked()==true){
