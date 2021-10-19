@@ -45,8 +45,7 @@ public class BookingProcess {
                     break;
             } else{seatsAdded.add(seat);
                     totalAmount += showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).getPrice();
-                    ShowEvent reservedShowEvent = seatingPlan.selectSeats(seats,showEvent);
-                    reserveBooking.setShowEventInfo(reservedShowEvent.getShowEventID());
+                    seatingPlan.selectSeats(seats,showEvent);
                     reserveBooking.setBookingStatus("reserved");
                     reserveBooking.setTotalPrice(totalAmount);}}
         } catch (InterruptedException e) {
