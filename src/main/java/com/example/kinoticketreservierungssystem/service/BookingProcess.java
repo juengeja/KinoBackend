@@ -39,16 +39,13 @@ public class BookingProcess {
             semaphore.acquire();
             reserveBooking.setSeatInfo(seats);
             for(String seat:seats){
+                if(showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).isBooked()==false){
                 totalAmount += showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).getPrice();
-            }
-            reserveBooking.setTotalPrice(totalAmount);
-            ShowEvent reservedShowEvent = seatingPlan.selectSeats(seats,showEvent);
-            if(showEvent.getSeatingTemplateInfo().getSeatMap().equals(reservedShowEvent.getSeatingTemplateInfo().getSeatMap())) {
-            reserveBooking.setBookingStatus("denied");
-            }else{
+                ShowEvent reservedShowEvent = seatingPlan.selectSeats(seats,showEvent);
+                reserveBooking.setShowEventInfo(reservedShowEvent.getShowEventID());
                 reserveBooking.setBookingStatus("reserved");
-            }
-            reserveBooking.setShowEventInfo(reservedShowEvent.getShowEventID());
+                reserveBooking.setTotalPrice(totalAmount);
+            } else{reserveBooking.setBookingStatus("denied");}}
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {

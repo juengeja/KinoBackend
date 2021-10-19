@@ -23,8 +23,8 @@ public class SeatingPlan {
     public ShowEvent selectSeats(Set<String> seats, ShowEvent showEvent){
         Map<String, SeatMod> selectSeatingPlanMap = showEvent.getSeatingTemplateInfo().getSeatMap();
         for(String seat : seats){
-            if(selectSeatingPlanMap.get(seat).isBooked()==false) {selectSeatingPlanMap.get(seat).setBooked(true);
-                showEvent.getSeatingTemplateInfo().setSeatMap(selectSeatingPlanMap);}}
+            selectSeatingPlanMap.get(seat).setBooked(true);
+            showEvent.getSeatingTemplateInfo().setSeatMap(selectSeatingPlanMap);}
             return showEventRepository.save(showEvent);
     }
 
