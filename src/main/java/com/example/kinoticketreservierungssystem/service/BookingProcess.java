@@ -41,11 +41,12 @@ public class BookingProcess {
             for(String seat:seats){
                 if(showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).isBooked()==true){
                     reserveBooking.setBookingStatus("denied");
+                    System.out.println("denied1");
                     seatingPlan.deselectSeats(seatsAdded, showEvent);
                     break;
             } else{seatsAdded.add(seat);
                     totalAmount += showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).getPrice();
-                    seatingPlan.selectSeats(seatsAdded,showEvent);
+                    seatingPlan.selectSeats(seatsAdded, showEvent);
                     reserveBooking.setBookingStatus("reserved");
                     reserveBooking.setTotalPrice(totalAmount);
                     bookingProcess.seatsReservedTimer(reserveBooking);}}
