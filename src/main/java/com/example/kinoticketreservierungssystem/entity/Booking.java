@@ -2,11 +2,9 @@ package com.example.kinoticketreservierungssystem.entity;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
-import com.example.kinoticketreservierungssystem.blSupport.SeatMod;
 import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
-import java.util.List;
-import java.util.Map;
+
 import java.util.Set;
 
 @Container(containerName = "Bookings", ru = "400")
@@ -14,27 +12,26 @@ public class Booking {
     @Id
     private String bookingID;
     private Customer customerInfo;
+    //Count of ticket Items as PartitionKey
     @PartitionKey
-    private String showEventInfo;
-    private Set<String> seatInfo;
+    private int ticketCount;
+    private Set<String> ticketInfo;
     private String bookingStatus;
     private Coupon couponInfo;
     private String paymentMethod = "not paid yet";
     private double totalPrice;
 
-    public Booking(String bookingID, Customer customerInfo, String showEventInfo, Set<String> seatInfo, Coupon couponInfo, String paymentMethod, double totalPrice) {
+    public Booking(String bookingID, Customer customerInfo, Set<String> ticketInfo, Coupon couponInfo, String paymentMethod, double totalPrice) {
         this.bookingID = bookingID;
         this.customerInfo = customerInfo;
-        this.showEventInfo = showEventInfo;
-        this.seatInfo = seatInfo;
+        this.ticketInfo = ticketInfo;
         this.couponInfo = couponInfo;
         this.paymentMethod = paymentMethod;
         this.totalPrice = totalPrice;
     }
 
-    public Booking(String bookingID, String showEventID) {
+    public Booking(String bookingID) {
         this.bookingID = bookingID;
-        this.showEventInfo = showEventID;
     }
 
     public Booking() {
@@ -62,20 +59,12 @@ public class Booking {
         this.customerInfo = customerInfo;
     }
 
-    public String getShowEventInfo() {
-        return showEventInfo;
+    public Set<String> getTicketInfo() {
+        return ticketInfo;
     }
 
-    public void setShowEventInfo(String showEventInfo) {
-        this.showEventInfo = showEventInfo;
-    }
-
-    public Set<String> getSeatInfo() {
-        return seatInfo;
-    }
-
-    public void setSeatInfo(Set<String> seatInfo) {
-        this.seatInfo = seatInfo;
+    public void setTicketInfo(Set<String> ticketInfo) {
+        this.ticketInfo = this.ticketInfo;
     }
 
     public Coupon getCouponInfo() {

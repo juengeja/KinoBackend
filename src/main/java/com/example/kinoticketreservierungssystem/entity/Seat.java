@@ -2,11 +2,8 @@ package com.example.kinoticketreservierungssystem.entity;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Reference;
 
 
 @Container(containerName = "Seats", ru= "400" )
@@ -19,14 +16,14 @@ public class Seat {
     @PartitionKey
     private char row;
     private int seatNumber;
-    private boolean booked;
+    private boolean available;
 
     public Seat(String seatID, EventRoom eventRoomInfo, char row, int seatNumber, boolean booked) {
         this.seatID = seatID;
         this.eventRoomInfo = eventRoomInfo;
         this.row = row;
         this.seatNumber = seatNumber;
-        this.booked = booked;
+        this.available = booked;
     }
 
     public Seat() {
@@ -71,11 +68,11 @@ public class Seat {
         this.seatNumber = seatNumber;
     }
 
-    public boolean isBooked() {
-        return booked;
+    public boolean isAvailable() {
+        return available;
     }
 
-    public void setBooked(boolean booked) {
-        this.booked = booked;
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 }

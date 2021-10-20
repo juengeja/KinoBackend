@@ -1,7 +1,9 @@
 package com.example.kinoticketreservierungssystem.controller;
 
+import com.example.kinoticketreservierungssystem.blSupport.Reservation;
 import com.example.kinoticketreservierungssystem.entity.*;
 import com.example.kinoticketreservierungssystem.repository.BookingRepository;
+import com.example.kinoticketreservierungssystem.repository.CustomerRepository;
 import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
 import com.example.kinoticketreservierungssystem.service.BookingProcess;
 import com.example.kinoticketreservierungssystem.service.SeatingPlan;
@@ -27,16 +29,17 @@ public class BookingController {
     BookingRepository bookingRepository;
     @Autowired
     SeatingPlan seatingPlan;
-
+    @Autowired
+    CustomerRepository customerRepository;
 
     @PostMapping
-    public ResponseEntity<Booking> seatsReserved(@RequestBody Booking booking){
-        return new ResponseEntity<Booking>( bookingProcess.reserveSeats(booking), HttpStatus.OK);
+    public ResponseEntity<Booking> seatsReserved(@RequestBody Reservation reservation){
+        return new ResponseEntity<Booking>(bookingProcess.reserveSeats(reservation), HttpStatus.OK);
     }
 
     @PutMapping("/successfulpayment")
     public ResponseEntity<Booking> seatsBooked(@RequestBody Booking booking){
-        return new ResponseEntity<Booking>( bookingProcess.bookSeats(booking), HttpStatus.OK);
+        return new ResponseEntity<Booking>(bookingProcess.bookSeats(booking), HttpStatus.OK);
     }
 
 }

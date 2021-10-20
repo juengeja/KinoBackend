@@ -1,7 +1,9 @@
 package com.example.kinoticketreservierungssystem.service;
 
+import com.example.kinoticketreservierungssystem.blSupport.Reservation;
 import com.example.kinoticketreservierungssystem.entity.*;
 import com.example.kinoticketreservierungssystem.repository.BookingRepository;
+import com.example.kinoticketreservierungssystem.repository.CustomerRepository;
 import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,8 @@ public class BookingProcess {
     BookingRepository bookingRepository;
     @Autowired
     SeatingPlan seatingPlan;
+    @Autowired
+    CustomerRepository customerRepository;
 
 
     private static Semaphore semaphore;
@@ -30,30 +34,32 @@ public class BookingProcess {
         semaphore = new Semaphore(1);
     }
 
-    public Booking reserveSeats(Booking reserveBooking) {
-        ShowEvent showEvent = showEventRepository.findByShowEventID(reserveBooking.getShowEventInfo()).get();
-        Set<String> seats = reserveBooking.getSeatInfo();
+    public Booking reserveSeats(Reservation reservation) {
+        ShowEvent showEvent = showEventRepository.findByShowEventID(reservation.getShowEventInfo()).get();
+        Set<String> seats = reservation.getSeats();
         String creationDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin")).toString();
+        Booking booking = new Booking("Booking"+creationDateTime);
         int totalAmount = 0;
         try {
             semaphore.acquire();
             Set<String> seatsAdded = new HashSet<>();
             for(String seat:seats){
                 if(showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).isBooked()==true){
-                    reserveBooking.setBookingStatus("denied");
+                    booking.setBookingStatus("denied");
                     seatingPlan.deselectSeats(seatsAdded, showEvent);
                     break;
             } else{seatsAdded.add(seat);
                     totalAmount += showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).getPrice();
                     seatingPlan.selectSeats(seatsAdded, showEvent);
-                    reserveBooking.setBookingStatus("reserved");
-                    reserveBooking.setTotalPrice(totalAmount);
-                    bookingProcess.seatsReservedTimer(reserveBooking);}}
+                    booking.setBookingStatus("reserved");
+                    booking.setTotalPrice(totalAmount);
+                    bookingProcess.seatsReservedTimer(booking);
+                    Ticket ticket = new Ticket("Ticket"+creationDateTime, seat, reservation.getShowEventInfo(), "reserved");}}
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             semaphore.release();
-            return bookingRepository.save(reserveBooking);
+            return bookingRepository.save(booking);
         }
     }
 
@@ -61,9 +67,9 @@ public class BookingProcess {
         Timer reservedTimer = new Timer();
         TimerTask deselectSeatsTimerTask = new TimerTask(){
             public void run(){
-                ShowEvent deselectedSeatingPlan = seatingPlan.deselectSeats(reservedBooking.getSeatInfo(), showEventRepository.findByShowEventID(reservedBooking.getShowEventInfo()).get());
+                ShowEvent deselectedSeatingPlan = seatingPlan.deselectSeats(reservedBooking.getTicketInfo(), showEventRepository.findByShowEventID(reservedBooking.getShowEventInfo()).get());
                 Set<String> clearSeats = new HashSet<>();
-                reservedBooking.setSeatInfo(clearSeats);
+                reservedBooking.setTicketInfo(clearSeats);
                 reservedBooking.setBookingStatus("no seats selected");
                 reservedBooking.setTotalPrice(0);
                 reservedBooking.setShowEventInfo(deselectedSeatingPlan.getShowEventID());
@@ -75,6 +81,7 @@ public class BookingProcess {
     }
 
     public Booking bookSeats(Booking paidBooking){
+        customerRepository.save(paidBooking.getCustomerInfo());
         paidBooking.setBookingStatus("paid");
         return bookingRepository.save(paidBooking);
     }
