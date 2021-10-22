@@ -1,5 +1,6 @@
 package com.example.kinoticketreservierungssystem.tempController;
 
+import com.example.kinoticketreservierungssystem.blSupport.Reservation;
 import com.example.kinoticketreservierungssystem.blSupport.SeatMod;
 import com.example.kinoticketreservierungssystem.entity.*;
 import com.example.kinoticketreservierungssystem.repository.*;
@@ -97,7 +98,7 @@ public class AddDBItemsController {
         seats.add("AstraC12");
         seats.add("AstraA3");
         ShowEvent showEvent = showEventRepository.findByShowEventID("firstEvent").get();
-        bookingRepository.save(bookingProcess.reserveSeats(new Booking()));
+        bookingRepository.save(bookingProcess.reserveSeats(new Reservation()));
     }
     @PostMapping("bookseat")
     public void backBookSeatTest(){

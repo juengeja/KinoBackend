@@ -1,20 +1,29 @@
 package com.example.kinoticketreservierungssystem.blSupport;
 
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
-import com.example.kinoticketreservierungssystem.entity.ShowEvent;
 import org.springframework.data.annotation.Id;
 
 import java.util.Set;
 
 public class Reservation {
+    @Id
     private String reservationID;
     private Set<String> seats;
+    @PartitionKey
     private String showEventInfo;
+    private String bookingInfo;
+    private double totalAmount;
 
-    public Reservation(String reservationID, Set<String> seats, String showEventInfo) {
+    public Reservation(String reservationID, Set<String> seats, String showEventInfo, String bookingInfo, double totalAmount) {
         this.reservationID = reservationID;
         this.seats = seats;
         this.showEventInfo = showEventInfo;
+        this.bookingInfo = bookingInfo;
+        this.totalAmount = totalAmount;
+    }
+
+    public Reservation() {
+
     }
 
     public String getReservationID() {
@@ -39,5 +48,21 @@ public class Reservation {
 
     public void setShowEventInfo(String showEventInfo) {
         this.showEventInfo = showEventInfo;
+    }
+
+    public String getBookingInfo() {
+        return bookingInfo;
+    }
+
+    public void setBookingInfo(String bookingInfo) {
+        this.bookingInfo = bookingInfo;
+    }
+
+    public double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
     }
 }

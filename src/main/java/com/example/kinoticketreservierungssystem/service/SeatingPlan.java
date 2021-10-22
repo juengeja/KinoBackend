@@ -35,5 +35,4 @@ public class SeatingPlan {
             showEvent.getSeatingTemplateInfo().setSeatMap(deselectSeatingPlanMap);}
             return showEventRepository.save(showEvent);
     }
-
 }

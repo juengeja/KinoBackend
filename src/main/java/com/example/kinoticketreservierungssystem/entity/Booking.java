@@ -2,6 +2,7 @@ package com.example.kinoticketreservierungssystem.entity;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
+import com.example.kinoticketreservierungssystem.blSupport.Reservation;
 import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
 
@@ -12,10 +13,9 @@ public class Booking {
     @Id
     private String bookingID;
     private Customer customerInfo;
-    //Count of ticket Items as PartitionKey
     @PartitionKey
-    private int ticketCount;
-    private Set<String> ticketInfo;
+    private Set<Reservation> reservations;
+    private Set<String> tickets;
     private String bookingStatus;
     private Coupon couponInfo;
     private String paymentMethod = "not paid yet";
@@ -24,7 +24,7 @@ public class Booking {
     public Booking(String bookingID, Customer customerInfo, Set<String> ticketInfo, Coupon couponInfo, String paymentMethod, double totalPrice) {
         this.bookingID = bookingID;
         this.customerInfo = customerInfo;
-        this.ticketInfo = ticketInfo;
+        this.tickets = ticketInfo;
         this.couponInfo = couponInfo;
         this.paymentMethod = paymentMethod;
         this.totalPrice = totalPrice;
@@ -59,12 +59,12 @@ public class Booking {
         this.customerInfo = customerInfo;
     }
 
-    public Set<String> getTicketInfo() {
-        return ticketInfo;
+    public Set<String> getTickets() {
+        return tickets;
     }
 
-    public void setTicketInfo(Set<String> ticketInfo) {
-        this.ticketInfo = this.ticketInfo;
+    public void setTickets(Set<String> tickets) {
+        this.tickets = this.tickets;
     }
 
     public Coupon getCouponInfo() {
@@ -97,5 +97,13 @@ public class Booking {
 
     public void setBookingStatus(String bookingStatus) {
         this.bookingStatus = bookingStatus;
+    }
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

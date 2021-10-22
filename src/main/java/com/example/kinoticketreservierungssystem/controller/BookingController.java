@@ -5,15 +5,13 @@ import com.example.kinoticketreservierungssystem.entity.*;
 import com.example.kinoticketreservierungssystem.repository.BookingRepository;
 import com.example.kinoticketreservierungssystem.repository.CustomerRepository;
 import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
+import com.example.kinoticketreservierungssystem.repository.TicketRepository;
 import com.example.kinoticketreservierungssystem.service.BookingProcess;
 import com.example.kinoticketreservierungssystem.service.SeatingPlan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RequestMapping(value = "/reservation")
 @RestController
@@ -31,6 +29,8 @@ public class BookingController {
     SeatingPlan seatingPlan;
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    TicketRepository ticketRepository;
 
     @PostMapping
     public ResponseEntity<Booking> seatsReserved(@RequestBody Reservation reservation){
