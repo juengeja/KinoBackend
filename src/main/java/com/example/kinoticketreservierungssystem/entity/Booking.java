@@ -14,24 +14,26 @@ public class Booking {
     private String bookingID;
     private Customer customerInfo;
     @PartitionKey
+    private boolean quickCheckout;
     private Set<Reservation> reservations;
     private Set<String> tickets;
     private String bookingStatus;
-    private Coupon couponInfo;
+    private String couponCode;
     private String paymentMethod = "not paid yet";
     private double totalPrice;
 
-    public Booking(String bookingID, Customer customerInfo, Set<String> ticketInfo, Coupon couponInfo, String paymentMethod, double totalPrice) {
+    public Booking(String bookingID, Customer customerInfo, Set<String> ticketInfo, String couponCode, String paymentMethod, double totalPrice) {
         this.bookingID = bookingID;
         this.customerInfo = customerInfo;
         this.tickets = ticketInfo;
-        this.couponInfo = couponInfo;
+        this.couponCode = couponCode;
         this.paymentMethod = paymentMethod;
         this.totalPrice = totalPrice;
     }
 
-    public Booking(String bookingID) {
+    public Booking(String bookingID, boolean quickCheckout) {
         this.bookingID = bookingID;
+        this.quickCheckout = quickCheckout;
     }
 
     public Booking() {
@@ -67,12 +69,12 @@ public class Booking {
         this.tickets = this.tickets;
     }
 
-    public Coupon getCouponInfo() {
-        return couponInfo;
+    public String getCouponCode() {
+        return couponCode;
     }
 
-    public void setCouponInfo(Coupon couponInfo) {
-        this.couponInfo = couponInfo;
+    public void setCouponCode(String couponCode) {
+        this.couponCode = couponCode;
     }
 
     public String getPaymentMethod() {
@@ -105,5 +107,13 @@ public class Booking {
 
     public void setReservations(Set<Reservation> reservations) {
         this.reservations = reservations;
+    }
+
+    public boolean isQuickCheckout() {
+        return quickCheckout;
+    }
+
+    public void setQuickCheckout(boolean quickCheckout) {
+        this.quickCheckout = quickCheckout;
     }
 }

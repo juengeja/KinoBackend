@@ -41,5 +41,4 @@ public class BookingController {
     public ResponseEntity<Booking> seatsBooked(@RequestBody Booking booking){
         return new ResponseEntity<Booking>(bookingProcess.bookSeats(booking), HttpStatus.OK);
     }
-
 }

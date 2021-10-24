@@ -11,6 +11,7 @@ public class Reservation {
     private Set<String> seats;
     @PartitionKey
     private String showEventInfo;
+    private boolean quickCheckout;
     private String bookingInfo;
     private double totalAmount;
 
@@ -64,5 +65,13 @@ public class Reservation {
 
     public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public boolean isQuickCheckout() {
+        return quickCheckout;
+    }
+
+    public void setQuickCheckout(boolean quickCheckout) {
+        this.quickCheckout = quickCheckout;
     }
 }
