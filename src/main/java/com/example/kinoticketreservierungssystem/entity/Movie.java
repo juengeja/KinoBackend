@@ -2,44 +2,88 @@ package com.example.kinoticketreservierungssystem.entity;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
+import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
-import java.time.LocalDate;
+import java.util.List;
 
+@Container(containerName = "Movies")
 public class Movie {
-    private int movieId;
-    private String name;
-    private String domain;
-    private String genre;
+    @Id
+    private String movieId;
+    private String movieName;
+    //Genre naming convention: Action, Thriller, Drama, Comedy...
+    @PartitionKey
+    private String mainGenre;
+    private List<String> genres;
     private int duration;
-    private LocalDate release_date;
-    private String description;
-    private boolean menu;
-    private boolean night_event;
-    private boolean featured;
-    private String trailer;
-
     private String img;
-    private String[] presentation_date = new String[4];
+    private String description;
 
+    public Movie(String movieId, String movieName, String mainGenre, int duration, String img, String description) {
+        this.movieId = movieId;
+        this.movieName = movieName;
+        this.mainGenre = mainGenre;
+        this.duration = duration;
+        this.img = img;
+        this.description = description;
+    }
+
+    public Movie() {
+
+    }
+
+    @Override
+    public String toString() {
+        Gson gson = new Gson();
+        return gson.toJson(this, Movie.class);
+    }
+
+    public String getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(String movieId) {
+        this.movieId = movieId;
+    }
+
+    public String getMovieName() {
+        return movieName;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
+
+    public String getMainGenre() {
+        return mainGenre;
+    }
+
+    public void setMainGenre(String mainGenre) {
+        this.mainGenre = mainGenre;
+    }
+
+    public List<String> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
+    }
 
     public int getDuration() {
         return duration;
     }
 
-    public void setDuration(int length) {
-        this.duration = length;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
-    public String getGenre() { return genre; }
-
-    public void setGenre(String genre) { this.genre = genre; }
-
-    public LocalDate getRelease_date() {
-        return release_date;
+    public String getImg() {
+        return img;
     }
 
-    public void setRelease_date(LocalDate release_date) {
-        this.release_date = release_date;
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getDescription() {
@@ -49,48 +93,6 @@ public class Movie {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public int getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String title) {
-        this.name = title;
-    }
-
-    public String getDomain() { return domain; }
-
-    public void setDomain(String domain) { this.domain = domain; }
-
-    public boolean isMenu() { return menu; }
-
-    public void setMenu(boolean menu) { this.menu = menu; }
-
-    public boolean isNight_event() { return night_event; }
-
-    public void setNight_event(boolean night_event) { this.night_event = night_event; }
-
-    public boolean isFeatured() { return featured; }
-
-    public void setFeatured(boolean featured) { this.featured = featured; }
-
-    public String getTrailer() { return trailer; }
-
-    public void setTrailer(String trailer) { this.trailer = trailer; }
-
-    public String getImg() { return img; }
-
-    public void setImg(String img) { this.img = img; }
-
-    public String[] getPresentation_date() { return presentation_date; }
-
-    public void setPresentation_date(String[] presentation_date) { this.presentation_date = presentation_date; }
 }
+
+

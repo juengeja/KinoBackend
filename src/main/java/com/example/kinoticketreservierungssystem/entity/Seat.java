@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
 
 
-@Container(containerName = "Seats", ru= "400" )
+@Container(containerName = "Seats")
 public class Seat {
     // seatID naming convention: EventRoomID + Row + SeatNumber
     @Id

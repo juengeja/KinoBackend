@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 import java.time.LocalDateTime;
 
 
-@Container(containerName = "ShowEvents", ru = "400")
+@Container(containerName = "ShowEvents")
 public class ShowEvent {
     @Id
     private String showEventID;

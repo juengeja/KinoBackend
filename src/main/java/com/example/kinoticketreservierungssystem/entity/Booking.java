@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 
 import java.util.Set;
 
-@Container(containerName = "Bookings", ru = "400")
+@Container(containerName = "Bookings")
 public class Booking {
     @Id
     private String bookingID;

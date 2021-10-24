@@ -1,8 +1,11 @@
 package com.example.kinoticketreservierungssystem.entity;
 
+import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
+import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
 
+@Container(containerName = "Tickets")
 public class Ticket {
     @Id
     private String ticketID;
@@ -17,6 +20,12 @@ public class Ticket {
         this.seatInfo = seatInfo;
         this.showEventInfo = showEventInfo;
         this.ticketStatus = ticketStatus;
+    }
+
+    @Override
+    public String toString() {
+        Gson gson = new Gson();
+        return gson.toJson(this, Ticket.class);
     }
 
     public String getTicketID() {

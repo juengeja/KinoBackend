@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 @Configuration
 public class ConfigDatasource {
 
-    private static final String DATABASE1 = "dhbw-kino-sql";
+    private static final String DATABASE1 = "dhbw-kino-free-tier";
 
     @Bean
     public CosmosProperties cosmosProperties() {

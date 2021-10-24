@@ -1,6 +1,5 @@
 package com.example.kinoticketreservierungssystem.service;
 
-
 import com.example.kinoticketreservierungssystem.blSupport.Mail;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
@@ -12,10 +11,10 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Service
-public class SendMailServiceImpl {
+public class SendMail{
     private final JavaMailSender javaMailSender;
 
-    public SendMailServiceImpl(JavaMailSender javaMailSender) {
+    public SendMail(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
 
@@ -30,7 +29,6 @@ public class SendMailServiceImpl {
 
         javaMailSender.send(msg);
     }
-
 
     public void sendMailWithAttachments(Mail mail) throws MessagingException {
         MimeMessage msg = javaMailSender.createMimeMessage();
@@ -48,3 +46,4 @@ public class SendMailServiceImpl {
         javaMailSender.send(msg);
     }
 }
+

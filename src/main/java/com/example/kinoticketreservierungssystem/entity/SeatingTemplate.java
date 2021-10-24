@@ -11,7 +11,7 @@ import org.springframework.data.annotation.Id;
 
 import java.util.Map;
 
-@Container(containerName = "SeatingTemplates", ru = "400")
+@Container(containerName = "SeatingTemplates")
 public class SeatingTemplate {
     // seatingTemplateID naming convention: eventroomID+Template+(localdatetime now .toString)
     @Id

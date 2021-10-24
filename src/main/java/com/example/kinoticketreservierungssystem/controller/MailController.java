@@ -1,6 +1,8 @@
 package com.example.kinoticketreservierungssystem.controller;
 
 import com.example.kinoticketreservierungssystem.blSupport.Mail;
+import com.example.kinoticketreservierungssystem.service.SendMail;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,22 +14,24 @@ import javax.mail.MessagingException;
 
 @RestController
 @RequestMapping("/api/v1/mail/")
-public class EmailController {
-    SendMailService service;
+public class MailController {
 
-    public EmailController(SendMailService service) {
-        this.service = service;
+    @Autowired
+    SendMail sendmail;
+
+    public MailController(SendMail service) {
+        this.sendmail = service;
     }
 
     @PostMapping("/send")
-    public ResponseEntity<String> sendMail(@RequestBody Mail mail) {
-        service.sendMail(mail);
+    public ResponseEntity<String> sendMail() {
+        sendmail.sendMail(new Mail("binhdich@web.de","testtitle","testmsg"));
         return new ResponseEntity<>("Email Sent successfully", HttpStatus.OK);
     }
 
     @PostMapping("/attachment")
-    public ResponseEntity<String> sendAttachmentEmail(@RequestBody Mail mail) throws MessagingException {
-        service.sendMailWithAttachments(mail);
+    public ResponseEntity<String> sendAttachmentEmail() throws MessagingException {
+        sendmail.sendMailWithAttachments(new Mail("binhdich@web.de","testtitle","testmsg"));
         return new ResponseEntity<>("Attachment mail sent successfully", HttpStatus.OK);
     }
 }

@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
 
 
-@Container(containerName = "Coupons", ru = "400")
+@Container(containerName = "Coupons")
 public class Coupon {
     @Id
     private String couponID;

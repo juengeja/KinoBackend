@@ -62,14 +62,14 @@ public class AddDBItemsController {
 
     @PostMapping("/createseats")
     public void backCreateSeats(){
-        EventRoom eventRoom = createEntities.getEventRoom("Astra");
-        List<Seat> seats = addSeats.addSeats(eventRoom,10,15);
+        EventRoom eventRoom = createEntities.getEventRoom("Delta");
+        List<Seat> seats = addSeats.addSeats(eventRoom,6,10);
         addSeats.createSeats(seats);
     }
 
     @PostMapping("/createseatingtemplate")
     public void backCreateSeatingTemplate(){
-        createEntities.createSeatingTemplate(createEntities.getEventRoom("Astra"), createEntities.getSeatsPerRoom("Astra"), new SeatMod(8.00,false));
+        createEntities.createSeatingTemplate(createEntities.getEventRoom("Delta"), createEntities.getSeatsPerRoom("Delta"), new SeatMod(6.50,false));
     }
 
     @PostMapping("createmovies")
