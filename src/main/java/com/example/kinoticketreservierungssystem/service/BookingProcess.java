@@ -48,6 +48,8 @@ public class BookingProcess {
         Booking booking = bookingRepository.findById(reservation.getBookingInfo()).get();
         ShowEvent showEvent = showEventRepository.findByShowEventID(reservation.getShowEventInfo()).get();
         Set<String> seats = reservation.getSeats();
+        for(String seat :seats){
+        System.out.println(seat);}
         try {
             semaphore.acquire();
             Set<String> seatsAdded = new HashSet<>();
