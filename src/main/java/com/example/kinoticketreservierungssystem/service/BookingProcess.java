@@ -62,7 +62,7 @@ public class BookingProcess {
                     booking.setBookingStatus("denied");
                     break;
             }else{seatsAdded.add(seat);
-                    reservation.setTotalAmount(+showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).getPrice());
+                    reservation.setTotalAmount(reservation.getTotalAmount()+showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).getPrice());
                     Ticket ticket = new Ticket("Ticket"+seat, seat, reservation.getShowEventInfo(), "reserved");
                     ticketsAdded.add(ticket);
                     ticketRepository.save(ticket);
@@ -83,7 +83,7 @@ public class BookingProcess {
                     bookingProcess.seatsReservedTimer(reservation);
                     booking.setBookingStatus("reserved");
                 }
-                booking.setTotalPrice(reservation.getTotalAmount());
+                booking.setTotalPrice(booking.getTotalPrice()+reservation.getTotalAmount());
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -106,7 +106,7 @@ public class BookingProcess {
                 Set <Reservation> removeReservation = booking.getReservations();
                 removeReservation.remove(reservation);
                 booking.setReservations(removeReservation);
-                booking.setTotalPrice(-reservation.getTotalAmount());
+                booking.setTotalPrice(booking.getTotalPrice()-reservation.getTotalAmount());
                 bookingRepository.save(booking);
                 }
         };
