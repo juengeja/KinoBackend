@@ -35,9 +35,7 @@ public class BookingProcess {
         semaphore = new Semaphore(1);
     }
 
-    public Booking reserveSeats(Reservation preReservation) {
-        reservationRepository.save(preReservation);
-        Reservation reservation = reservationRepository.findById(preReservation.getReservationID()).get();
+    public Booking reserveSeats(Reservation reservation) {
         String creationDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin")).toString();
         if(reservation.getBookingInfo()==null){
             String bookingID = "Booking"+creationDateTime;
@@ -90,6 +88,7 @@ public class BookingProcess {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
+            reservationRepository.save(reservation);
             semaphore.release();
             return bookingRepository.save(booking);
         }
