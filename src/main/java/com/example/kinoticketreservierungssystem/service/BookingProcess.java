@@ -76,6 +76,7 @@ public class BookingProcess {
                     booking.setReservations(reservations);
                     booking.setBookingStatus("reserved");
                 }
+                bookingRepository.save(booking);
                 booking.setTotalPrice(savedReservation.getTotalAmount());
                 for(Ticket ticket: ticketsAdded){
                 ticketRepository.save(ticket);}
