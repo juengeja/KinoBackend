@@ -13,6 +13,8 @@ public class Reservation {
     private Set<String> seats;
     @PartitionKey
     private String showEventInfo;
+    private String moviename;
+    private String moviePoster;
     private boolean quickCheckout;
     private String bookingInfo;
     private double totalAmount;
@@ -75,5 +77,21 @@ public class Reservation {
 
     public void setQuickCheckout(boolean quickCheckout) {
         this.quickCheckout = quickCheckout;
+    }
+
+    public String getMoviename() {
+        return moviename;
+    }
+
+    public void setMoviename(String moviename) {
+        this.moviename = moviename;
+    }
+
+    public String getMoviePoster() {
+        return moviePoster;
+    }
+
+    public void setMoviePoster(String moviePoster) {
+        this.moviePoster = moviePoster;
     }
 }
