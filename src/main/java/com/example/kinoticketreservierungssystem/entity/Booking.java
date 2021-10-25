@@ -66,7 +66,7 @@ public class Booking {
     }
 
     public void setTickets(Set<String> tickets) {
-        this.tickets = this.tickets;
+        this.tickets = tickets;
     }
 
     public String getCouponCode() {
