@@ -25,9 +25,9 @@ public class TicketPDF {
     SeatRepository seatRepository;
 
     private static String FILE = "src/main/resources/ticket.pdf";
-    private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 30,
+    private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 40,
             Font.BOLD);
-    private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
+    private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 23,
             Font.NORMAL);
 
 
@@ -62,11 +62,11 @@ public class TicketPDF {
                 subFont));
         addEmptyLine(preface, 3);
         preface.add(new Paragraph("Row: " + String.valueOf(seat.getRow()),
-                catFont));
+                subFont));
         addEmptyLine(preface,2);
         preface.add(new Paragraph(
                 "Number: " + String.valueOf(seat.getSeatNumber()),
-                catFont));
+                subFont));
         document.add(preface);
         // Start a new page
         return document;
