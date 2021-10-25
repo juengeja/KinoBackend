@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface MovieRepository extends CosmosRepository<Movie, String> {
 
     Optional<Movie> findByMovieId(String movieId);
+    Optional<Movie> findByMainGenre(String mainGenre);
+
 }

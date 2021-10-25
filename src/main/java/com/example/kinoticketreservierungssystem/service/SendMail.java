@@ -25,6 +25,7 @@ public class SendMail {
     @Autowired
     TicketPDF ticketPDF;
 
+
     private final JavaMailSender javaMailSender;
     private static Semaphore semaphore;
 

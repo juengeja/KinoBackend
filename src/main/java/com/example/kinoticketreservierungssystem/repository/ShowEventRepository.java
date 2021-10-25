@@ -18,5 +18,4 @@ public interface ShowEventRepository extends CosmosRepository<ShowEvent, String>
     Iterable<ShowEvent> findAllByLive(boolean isLive);
     Iterable<ShowEvent> findAllByMovieInfoAndLive(Movie movie, boolean isLive);
     Optional<ShowEvent> findByShowEventID(String showEventID);
-    Optional<ShowEvent> findBy(ShowEvent showEvent);
 }

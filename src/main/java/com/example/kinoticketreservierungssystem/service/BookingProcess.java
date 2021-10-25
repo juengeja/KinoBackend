@@ -44,7 +44,7 @@ public class BookingProcess {
             else{bookingRepository.save(new Booking(bookingID,false));}
             reservation.setBookingInfo(bookingID);
         }
-        Booking booking = bookingRepository.findById(reservation.getBookingInfo()).get();
+        Booking booking = bookingRepository.findByBookingID(reservation.getBookingInfo()).get();
         ShowEvent showEvent = showEventRepository.findByShowEventID(reservation.getShowEventInfo()).get();
         Set<String> seats = reservation.getSeats();
         try {
