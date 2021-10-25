@@ -77,8 +77,9 @@ public class BookingProcess {
                     if(reservations==null){
                         reservations = new HashSet<>();
                     }
-                    reservation.setMoviename(showEvent.getMovieInfo().getMovieName());
+                    reservation.setMovieName(showEvent.getMovieInfo().getMovieName());
                     reservation.setMoviePoster(showEvent.getMovieInfo().getImg());
+                    reservation.setEventStart(showEvent.getEventStart());
                     reservations.add(reservation);
                     booking.setReservations(reservations);
                     seatingPlan.selectSeats(seatsAdded, showEvent);

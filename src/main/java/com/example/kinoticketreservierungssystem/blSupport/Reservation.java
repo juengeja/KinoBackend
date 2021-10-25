@@ -4,6 +4,7 @@ import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
 import org.springframework.data.annotation.Id;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Container(containerName = "Reservation")
@@ -13,8 +14,9 @@ public class Reservation {
     private Set<String> seats;
     @PartitionKey
     private String showEventInfo;
-    private String moviename;
+    private String movieName;
     private String moviePoster;
+    private LocalDateTime eventStart;
     private boolean quickCheckout;
     private String bookingInfo;
     private double totalAmount;
@@ -79,12 +81,12 @@ public class Reservation {
         this.quickCheckout = quickCheckout;
     }
 
-    public String getMoviename() {
-        return moviename;
+    public String getMovieName() {
+        return movieName;
     }
 
-    public void setMoviename(String moviename) {
-        this.moviename = moviename;
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
     }
 
     public String getMoviePoster() {
@@ -93,5 +95,13 @@ public class Reservation {
 
     public void setMoviePoster(String moviePoster) {
         this.moviePoster = moviePoster;
+    }
+
+    public LocalDateTime getEventStart() {
+        return eventStart;
+    }
+
+    public void setEventStart(LocalDateTime eventStart) {
+        this.eventStart = eventStart;
     }
 }
