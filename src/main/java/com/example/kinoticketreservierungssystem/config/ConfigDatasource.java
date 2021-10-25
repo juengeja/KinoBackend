@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-/*
+
 @Configuration
 public class ConfigDatasource {
 
@@ -49,4 +49,4 @@ public class ConfigDatasource {
     }
 
     }
-*/
+
