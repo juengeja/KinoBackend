@@ -6,19 +6,15 @@ import com.example.kinoticketreservierungssystem.entity.Ticket;
 import com.example.kinoticketreservierungssystem.repository.SeatRepository;
 import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
 import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import net.glxn.qrgen.javase.QRCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
-import java.util.Date;
 
 @Service
 public class TicketPDF {
@@ -36,12 +32,13 @@ public class TicketPDF {
 
 
     public void createTicketPDF(Ticket ticket){
+
     try {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(FILE));
         document.open();
         addTitlePage(document, ticket);
-       // document.add(generateQRCodeImage(ticket.getTicketID()));
+        document.add(generateQRCodeImage(ticket.getTicketID()));
         document.close();
     } catch (Exception e) {
         e.printStackTrace();
@@ -75,13 +72,16 @@ public class TicketPDF {
         return document;
     }
 
-    public static BufferedImage generateQRCodeImage(String barcodeText) throws Exception {
+    public static Image generateQRCodeImage(String barcodeText) throws Exception {
         ByteArrayOutputStream stream = QRCode
                 .from(barcodeText)
                 .withSize(250, 250)
                 .stream();
         ByteArrayInputStream bis = new ByteArrayInputStream(stream.toByteArray());
-        return ImageIO.read(bis);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(ImageIO.read(bis), "png", baos);
+        Image iTextImage = Image.getInstance(baos.toByteArray());
+        return iTextImage;
     }
 
     private static void addEmptyLine(Paragraph paragraph, int number) {
