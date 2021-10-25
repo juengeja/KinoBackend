@@ -14,17 +14,15 @@ public class ShowEvent {
     private Movie movieInfo;
     private SeatingTemplate seatingTemplateInfo;
     private LocalDateTime eventStart;
-    private int duration;
     @PartitionKey
     private boolean is3D;
     private boolean live = true;
 
-    public ShowEvent(String showEventID, Movie movieInfo, SeatingTemplate seatingTemplateInfo, LocalDateTime eventStart, int duration, boolean is3D, boolean isLive) {
+    public ShowEvent(String showEventID, Movie movieInfo, SeatingTemplate seatingTemplateInfo, LocalDateTime eventStart, boolean is3D, boolean isLive) {
         this.showEventID = showEventID;
         this.movieInfo = movieInfo;
         this.seatingTemplateInfo = seatingTemplateInfo;
         this.eventStart = eventStart;
-        this.duration = duration;
         this.is3D = is3D;
         this.live = isLive;
     }
@@ -32,10 +30,9 @@ public class ShowEvent {
     public ShowEvent() {
     }
 
-    public ShowEvent(String showEventID, LocalDateTime eventStart, int duration, boolean is3D, boolean isLive) {
+    public ShowEvent(String showEventID, LocalDateTime eventStart, boolean is3D, boolean isLive) {
         this.showEventID = showEventID;
         this.eventStart = eventStart;
-        this.duration = duration;
         this.is3D = is3D;
         this.live = isLive;
     }
@@ -76,14 +73,6 @@ public class ShowEvent {
 
     public void setEventStart(LocalDateTime eventStart) {
         this.eventStart = eventStart;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
     }
 
     public boolean isIs3D() {

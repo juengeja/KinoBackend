@@ -1,6 +1,8 @@
 package com.example.kinoticketreservierungssystem.controller;
 
 import com.example.kinoticketreservierungssystem.blSupport.Mail;
+import com.example.kinoticketreservierungssystem.entity.Booking;
+import com.example.kinoticketreservierungssystem.entity.Customer;
 import com.example.kinoticketreservierungssystem.service.SendMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +33,12 @@ public class MailController {
 
     @PostMapping("/attachment")
     public ResponseEntity<String> sendAttachmentEmail() throws MessagingException {
-        sendmail.sendMailWithAttachments(new Mail("binhdich@web.de","testtitle","testmsg"));
+        Booking booking = new Booking();
+        Customer customer = new Customer();
+        customer.setEmail("binhdich@web.de");
+        customer.setFirstName("binh");
+        booking.setCustomerInfo(customer);
+        sendmail.ticketEmail(booking);
         return new ResponseEntity<>("Attachment mail sent successfully", HttpStatus.OK);
     }
 }

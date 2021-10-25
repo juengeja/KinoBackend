@@ -58,10 +58,10 @@ public class CreateEntities {
         return seatsPerRoomList;
     }
 
-    public void createShowEvent(String showEventId, String movieID, String seatingTemplateID, LocalDateTime eventStart, int duration, boolean is3D, boolean isLive){
+    public void createShowEvent(String showEventId, String movieID, String seatingTemplateID, LocalDateTime eventStart, boolean is3D, boolean isLive){
         Movie movie = movieRepository.findByMovieId(movieID).get();
         SeatingTemplate seatingTemplate = seatingTemplateRepository.findBySeatingTemplateID(seatingTemplateID).get();
-    ShowEvent showEvent = new ShowEvent(showEventId, movie, seatingTemplate, eventStart,duration,is3D,isLive);
+    ShowEvent showEvent = new ShowEvent(showEventId, movie, seatingTemplate, eventStart,is3D,isLive);
         showEventRepository.save(showEvent);
     }
 
