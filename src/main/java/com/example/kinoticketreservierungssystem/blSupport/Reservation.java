@@ -1,10 +1,12 @@
 package com.example.kinoticketreservierungssystem.blSupport;
 
+import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
 import org.springframework.data.annotation.Id;
 
 import java.util.Set;
 
+@Container(containerName = "Reservation")
 public class Reservation {
     @Id
     private String reservationID;

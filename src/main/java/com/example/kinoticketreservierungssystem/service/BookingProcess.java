@@ -2,10 +2,7 @@ package com.example.kinoticketreservierungssystem.service;
 
 import com.example.kinoticketreservierungssystem.blSupport.Reservation;
 import com.example.kinoticketreservierungssystem.entity.*;
-import com.example.kinoticketreservierungssystem.repository.BookingRepository;
-import com.example.kinoticketreservierungssystem.repository.CustomerRepository;
-import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
-import com.example.kinoticketreservierungssystem.repository.TicketRepository;
+import com.example.kinoticketreservierungssystem.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +26,8 @@ public class BookingProcess {
     CustomerRepository customerRepository;
     @Autowired
     TicketRepository ticketRepository;
-
+    @Autowired
+    ReservationRepository reservationRepository;
 
     private static Semaphore semaphore;
 
@@ -45,6 +43,7 @@ public class BookingProcess {
             bookingRepository.save(new Booking(bookingID, true));}
             else{bookingRepository.save(new Booking(bookingID,false));}
             reservation.setBookingInfo(bookingID);
+            reservationRepository.save(reservation);
         }
         Booking booking = bookingRepository.findById(reservation.getBookingInfo()).get();
         ShowEvent showEvent = showEventRepository.findByShowEventID(reservation.getShowEventInfo()).get();
