@@ -8,10 +8,13 @@ import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
 import com.example.kinoticketreservierungssystem.repository.TicketRepository;
 import com.example.kinoticketreservierungssystem.service.BookingProcess;
 import com.example.kinoticketreservierungssystem.service.SeatingPlan;
+import com.example.kinoticketreservierungssystem.service.SendMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
 
 @RequestMapping(value = "/reservation")
 @RestController
@@ -31,6 +34,8 @@ public class BookingController {
     CustomerRepository customerRepository;
     @Autowired
     TicketRepository ticketRepository;
+    @Autowired
+    SendMail sendMail;
 
     @PostMapping
     public ResponseEntity<Booking> seatsReserved(@RequestBody Reservation reservation){
@@ -38,7 +43,9 @@ public class BookingController {
     }
 
     @PutMapping("/successfulpayment")
-    public ResponseEntity<Booking> seatsBooked(@RequestBody Booking booking){
-        return new ResponseEntity<Booking>(bookingProcess.bookSeats(booking), HttpStatus.OK);
+    public ResponseEntity<Booking> seatsBooked(@RequestBody Booking booking) throws MessagingException {
+        Booking bookedSeats = bookingProcess.bookSeats(booking);
+        sendMail.ticketEmail(booking);
+        return new ResponseEntity<Booking>(bookedSeats, HttpStatus.OK);
     }
 }
