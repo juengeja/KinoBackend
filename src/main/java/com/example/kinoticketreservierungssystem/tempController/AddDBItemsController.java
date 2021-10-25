@@ -91,9 +91,13 @@ public class AddDBItemsController {
 
     @PostMapping("createshowevent")
     public void backCreateShowEvent() {
-        createEntities.createShowEvent("firstEvent","Dune","AstraTemplate2021-10-24T21:54:43.795811400", LocalDateTime.of(2021, 1, 14, 15, 56), true, true);
-        //createEntities.createShowEvent("secondEvent","Candyman","AstraTemplate2021-10-17T05:26:10.390228100",LocalDateTime.of(2020, 3, 13, 15, 56),134,true,true);
+        //createEntities.createShowEvent("","Dune","AstraTemplate2021-10-24T21:54:43.795811400", LocalDateTime.of(2021, 1, 14, 15, 56), true, true);
+        createEntities.createShowEvent("TheAeronautsEvent","TheAeronauts","AstraTemplate2021-10-24T21:54:43.795811400",LocalDateTime.of(2021, 12, 25, 22, 0),false,true);
+        createEntities.createShowEvent("TheAeronautsEvent","TheAeronauts","AstraTemplate2021-10-24T21:54:43.795811400",LocalDateTime.of(2021, 12, 26, 15, 30),true,true);
+        createEntities.createShowEvent("TheAeronautsEvent","TheAeronauts","AstraTemplate2021-10-24T21:54:43.795811400",LocalDateTime.of(2021, 12, 26, 17, 30),true,true);
+        createEntities.createShowEvent("TheAeronautsEvent","TheAeronauts","AstraTemplate2021-10-24T21:54:43.795811400",LocalDateTime.of(2021, 12, 26, 22, 0),false,true);
     }
+
     @PostMapping("reserveseat")
     public void backReserveSeatTest(){
         List<String> seats = new ArrayList<>();

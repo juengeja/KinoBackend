@@ -14,7 +14,7 @@ public class Booking {
     private String bookingID;
     private Customer customerInfo;
     @PartitionKey
-    private boolean quickCheckout = false;
+    private boolean quickCheckout;
     private Set<Reservation> reservations;
     private Set<String> tickets;
     private String bookingStatus;
