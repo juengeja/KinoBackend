@@ -41,7 +41,7 @@ public class TicketPDF {
         PdfWriter.getInstance(document, new FileOutputStream(FILE));
         document.open();
         addTitlePage(document, ticket);
-        document.add(generateQRCodeImage(ticket.getTicketID()));
+       // document.add(generateQRCodeImage(ticket.getTicketID()));
         document.close();
     } catch (Exception e) {
         e.printStackTrace();
