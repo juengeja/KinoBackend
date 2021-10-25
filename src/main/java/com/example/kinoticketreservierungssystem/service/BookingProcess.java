@@ -36,49 +36,47 @@ public class BookingProcess {
     }
 
     public Booking reserveSeats(Reservation reservation) {
+        reservationRepository.save(reservation);
+        Reservation savedReservation = reservationRepository.findById(reservation.getReservationID()).get();
         String creationDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin")).toString();
-        if(reservation.getBookingInfo()==null){
+        if(savedReservation.getBookingInfo()==null){
             String bookingID = "Booking"+creationDateTime;
-            if(reservation.isQuickCheckout() == true){
+            if(savedReservation.isQuickCheckout() == true){
             bookingRepository.save(new Booking(bookingID, true));}
             else{bookingRepository.save(new Booking(bookingID,false));}
-            reservation.setBookingInfo(bookingID);
-            reservationRepository.save(reservation);
+            savedReservation.setBookingInfo(bookingID);
         }
-        Booking booking = bookingRepository.findById(reservation.getBookingInfo()).get();
-        ShowEvent showEvent = showEventRepository.findByShowEventID(reservation.getShowEventInfo()).get();
-        Set<String> seats = reservation.getSeats();
-        for(String seat :seats){
-        System.out.println(seat);}
+        Booking booking = bookingRepository.findById(savedReservation.getBookingInfo()).get();
+        ShowEvent showEvent = showEventRepository.findByShowEventID(savedReservation.getShowEventInfo()).get();
+        Set<String> seats = savedReservation.getSeats();
         try {
             semaphore.acquire();
             Set<String> seatsAdded = new HashSet<>();
             Set<Ticket> ticketsAdded = new HashSet<>();
             for(String seat:seats){
-
                 if(showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).isBooked()==true){
                     reservation.setTotalAmount(0);
                     Set<Reservation> reservations = booking.getReservations();
-                    reservations.remove(reservation);
+                    reservations.remove(savedReservation);
                     booking.setReservations(reservations);
                     booking.setBookingStatus("denied");
                     seatingPlan.deselectSeats(seatsAdded, showEvent);
                     break;
             }else{seatsAdded.add(seat);
-                    reservation.setTotalAmount(+showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).getPrice());
+                    savedReservation.setTotalAmount(+showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).getPrice());
                     seatingPlan.selectSeats(seatsAdded, showEvent);
-                    Ticket ticket = new Ticket("Ticket"+seat, seat, reservation.getShowEventInfo(), "reserved");
+                    Ticket ticket = new Ticket("Ticket"+seat, seat, savedReservation.getShowEventInfo(), "reserved");
                     ticketsAdded.add(ticket);
                     Set<String> tickets = booking.getTickets();
                     tickets.add(ticket.getTicketID());
                     booking.setTickets(tickets);
-                    bookingProcess.seatsReservedTimer(reservation);
+                    bookingProcess.seatsReservedTimer(savedReservation);
                     Set<Reservation> reservations = booking.getReservations();
-                    reservations.add(reservation);
+                    reservations.add(savedReservation);
                     booking.setReservations(reservations);
                     booking.setBookingStatus("reserved");
                 }
-                booking.setTotalPrice(reservation.getTotalAmount());
+                booking.setTotalPrice(savedReservation.getTotalAmount());
                 for(Ticket ticket: ticketsAdded){
                 ticketRepository.save(ticket);}
             }
