@@ -85,8 +85,8 @@ public class BookingProcess {
                     bookingProcess.seatsReservedTimer(reservation);
                     booking.setBookingStatus("reserved");
                 }
-                booking.setTotalPrice(booking.getTotalPrice()+reservation.getTotalAmount());
             }
+            booking.setTotalPrice(booking.getTotalPrice()+reservation.getTotalAmount());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
