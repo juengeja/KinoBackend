@@ -59,4 +59,22 @@ public class Ticket {
     public void setTicketStatus(String ticketStatus) {
         this.ticketStatus = ticketStatus;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Ticket ticket = (Ticket) o;
+
+        if (!ticketID.equals(ticket.ticketID)) return false;
+        return seatInfo.equals(ticket.seatInfo);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = ticketID.hashCode();
+        result = 31 * result + seatInfo.hashCode();
+        return result;
+    }
 }

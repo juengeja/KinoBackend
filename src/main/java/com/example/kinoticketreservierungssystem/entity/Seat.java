@@ -75,4 +75,22 @@ public class Seat {
     public void setAvailable(boolean available) {
         this.available = available;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Seat seat = (Seat) o;
+
+        if (row != seat.row) return false;
+        return seatID.equals(seat.seatID);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = seatID.hashCode();
+        result = 31 * result + (int) row;
+        return result;
+    }
 }

@@ -113,4 +113,22 @@ public class Cinema {
     public void setBusinessPhoneNumber(String businessPhoneNumber) {
         this.businessPhoneNumber = businessPhoneNumber;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Cinema cinema = (Cinema) o;
+
+        if (!cinemaID.equals(cinema.cinemaID)) return false;
+        return state.equals(cinema.state);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = cinemaID.hashCode();
+        result = 31 * result + state.hashCode();
+        return result;
+    }
 }

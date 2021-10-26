@@ -77,4 +77,22 @@ public class Coupon {
     public void setPercentAmount(double percentAmount) {
         this.percentAmount = percentAmount;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Coupon coupon = (Coupon) o;
+
+        if (couponType != coupon.couponType) return false;
+        return couponID.equals(coupon.couponID);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = couponID.hashCode();
+        result = 31 * result + (int) couponType;
+        return result;
+    }
 }

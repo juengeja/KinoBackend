@@ -48,4 +48,22 @@ public class Admin {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Admin admin = (Admin) o;
+
+        if (!adminID.equals(admin.adminID)) return false;
+        return username.equals(admin.username);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = adminID.hashCode();
+        result = 31 * result + username.hashCode();
+        return result;
+    }
 }

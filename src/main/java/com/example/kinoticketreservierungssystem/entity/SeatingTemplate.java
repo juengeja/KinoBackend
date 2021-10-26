@@ -55,4 +55,22 @@ public class SeatingTemplate {
     public void setSeatMap(Map<String, SeatMod> seatMap) {
         this.seatMap = seatMap;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SeatingTemplate that = (SeatingTemplate) o;
+
+        if (!seatingTemplateID.equals(that.seatingTemplateID)) return false;
+        return eventRoomID.equals(that.eventRoomID);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = seatingTemplateID.hashCode();
+        result = 31 * result + eventRoomID.hashCode();
+        return result;
+    }
 }

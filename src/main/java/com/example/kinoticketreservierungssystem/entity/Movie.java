@@ -129,6 +129,24 @@ public class Movie {
     public void setDirector(String director) {
         this.director = director;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Movie movie = (Movie) o;
+
+        if (!movieId.equals(movie.movieId)) return false;
+        return mainGenre.equals(movie.mainGenre);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = movieId.hashCode();
+        result = 31 * result + mainGenre.hashCode();
+        return result;
+    }
 }
 
 
