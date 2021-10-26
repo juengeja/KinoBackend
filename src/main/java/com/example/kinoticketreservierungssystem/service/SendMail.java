@@ -47,8 +47,8 @@ public class SendMail {
     }
 
     public void ticketEmail(Booking booking) throws MessagingException {
-       // try {
-         //   semaphore.acquire();
+       try {
+          semaphore.acquire();
 
             MimeMessage msg = javaMailSender.createMimeMessage();
 
@@ -66,11 +66,11 @@ public class SendMail {
                 ticketPDF.createTicketPDF(tickets);
                 helper.addAttachment("ticket.pdf", new ClassPathResource("ticket.pdf"));
             javaMailSender.send(msg);
-       // } catch (InterruptedException e) {
-       //     e.printStackTrace();
-        //} finally {
-          //  semaphore.release();
-        //}
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            semaphore.release();
+        }
     }
 }
 

@@ -121,4 +121,14 @@ public class BookingProcess {
         paidBooking.setBookingStatus("paid");
         return bookingRepository.save(paidBooking);
     }
+
+    public Booking removeReservation(String reservationId) {
+        Reservation reservation = reservationRepository.findById(reservationId).get();
+        seatingPlan.deselectSeats(reservation.getSeats(), showEventRepository.findById(reservation.getShowEventInfo()).get());
+        Booking booking = bookingRepository.findByBookingID(reservation.getBookingInfo()).get();
+        Set<Reservation> reservations = booking.getReservations();
+        reservations.remove(reservation);
+        booking.setReservations(reservations);
+        return booking;
+    }
 }
