@@ -123,7 +123,7 @@ public class AddDBItemsController {
     public void writePDF(){
         Set<Ticket> tickets = new HashSet<>();
        Ticket ticket = new Ticket("testticket","AstraA1","firstEvent","reserved");
-       Ticket ticket2 = new Ticket("testticket2","Astrab1","firstEvent","reserved");
+       Ticket ticket2 = new Ticket("testticket2","AstraB1","firstEvent","reserved");
        tickets.add(ticket);
        tickets.add(ticket2);
        ticketPDF.createTicketPDF(tickets);
