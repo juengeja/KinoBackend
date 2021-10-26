@@ -128,7 +128,9 @@ public class BookingProcess {
         Booking booking = bookingRepository.findByBookingID(reservation.getBookingInfo()).get();
         Set<Reservation> reservations = booking.getReservations();
         reservations.remove(reservation);
-        booking.setReservations(reservations);
+        if(reservations==null){booking.setReservations(null);}
+        else{
+        booking.setReservations(reservations);}
         return bookingRepository.save(booking);
     }
 }
