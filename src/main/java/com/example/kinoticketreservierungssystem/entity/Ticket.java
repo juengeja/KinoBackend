@@ -11,13 +11,15 @@ public class Ticket {
     private String ticketID;
     @PartitionKey
     private String seatInfo;
+    private String reservationID;
     private String showEventInfo;
     //after successful reservation: "reserved", after successful payment: "booked", after validation: "validated"/after expiration: "expired"
     private String ticketStatus;
 
-    public Ticket(String ticketID, String seatInfo, String showEventInfo, String ticketStatus) {
+    public Ticket(String ticketID, String seatInfo, String reservationID, String showEventInfo, String ticketStatus) {
         this.ticketID = ticketID;
         this.seatInfo = seatInfo;
+        this.reservationID = reservationID;
         this.showEventInfo = showEventInfo;
         this.ticketStatus = ticketStatus;
     }
@@ -58,6 +60,14 @@ public class Ticket {
 
     public void setTicketStatus(String ticketStatus) {
         this.ticketStatus = ticketStatus;
+    }
+
+    public String getReservationID() {
+        return reservationID;
+    }
+
+    public void setReservationID(String reservationID) {
+        this.reservationID = reservationID;
     }
 
     @Override

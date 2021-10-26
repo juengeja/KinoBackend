@@ -63,7 +63,7 @@ public class BookingProcess {
                     break;
             }else{seatsAdded.add(seat);
                     reservation.setTotalAmount(reservation.getTotalAmount()+showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).getPrice());
-                    Ticket ticket = new Ticket("Ticket"+seat+creationDateTime, seat, reservation.getShowEventInfo(), "reserved");
+                    Ticket ticket = new Ticket("Ticket"+seat+creationDateTime, seat,reservation.getReservationID(), reservation.getShowEventInfo(), "reserved");
                     ticketRepository.save(ticket);
                     ticketsAdded.add(ticket);
                     Set<String> tickets = booking.getTickets();
@@ -122,8 +122,8 @@ public class BookingProcess {
         return bookingRepository.save(paidBooking);
     }
 
-    public Booking removeReservation(String reservationId) {
-        Reservation reservation = reservationRepository.findById(reservationId).get();
+    public Booking removeReservation(String reservationID) {
+        Reservation reservation = reservationRepository.findById(reservationID).get();
         seatingPlan.deselectSeats(reservation.getSeats(), showEventRepository.findById(reservation.getShowEventInfo()).get());
         Booking booking = bookingRepository.findByBookingID(reservation.getBookingInfo()).get();
         Set<Reservation> reservations = booking.getReservations();
@@ -131,6 +131,18 @@ public class BookingProcess {
         if(reservations==null){booking.setReservations(null);}
         else{
         booking.setReservations(reservations);}
+        Set<Ticket> tickets = new HashSet<>();
+        Set<String> bookedTickets = booking.getTickets();
+        ticketRepository.findAllByReservationID(reservationID).forEach(tickets::add);
+        for(Ticket ticket : tickets){
+            bookedTickets.remove(ticket.getTicketID());
+        }
+        if(bookedTickets==null){
+            booking.setTickets(null);
+        }
+        else{
+            booking.setTickets(bookedTickets);
+        }
         return bookingRepository.save(booking);
     }
 }

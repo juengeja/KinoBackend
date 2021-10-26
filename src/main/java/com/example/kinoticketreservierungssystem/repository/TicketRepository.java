@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface TicketRepository extends CosmosRepository<Ticket, String> {
 Optional<Ticket> findByTicketID(String ticketID);
+Iterable<Ticket> findAllByReservationID(String ReservationID);
 }
