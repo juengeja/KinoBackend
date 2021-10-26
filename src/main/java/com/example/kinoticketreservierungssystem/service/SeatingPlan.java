@@ -6,8 +6,8 @@ import com.example.kinoticketreservierungssystem.repository.SeatingTemplateRepos
 import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 public class SeatingPlan {
@@ -20,7 +20,7 @@ public class SeatingPlan {
     SeatingPlan seatingPlan;
 
 
-    public ShowEvent selectSeats(List<String> seats, ShowEvent showEvent){
+    public ShowEvent selectSeats(Set<String> seats, ShowEvent showEvent){
         Map<String, SeatMod> selectSeatingPlanMap = showEvent.getSeatingTemplateInfo().getSeatMap();
         for(String seat : seats){
             selectSeatingPlanMap.get(seat).setBooked(true);
@@ -28,7 +28,7 @@ public class SeatingPlan {
             return showEventRepository.save(showEvent);
     }
 
-    public ShowEvent deselectSeats(List<String> seats, ShowEvent showEvent){
+    public ShowEvent deselectSeats(Set<String> seats, ShowEvent showEvent){
         Map<String, SeatMod> deselectSeatingPlanMap = showEvent.getSeatingTemplateInfo().getSeatMap();
         for(String seat : seats){
             deselectSeatingPlanMap.get(seat).setBooked(false);

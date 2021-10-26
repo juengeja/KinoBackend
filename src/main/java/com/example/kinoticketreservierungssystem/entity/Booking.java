@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Container(containerName = "Bookings", ru = "400")
 public class Booking {
@@ -15,14 +16,13 @@ public class Booking {
     private Customer customerInfo;
     @PartitionKey
     private String showEventInfo;
-    private Map<String, SeatMod> reservedSeatMap;
-    private List<String> seatInfo;
+    private Set<String> seatInfo;
+    private String bookingStatus;
     private Coupon couponInfo;
     private String paymentMethod = "not paid yet";
     private double totalPrice;
-    private boolean paid = false;
 
-    public Booking(String bookingID, Customer customerInfo, String showEventInfo, List<String> seatInfo, Coupon couponInfo, String paymentMethod, double totalPrice, boolean paid) {
+    public Booking(String bookingID, Customer customerInfo, String showEventInfo, Set<String> seatInfo, Coupon couponInfo, String paymentMethod, double totalPrice) {
         this.bookingID = bookingID;
         this.customerInfo = customerInfo;
         this.showEventInfo = showEventInfo;
@@ -30,12 +30,10 @@ public class Booking {
         this.couponInfo = couponInfo;
         this.paymentMethod = paymentMethod;
         this.totalPrice = totalPrice;
-        this.paid = paid;
     }
 
-    public Booking(String bookingID, List<String> seats, String showEventID) {
+    public Booking(String bookingID, String showEventID) {
         this.bookingID = bookingID;
-        this.seatInfo = seats;
         this.showEventInfo = showEventID;
     }
 
@@ -72,11 +70,11 @@ public class Booking {
         this.showEventInfo = showEventInfo;
     }
 
-    public List<String> getSeatInfo() {
+    public Set<String> getSeatInfo() {
         return seatInfo;
     }
 
-    public void setSeatInfo(List<String> seatInfo) {
+    public void setSeatInfo(Set<String> seatInfo) {
         this.seatInfo = seatInfo;
     }
 
@@ -104,19 +102,11 @@ public class Booking {
         this.totalPrice = totalPrice;
     }
 
-    public boolean isPaid() {
-        return paid;
+    public String getBookingStatus() {
+        return bookingStatus;
     }
 
-    public void setPaid(boolean paid) {
-        this.paid = paid;
-    }
-
-    public Map<String, SeatMod> getReservedSeatMap() {
-        return reservedSeatMap;
-    }
-
-    public void setReservedSeatMap(Map<String, SeatMod> reservedSeatMap) {
-        this.reservedSeatMap = reservedSeatMap;
+    public void setBookingStatus(String bookingStatus) {
+        this.bookingStatus = bookingStatus;
     }
 }
