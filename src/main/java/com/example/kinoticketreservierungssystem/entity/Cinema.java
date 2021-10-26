@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
 
 
-@Container(containerName = "Cinemas", ru = "400")
+@Container(containerName = "Cinemas")
 public class Cinema {
     @Id
     private String cinemaID;

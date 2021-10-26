@@ -1,5 +1,6 @@
 package com.example.kinoticketreservierungssystem.tempController;
 
+import com.example.kinoticketreservierungssystem.blSupport.Reservation;
 import com.example.kinoticketreservierungssystem.blSupport.SeatMod;
 import com.example.kinoticketreservierungssystem.entity.*;
 import com.example.kinoticketreservierungssystem.repository.*;
@@ -47,6 +48,8 @@ public class AddDBItemsController {
     BookingProcess bookingProcess;
     @Autowired
     BookingRepository bookingRepository;
+    @Autowired
+    TicketPDF ticketPDF;
 
     @PostMapping("createcinema")
     public void backCreateCinema(){
@@ -61,14 +64,14 @@ public class AddDBItemsController {
 
     @PostMapping("/createseats")
     public void backCreateSeats(){
-        EventRoom eventRoom = createEntities.getEventRoom("Astra");
-        List<Seat> seats = addSeats.addSeats(eventRoom,10,15);
+        EventRoom eventRoom = createEntities.getEventRoom("Delta");
+        List<Seat> seats = addSeats.addSeats(eventRoom,6,10);
         addSeats.createSeats(seats);
     }
 
     @PostMapping("/createseatingtemplate")
     public void backCreateSeatingTemplate(){
-        createEntities.createSeatingTemplate(createEntities.getEventRoom("Astra"), createEntities.getSeatsPerRoom("Astra"), new SeatMod(8.00,false));
+        createEntities.createSeatingTemplate(createEntities.getEventRoom("Delta"), createEntities.getSeatsPerRoom("Delta"), new SeatMod(6.50,false));
     }
 
     @PostMapping("createmovies")
@@ -88,16 +91,20 @@ public class AddDBItemsController {
 
     @PostMapping("createshowevent")
     public void backCreateShowEvent() {
-        createEntities.createShowEvent("firstEvent","Dune","AstraTemplate2021-10-17T05:26:10.390228100", LocalDateTime.of(2021, 1, 14, 15, 56), 123, true, true);
-        createEntities.createShowEvent("secondEvent","Candyman","AstraTemplate2021-10-17T05:26:10.390228100",LocalDateTime.of(2020, 3, 13, 15, 56),134,true,true);
+        //createEntities.createShowEvent("","Dune","AstraTemplate2021-10-24T21:54:43.795811400", LocalDateTime.of(2021, 1, 14, 15, 56), true, true);
+        createEntities.createShowEvent("TheAeronauts1Event","TheAeronauts","AstraTemplate2021-10-24T21:54:43.795811400",LocalDateTime.of(2021, 12, 25, 22, 0),false,true);
+        createEntities.createShowEvent("TheAeronauts2Event","TheAeronauts","AstraTemplate2021-10-24T21:54:43.795811400",LocalDateTime.of(2021, 12, 26, 15, 30),true,true);
+        createEntities.createShowEvent("TheAeronauts3Event","TheAeronauts","AstraTemplate2021-10-24T21:54:43.795811400",LocalDateTime.of(2021, 12, 26, 17, 30),true,true);
+        createEntities.createShowEvent("TheAeronauts4Event","TheAeronauts","AstraTemplate2021-10-24T21:54:43.795811400",LocalDateTime.of(2021, 12, 26, 22, 0),false,true);
     }
+
     @PostMapping("reserveseat")
     public void backReserveSeatTest(){
         List<String> seats = new ArrayList<>();
         seats.add("AstraC12");
         seats.add("AstraA3");
         ShowEvent showEvent = showEventRepository.findByShowEventID("firstEvent").get();
-        bookingRepository.save(bookingProcess.reserveSeats(new Booking()));
+        bookingRepository.save(bookingProcess.reserveSeats(new Reservation()));
     }
     @PostMapping("bookseat")
     public void backBookSeatTest(){
@@ -109,6 +116,10 @@ public class AddDBItemsController {
         Booking booking = bookingRepository.findByBookingID("secondEvent").get();
         booking.setPaymentMethod("Paypal");
         bookingRepository.save(booking);
+    }
+    @PostMapping("writepdf")
+    public void writePDF(){
+       ticketPDF.createTicketPDF(new Ticket("ticketOne","AstraA1","firstEvent","reserved"));
     }
     }
 

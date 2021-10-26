@@ -2,39 +2,38 @@ package com.example.kinoticketreservierungssystem.entity;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
-import com.example.kinoticketreservierungssystem.blSupport.SeatMod;
+import com.example.kinoticketreservierungssystem.blSupport.Reservation;
 import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
-import java.util.List;
-import java.util.Map;
+
 import java.util.Set;
 
-@Container(containerName = "Bookings", ru = "400")
+@Container(containerName = "Bookings")
 public class Booking {
     @Id
     private String bookingID;
     private Customer customerInfo;
     @PartitionKey
-    private String showEventInfo;
-    private Set<String> seatInfo;
+    private boolean quickCheckout;
+    private Set<Reservation> reservations;
+    private Set<String> tickets;
     private String bookingStatus;
-    private Coupon couponInfo;
+    private String couponCode;
     private String paymentMethod = "not paid yet";
     private double totalPrice;
 
-    public Booking(String bookingID, Customer customerInfo, String showEventInfo, Set<String> seatInfo, Coupon couponInfo, String paymentMethod, double totalPrice) {
+    public Booking(String bookingID, Customer customerInfo, Set<String> ticketInfo, String couponCode, String paymentMethod, double totalPrice) {
         this.bookingID = bookingID;
         this.customerInfo = customerInfo;
-        this.showEventInfo = showEventInfo;
-        this.seatInfo = seatInfo;
-        this.couponInfo = couponInfo;
+        this.tickets = ticketInfo;
+        this.couponCode = couponCode;
         this.paymentMethod = paymentMethod;
         this.totalPrice = totalPrice;
     }
 
-    public Booking(String bookingID, String showEventID) {
+    public Booking(String bookingID, boolean quickCheckout) {
         this.bookingID = bookingID;
-        this.showEventInfo = showEventID;
+        this.quickCheckout = quickCheckout;
     }
 
     public Booking() {
@@ -62,28 +61,20 @@ public class Booking {
         this.customerInfo = customerInfo;
     }
 
-    public String getShowEventInfo() {
-        return showEventInfo;
+    public Set<String> getTickets() {
+        return tickets;
     }
 
-    public void setShowEventInfo(String showEventInfo) {
-        this.showEventInfo = showEventInfo;
+    public void setTickets(Set<String> tickets) {
+        this.tickets = tickets;
     }
 
-    public Set<String> getSeatInfo() {
-        return seatInfo;
+    public String getCouponCode() {
+        return couponCode;
     }
 
-    public void setSeatInfo(Set<String> seatInfo) {
-        this.seatInfo = seatInfo;
-    }
-
-    public Coupon getCouponInfo() {
-        return couponInfo;
-    }
-
-    public void setCouponInfo(Coupon couponInfo) {
-        this.couponInfo = couponInfo;
+    public void setCouponCode(String couponCode) {
+        this.couponCode = couponCode;
     }
 
     public String getPaymentMethod() {
@@ -108,5 +99,21 @@ public class Booking {
 
     public void setBookingStatus(String bookingStatus) {
         this.bookingStatus = bookingStatus;
+    }
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    public boolean isQuickCheckout() {
+        return quickCheckout;
+    }
+
+    public void setQuickCheckout(boolean quickCheckout) {
+        this.quickCheckout = quickCheckout;
     }
 }

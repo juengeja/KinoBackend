@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import org.springframework.data.annotation.Id;
 import java.time.LocalDate;
 
-@Container(containerName = "Customers", ru = "400")
+@Container(containerName = "Customers")
 public class Customer{
     @Id
     private String customerID;

@@ -13,11 +13,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-/*
+
 @Configuration
 public class ConfigDatasource {
 
-    private static final String DATABASE1 = "dhbw-kino-sql";
+    private static final String DATABASE1 = "dhbw-kino-free-tier";
 
     @Bean
     public CosmosProperties cosmosProperties() {
@@ -49,4 +49,4 @@ public class ConfigDatasource {
     }
 
     }
-*/
+

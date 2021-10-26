@@ -27,6 +27,7 @@ public class SeatingPlan {
             showEvent.getSeatingTemplateInfo().setSeatMap(selectSeatingPlanMap);}
             return showEventRepository.save(showEvent);
     }
+    //assertTrue(showEvent.getSeatingTemplateInfo().getSeatMap().get("AstraA3").isBooked()==true)
 
     public ShowEvent deselectSeats(Set<String> seats, ShowEvent showEvent){
         Map<String, SeatMod> deselectSeatingPlanMap = showEvent.getSeatingTemplateInfo().getSeatMap();
@@ -35,5 +36,4 @@ public class SeatingPlan {
             showEvent.getSeatingTemplateInfo().setSeatMap(deselectSeatingPlanMap);}
             return showEventRepository.save(showEvent);
     }
-
 }

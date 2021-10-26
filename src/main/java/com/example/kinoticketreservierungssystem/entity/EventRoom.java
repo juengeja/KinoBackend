@@ -9,11 +9,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Reference;
 
 
-@Container(containerName = "EventRooms", ru = "400")
+@Container(containerName = "EventRooms")
 public class EventRoom {
     @Id
     private String eventRoomID;
-    //screenSizes: small, medium, big
+    //screenSizes: small, medium, large
     @PartitionKey
     private String screenSize;
     private Cinema cinemaInfo;
