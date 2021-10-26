@@ -3,6 +3,8 @@ package com.example.kinoticketreservierungssystem.controller;
 import com.example.kinoticketreservierungssystem.entity.Booking;
 import com.example.kinoticketreservierungssystem.service.BookingProcess;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(value = "/remove")
@@ -14,7 +16,7 @@ public class ShoppingCartController {
     BookingProcess bookingProcess;
 
     @PutMapping("{reservation}")
-    public Booking backUndoReservation (@PathVariable String reservation){
-        return bookingProcess.removeReservation(reservation);
+    public ResponseEntity<Booking> backUndoReservation (@PathVariable String reservation){
+        return new ResponseEntity<Booking>(bookingProcess.removeReservation(reservation), HttpStatus.OK);
     }
 }
