@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
+import java.util.Set;
 
 @Service
 public class TicketPDF {
@@ -31,14 +32,15 @@ public class TicketPDF {
             Font.NORMAL);
 
 
-    public void createTicketPDF(Ticket ticket){
-
+    public void createTicketPDF(Set<Ticket> tickets){
     try {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(FILE));
         document.open();
+        for(Ticket ticket: tickets){
         addTitlePage(document, ticket);
         document.add(generateQRCodeImage(ticket.getTicketID()));
+        document.newPage();}
         document.close();
     } catch (Exception e) {
         e.printStackTrace();

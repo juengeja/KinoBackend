@@ -59,13 +59,13 @@ public class SendMail {
             helper.setSubject("Indigo BW Movie Tickets");
 
             helper.setText("Dear " + booking.getCustomerInfo().getFirstName() + ",\n\n" + "we wish you all the best enjoyment for your upcoming movie. Please find the attached tickets.", true);
-            Set<Ticket> tickets = new HashSet<>();
-            for (String ticket : booking.getTickets()) {
-                ticketPDF.createTicketPDF(ticketRepository.findByTicketID(ticket).get());
+                Set<Ticket> tickets = new HashSet<>();
+                for(String ticket : booking.getTickets()){
+                    tickets.add(ticketRepository.findByTicketID(ticket).get());
+                }
+                ticketPDF.createTicketPDF(tickets);
                 helper.addAttachment("ticket.pdf", new ClassPathResource("ticket.pdf"));
-            }
             javaMailSender.send(msg);
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
