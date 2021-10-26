@@ -117,9 +117,9 @@ public class AddDBItemsController {
         booking.setPaymentMethod("Paypal");
         bookingRepository.save(booking);
     }
-    @PostMapping("writepdf")
-    public void writePDF(){
-       ticketPDF.createTicketPDF(new Ticket("ticketOne","AstraA1","firstEvent","reserved"));
-    }
+   // @PostMapping("writepdf")
+    //public void writePDF(){
+      // ticketPDF.createTicketPDF(new Ticket("ticketOne","AstraA1","firstEvent","reserved"));
+   // }
     }
 
