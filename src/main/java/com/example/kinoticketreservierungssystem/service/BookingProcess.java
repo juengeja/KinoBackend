@@ -143,7 +143,7 @@ public class BookingProcess {
         else{
             booking.setTickets(bookedTickets);
         }
-        double newTotalPrice = booking.getTotalPrice() - reservation.getTotalAmount();
+        booking.setTotalPrice(booking.getTotalPrice() - reservation.getTotalAmount());
         return bookingRepository.save(booking);
     }
 }
