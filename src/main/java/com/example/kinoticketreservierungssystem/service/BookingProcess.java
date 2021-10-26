@@ -129,6 +129,6 @@ public class BookingProcess {
         Set<Reservation> reservations = booking.getReservations();
         reservations.remove(reservation);
         booking.setReservations(reservations);
-        return booking;
+        return bookingRepository.save(booking);
     }
 }
