@@ -63,7 +63,7 @@ public class BookingProcess {
                     break;
             }else{seatsAdded.add(seat);
                     reservation.setTotalAmount(reservation.getTotalAmount()+showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).getPrice());
-                    Ticket ticket = new Ticket("Ticket"+seat, seat, reservation.getShowEventInfo(), "reserved");
+                    Ticket ticket = new Ticket("Ticket"+seat+creationDateTime, seat, reservation.getShowEventInfo(), "reserved");
                     ticketRepository.save(ticket);
                     ticketsAdded.add(ticket);
                     Set<String> tickets = booking.getTickets();
