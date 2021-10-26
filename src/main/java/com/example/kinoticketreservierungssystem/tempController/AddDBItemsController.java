@@ -15,7 +15,9 @@ import com.example.kinoticketreservierungssystem.entity.Movie;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RequestMapping(value = "/dbitems")
 @RestController
@@ -117,9 +119,14 @@ public class AddDBItemsController {
         booking.setPaymentMethod("Paypal");
         bookingRepository.save(booking);
     }
-   // @PostMapping("writepdf")
-    //public void writePDF(){
-      // ticketPDF.createTicketPDF(new Ticket("ticketOne","AstraA1","firstEvent","reserved"));
-   // }
+   @PostMapping("writepdf")
+    public void writePDF(){
+        Set<Ticket> tickets = new HashSet<>();
+       Ticket ticket = new Ticket("testticket","AstraA1","firstEvent","reserved");
+       Ticket ticket2 = new Ticket("testticket2","Astrab1","firstEvent","reserved");
+       tickets.add(ticket);
+       tickets.add(ticket2);
+       ticketPDF.createTicketPDF(tickets);
+   }
     }
 

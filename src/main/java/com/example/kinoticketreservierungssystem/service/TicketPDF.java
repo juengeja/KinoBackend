@@ -36,17 +36,16 @@ public class TicketPDF {
     try {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(FILE));
-        document.open();
         for(Ticket ticket: tickets){
+            document.open();
         addTitlePage(document, ticket);
-        document.add(generateQRCodeImage(ticket.getTicketID()));
-        document.newPage();}
-        document.close();
+            document.close();
+        }
     } catch (Exception e) {
         e.printStackTrace();
     }}
 
-    private Document addTitlePage(Document document, Ticket ticket)
+    private void addTitlePage(Document document, Ticket ticket)
             throws DocumentException {
         Seat seat = seatRepository.findBySeatID(ticket.getSeatInfo()).get();
         ShowEvent showEvent = showEventRepository.findByShowEventID(ticket.getShowEventInfo()).get();
@@ -70,8 +69,13 @@ public class TicketPDF {
                 "Number: " + String.valueOf(seat.getSeatNumber()),
                 subFont));
         document.add(preface);
+        try {
+            document.add(generateQRCodeImage(ticket.getTicketID()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        document.newPage();
         // Start a new page
-        return document;
     }
 
     public static Image generateQRCodeImage(String barcodeText) throws Exception {
