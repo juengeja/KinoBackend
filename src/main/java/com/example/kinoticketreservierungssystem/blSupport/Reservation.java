@@ -104,4 +104,22 @@ public class Reservation {
     public void setEventStart(LocalDateTime eventStart) {
         this.eventStart = eventStart;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Reservation that = (Reservation) o;
+
+        if (!reservationID.equals(that.reservationID)) return false;
+        return showEventInfo.equals(that.showEventInfo);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = reservationID.hashCode();
+        result = 31 * result + showEventInfo.hashCode();
+        return result;
+    }
 }
