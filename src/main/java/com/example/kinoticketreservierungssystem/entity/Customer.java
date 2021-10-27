@@ -123,4 +123,22 @@ public class Customer{
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Customer customer = (Customer) o;
+
+        if (user != customer.user) return false;
+        return customerID.equals(customer.customerID);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = customerID.hashCode();
+        result = 31 * result + (user ? 1 : 0);
+        return result;
+    }
 }

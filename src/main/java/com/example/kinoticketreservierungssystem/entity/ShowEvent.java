@@ -90,4 +90,22 @@ public class ShowEvent {
     public void setLive(boolean live) {
         this.live = live;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ShowEvent showEvent = (ShowEvent) o;
+
+        if (is3D != showEvent.is3D) return false;
+        return showEventID.equals(showEvent.showEventID);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = showEventID.hashCode();
+        result = 31 * result + (is3D ? 1 : 0);
+        return result;
+    }
 }

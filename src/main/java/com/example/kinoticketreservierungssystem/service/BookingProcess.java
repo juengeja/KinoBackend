@@ -63,15 +63,14 @@ public class BookingProcess {
                     break;
             }else{seatsAdded.add(seat);
                     reservation.setTotalAmount(reservation.getTotalAmount()+showEvent.getSeatingTemplateInfo().getSeatMap().get(seat).getPrice());
-                    Ticket ticket = new Ticket("Ticket"+seat, seat, reservation.getShowEventInfo(), "reserved");
-                    ticketsAdded.add(ticket);
+                    Ticket ticket = new Ticket("Ticket"+seat+creationDateTime, seat,reservation.getReservationID(), reservation.getShowEventInfo(), "reserved");
                     ticketRepository.save(ticket);
+                    ticketsAdded.add(ticket);
                     Set<String> tickets = booking.getTickets();
                     if(tickets==null){
                         tickets = new HashSet<>();
                     }
                     tickets.add(ticket.getTicketID());
-
                     booking.setTickets(tickets);
                     Set<Reservation> reservations = booking.getReservations();
                     if(reservations==null){
@@ -86,8 +85,8 @@ public class BookingProcess {
                     bookingProcess.seatsReservedTimer(reservation);
                     booking.setBookingStatus("reserved");
                 }
-                booking.setTotalPrice(booking.getTotalPrice()+reservation.getTotalAmount());
             }
+            booking.setTotalPrice(booking.getTotalPrice()+reservation.getTotalAmount());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
@@ -121,5 +120,30 @@ public class BookingProcess {
         customerRepository.save(paidBooking.getCustomerInfo());
         paidBooking.setBookingStatus("paid");
         return bookingRepository.save(paidBooking);
+    }
+
+    public Booking removeReservation(String reservationID) {
+        Reservation reservation = reservationRepository.findById(reservationID).get();
+        seatingPlan.deselectSeats(reservation.getSeats(), showEventRepository.findById(reservation.getShowEventInfo()).get());
+        Booking booking = bookingRepository.findByBookingID(reservation.getBookingInfo()).get();
+        Set<Reservation> reservations = booking.getReservations();
+        reservations.remove(reservation);
+        if(reservations==null){booking.setReservations(null);}
+        else{
+        booking.setReservations(reservations);}
+        Set<Ticket> tickets = new HashSet<>();
+        Set<String> bookedTickets = booking.getTickets();
+        ticketRepository.findAllByReservationID(reservationID).forEach(tickets::add);
+        for(Ticket ticket : tickets){
+            bookedTickets.remove(ticket.getTicketID());
+        }
+        if(bookedTickets==null){
+            booking.setTickets(null);
+        }
+        else{
+            booking.setTickets(bookedTickets);
+        }
+        booking.setTotalPrice(booking.getTotalPrice() - reservation.getTotalAmount());
+        return bookingRepository.save(booking);
     }
 }

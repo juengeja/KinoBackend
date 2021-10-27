@@ -116,4 +116,22 @@ public class Booking {
     public void setQuickCheckout(boolean quickCheckout) {
         this.quickCheckout = quickCheckout;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Booking booking = (Booking) o;
+
+        if (quickCheckout != booking.quickCheckout) return false;
+        return bookingID.equals(booking.bookingID);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = bookingID.hashCode();
+        result = 31 * result + (quickCheckout ? 1 : 0);
+        return result;
+    }
 }

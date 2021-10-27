@@ -17,5 +17,6 @@ import java.util.Optional;
 public interface ShowEventRepository extends CosmosRepository<ShowEvent, String> {
     Iterable<ShowEvent> findAllByLive(boolean isLive);
     Iterable<ShowEvent> findAllByMovieInfoAndLive(Movie movie, boolean isLive);
+    Iterable<ShowEvent> findDistinctByMovieInfo();
     Optional<ShowEvent> findByShowEventID(String showEventID);
 }

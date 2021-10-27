@@ -53,4 +53,22 @@ public class EventRoom {
     public void setCinemaInfo(Cinema cinemaInfo) {
         this.cinemaInfo = cinemaInfo;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        EventRoom eventRoom = (EventRoom) o;
+
+        if (!eventRoomID.equals(eventRoom.eventRoomID)) return false;
+        return screenSize.equals(eventRoom.screenSize);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = eventRoomID.hashCode();
+        result = 31 * result + screenSize.hashCode();
+        return result;
+    }
 }
