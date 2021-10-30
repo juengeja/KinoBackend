@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -27,9 +28,9 @@ class SeatingPlanTest {
     @Autowired
     SeatingPlan seatingPlan;
 
-    //SelectSeatObjekten
+    //SelectSeatObjekte
     ShowEvent showEvent;
-    HashSet seats;
+    HashSet<String> seats;
 
     //Testklasen
     ShowEvent testEvent;
@@ -46,13 +47,13 @@ class SeatingPlanTest {
 
         showEvent = showEventRepository.findByShowEventID("thirdEvent").get();
 
-        seats = new HashSet();
+        seats = new HashSet<String>();
         seats.add("AstraG15");
         seats.add("AstraG13");
 
         seatingPlan.selectSeats(seats, showEvent);
 
-        assertTrue(showEvent.getSeatingTemplateInfo().getSeatMap().get("AstraG15").isBooked() == true);
+        assertTrue(showEvent.getSeatingTemplateInfo().getSeatMap().get("AstraG15").isBooked());
 
     }
 
@@ -61,13 +62,13 @@ class SeatingPlanTest {
 
         showEvent = showEventRepository.findByShowEventID("thirdEvent").get();
 
-        seats = new HashSet();
+        seats = new HashSet<String>();
         seats.add("AstraG15");
         seats.add("AstraG13");
 
         seatingPlan.deselectSeats(seats, showEvent);
 
-        assertTrue(showEvent.getSeatingTemplateInfo().getSeatMap().get("AstraG15").isBooked() == false);
+        assertFalse(showEvent.getSeatingTemplateInfo().getSeatMap().get("AstraG15").isBooked());
 
     }
 }
