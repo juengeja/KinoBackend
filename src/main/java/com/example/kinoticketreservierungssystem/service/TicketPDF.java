@@ -23,7 +23,7 @@ public class TicketPDF {
     @Autowired
     SeatRepository seatRepository;
 
-    private static String FILE = "src/main/resources/ticket.pdf";
+    private static String FILE = System.getProperty("user.home") + File.separator + "Tickets";
     private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 40,
             Font.BOLD);
     private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 23,
