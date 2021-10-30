@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Semaphore;
@@ -64,7 +65,7 @@ public class SendMail {
                     tickets.add(ticketRepository.findByTicketID(ticket).get());
                 }
                 ticketPDF.createTicketPDF(tickets);
-                helper.addAttachment("ticket.pdf", new ClassPathResource("ticket.pdf"));
+                helper.addAttachment("ticket.pdf", new File("src/main/resources/ticket.pdf"));
             javaMailSender.send(msg);
         } catch (InterruptedException e) {
             e.printStackTrace();
