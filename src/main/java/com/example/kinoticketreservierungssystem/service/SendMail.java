@@ -65,7 +65,7 @@ public class SendMail {
                     tickets.add(ticketRepository.findByTicketID(ticket).get());
                 }
                 ticketPDF.createTicketPDF(tickets);
-                helper.addAttachment("ticket.pdf", new File(System.getProperty("user.home") + File.separator + "Tickets"));
+                helper.addAttachment("ticket.pdf", new ClassPathResource(System.getProperty("user.home") + File.separator + "Tickets"));
             javaMailSender.send(msg);
         } catch (InterruptedException e) {
             e.printStackTrace();
