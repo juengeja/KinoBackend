@@ -65,7 +65,7 @@ public class SendMail {
                     tickets.add(ticketRepository.findByTicketID(ticket).get());
                 }
                 ticketPDF.createTicketPDF(tickets);
-                helper.addAttachment("ticket.pdf", new File("/var/lib/jenkins/workspace/KinoBackend/src/main/resources/ticket.pdf"));
+                helper.addAttachment("ticket.pdf", new File("C:/var/lib/jenkins/workspace/KinoBackend/src/main/resources/ticket.pdf"));
             javaMailSender.send(msg);
         } catch (InterruptedException e) {
             e.printStackTrace();

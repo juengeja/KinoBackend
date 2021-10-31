@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -46,7 +47,6 @@ class SeatingPlanTest {
     void selectSeats() {
 
         showEvent = showEventRepository.findByShowEventID("thirdEvent").get();
-
         seats = new HashSet<String>();
         seats.add("AstraG15");
         seats.add("AstraG13");

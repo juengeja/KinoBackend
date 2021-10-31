@@ -11,6 +11,7 @@ public class Admin {
     private String adminID;
     @PartitionKey
     private String username;
+    private boolean successful;
     private String password;
 
     public Admin(String adminID, String username, String password) {

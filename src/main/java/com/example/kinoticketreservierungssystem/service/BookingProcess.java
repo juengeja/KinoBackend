@@ -39,7 +39,7 @@ public class BookingProcess {
         String creationDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin")).toString();
         if(reservation.getBookingInfo()==null){
             String bookingID = "Booking"+creationDateTime;
-            if(reservation.isQuickCheckout() == true){
+            if(reservation.isQuickCheckout()){
             bookingRepository.save(new Booking(bookingID, true));}
             else{bookingRepository.save(new Booking(bookingID,false));}
             reservation.setBookingInfo(bookingID);
