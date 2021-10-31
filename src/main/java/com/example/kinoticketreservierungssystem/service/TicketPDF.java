@@ -31,13 +31,13 @@ public class TicketPDF {
 
 
 
-    public void createTicketPDF(Set<Ticket> tickets) {
+    public File createTicketPDF(Set<Ticket> tickets) {
 
         Document document = new Document();
-
+        File file = null;
         try {
 
-            PdfWriter.getInstance(document, new FileOutputStream(FILE));
+            PdfWriter.getInstance(document, new FileOutputStream(file));
 
             //open
             document.open();
@@ -82,7 +82,7 @@ public class TicketPDF {
         } catch (FileNotFoundException | DocumentException e) {
             e.printStackTrace();
         }
-
+    return file;
     }
 
     public static Image generateQRCodeImage(String barcodeText) throws Exception {
