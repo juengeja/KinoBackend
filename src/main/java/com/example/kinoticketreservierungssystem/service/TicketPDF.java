@@ -34,7 +34,7 @@ public class TicketPDF {
     public File createTicketPDF(Set<Ticket> tickets) {
 
         Document document = new Document();
-        File file = null;
+        File file = new File(System.getProperty("user.home") + File.separator + "Tickets" + File.separator + "tickets.pdf");
         try {
 
             PdfWriter.getInstance(document, new FileOutputStream(file));
