@@ -36,18 +36,19 @@ public class BookingProcess {
     }
 
     public Booking reserveSeats(Reservation reservation) {
-        String creationDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin")).toString();
-        if(reservation.getBookingInfo()==null){
-            String bookingID = "Booking"+creationDateTime;
-            if(reservation.isQuickCheckout()){
-            bookingRepository.save(new Booking(bookingID, true));}
-            else{bookingRepository.save(new Booking(bookingID,false));}
-            reservation.setBookingInfo(bookingID);
-        }
-        Booking booking = bookingRepository.findByBookingID(reservation.getBookingInfo()).get();
-        ShowEvent showEvent = showEventRepository.findByShowEventID(reservation.getShowEventInfo()).get();
-        Set<String> seats = reservation.getSeats();
+
         try {
+            String creationDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin")).toString();
+            if(reservation.getBookingInfo()==null){
+                String bookingID = "Booking"+creationDateTime;
+                if(reservation.isQuickCheckout()){
+                    bookingRepository.save(new Booking(bookingID, true));}
+                else{bookingRepository.save(new Booking(bookingID,false));}
+                reservation.setBookingInfo(bookingID);
+            }
+            Booking booking = bookingRepository.findByBookingID(reservation.getBookingInfo()).get();
+            ShowEvent showEvent = showEventRepository.findByShowEventID(reservation.getShowEventInfo()).get();
+            Set<String> seats = reservation.getSeats();
             semaphore.acquire();
             Set<String> seatsAdded = new HashSet<>();
             Set<Ticket> ticketsAdded = new HashSet<>();
@@ -84,15 +85,18 @@ public class BookingProcess {
                     seatingPlan.selectSeats(seatsAdded, showEvent);
                     bookingProcess.seatsReservedTimer(reservation);
                     booking.setBookingStatus("reserved");
+
                 }
             }
             booking.setTotalPrice(booking.getTotalPrice()+reservation.getTotalAmount());
+            return bookingRepository.save(booking);
         } catch (InterruptedException e) {
             e.printStackTrace();
+            return null;
         } finally {
             reservationRepository.save(reservation);
             semaphore.release();
-            return bookingRepository.save(booking);
+
         }
     }
 
