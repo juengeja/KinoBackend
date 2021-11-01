@@ -26,6 +26,6 @@ public class DropdownController {
 
     @GetMapping("/{cinema}")
     public ResponseEntity<Iterable<SeatingTemplate>> frontShowAllSeatingTemplates(@PathVariable String cinema){
-        return new ResponseEntity<>(dropdownSelection.getAllSeatingPlans(cinema), HttpStatus.OK);
+        return new ResponseEntity<>(dropdownSelection.getAllSeatingTemplates(cinema), HttpStatus.OK);
     }
 }

@@ -23,7 +23,7 @@ public class DropdownSelection {
     EventRoomRepository eventRoomRepository;
 
 
-    public Set<SeatingTemplate> getAllSeatingPlans(String cinema){
+    public Set<SeatingTemplate> getAllSeatingTemplates(String cinema){
         Set<SeatingTemplate> seatingTemplates = new HashSet<>();
         Set<EventRoom> eventRooms = new HashSet<>();
         eventRoomRepository.findAllByCinemaInfo(cinemaRepository.findById(cinema).get()).forEach(eventRooms::add);
