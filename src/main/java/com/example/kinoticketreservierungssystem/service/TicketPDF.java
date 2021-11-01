@@ -23,7 +23,7 @@ public class TicketPDF {
     @Autowired
     SeatRepository seatRepository;
 
-    private static String FILE = "C:/var/lib/jenkins/workspace/KinoBackend/src/main/resources/ticket.pdf";
+    private static String FILE = System.getProperty("user.home") + File.separator + "Tickets" + File.separator + "tickets.pdf";
     private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 40,
             Font.BOLD);
     private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 23,
@@ -34,7 +34,7 @@ public class TicketPDF {
     public File createTicketPDF(Set<Ticket> tickets) {
 
         Document document = new Document();
-        File file = new File(System.getProperty("user.home") + File.separator + "Tickets" + File.separator + "tickets.pdf");
+        File file = new File("./");
         try {
 
             PdfWriter.getInstance(document, new FileOutputStream(file));
