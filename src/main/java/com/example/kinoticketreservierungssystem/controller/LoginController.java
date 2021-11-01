@@ -20,7 +20,7 @@ public class LoginController {
     @Autowired
     CheckAdmin checkAdmin;
 
-    @GetMapping
+    @PutMapping
     public ResponseEntity<Admin> frontCheckAdmin(@RequestBody Admin admin){
         return new ResponseEntity<Admin>(checkAdmin.checkAdmin(admin), HttpStatus.OK);
     }
