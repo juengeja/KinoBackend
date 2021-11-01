@@ -38,6 +38,7 @@ public class BookingProcess {
     public Booking reserveSeats(Reservation reservation) {
 
         try {
+            semaphore.acquire();
             String creationDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin")).toString();
             if(reservation.getBookingInfo()==null){
                 String bookingID = "Booking"+creationDateTime;
@@ -49,7 +50,6 @@ public class BookingProcess {
             Booking booking = bookingRepository.findByBookingID(reservation.getBookingInfo()).get();
             ShowEvent showEvent = showEventRepository.findByShowEventID(reservation.getShowEventInfo()).get();
             Set<String> seats = reservation.getSeats();
-            semaphore.acquire();
             Set<String> seatsAdded = new HashSet<>();
             Set<Ticket> ticketsAdded = new HashSet<>();
             for(String seat:seats){
