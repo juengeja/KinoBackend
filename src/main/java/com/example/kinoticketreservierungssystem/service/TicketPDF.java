@@ -34,7 +34,7 @@ public class TicketPDF {
     public File createTicketPDF(Set<Ticket> tickets) {
 
         Document document = new Document();
-        File file = new File("./");
+        File file = new File("webapps/ticket.pdf");
         try {
 
             PdfWriter.getInstance(document, new FileOutputStream(file));

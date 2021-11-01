@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface SeatingTemplateRepository extends CosmosRepository<SeatingTemplate, String> {
     Optional<SeatingTemplate> findBySeatingTemplateID(String seatingTemplateID);
     Iterable<SeatingTemplate> findAll();
+    Optional<SeatingTemplate> findByEventRoomID(String eventRoomID);
 }
