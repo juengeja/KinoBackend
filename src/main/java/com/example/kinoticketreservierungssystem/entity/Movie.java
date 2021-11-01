@@ -22,6 +22,7 @@ public class Movie {
     private String director;
     private String img;
     private String description;
+    private boolean successful = true;
 
     public Movie(String movieId, String movieName, String mainGenre, int duration, String img, String description) {
         this.movieId = movieId;
