@@ -11,7 +11,7 @@ public class Admin {
     private String adminID;
     @PartitionKey
     private String username;
-    private boolean successful;
+    private boolean successful = true;
     private String password;
 
     public Admin(String adminID, String username, String password) {
@@ -48,6 +48,14 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isSuccessful() {
+        return successful;
+    }
+
+    public void setSuccessful(boolean successful) {
+        this.successful = successful;
     }
 
     @Override
