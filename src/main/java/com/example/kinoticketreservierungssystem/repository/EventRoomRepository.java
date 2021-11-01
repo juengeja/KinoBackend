@@ -17,6 +17,6 @@ public interface EventRoomRepository extends CosmosRepository<EventRoom, String>
 
 
    Optional<EventRoom> findByEventRoomID(String eventRoomID);
-   Iterable<EventRoom> findAllByCinema(Cinema cinema);
+   Iterable<EventRoom> findAllByCinemaInfo(Cinema cinema);
 }
 
