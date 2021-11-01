@@ -1,10 +1,8 @@
 package com.example.kinoticketreservierungssystem.controller;
 
 import com.example.kinoticketreservierungssystem.entity.Admin;
-import com.example.kinoticketreservierungssystem.entity.Booking;
 import com.example.kinoticketreservierungssystem.repository.AdminRepository;
 import com.example.kinoticketreservierungssystem.service.CheckAdmin;
-import com.sun.tools.javac.comp.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
