@@ -23,12 +23,11 @@ public class AdminController {
 
     @PostMapping("/createshowevent")
     public ResponseEntity<ShowEvent> createShowEvent(@RequestBody ShowEvent showEvent){
-        return new ResponseEntity<ShowEvent>(showEventRepository.save(showEvent), HttpStatus.OK);
+        return new ResponseEntity<>(showEventRepository.save(showEvent), HttpStatus.OK);
     }
 
     @PostMapping("/createmovie")
     public ResponseEntity<Movie> createShowEvent(@RequestBody Movie movie){
-        Movie successfulMovie = movie;
-        return new ResponseEntity<Movie>(movieRepository.save(successfulMovie), HttpStatus.OK);
+        return new ResponseEntity<>(movieRepository.save(movie), HttpStatus.OK);
     }
 }
