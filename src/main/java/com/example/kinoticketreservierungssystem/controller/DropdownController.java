@@ -10,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @RequestMapping(value = "/seatingtemplates")
 @RestController
 @CrossOrigin(origins = "*")
@@ -26,6 +29,8 @@ public class DropdownController {
 
     @GetMapping("/{cinema}")
     public ResponseEntity<Iterable<SeatingTemplate>> frontShowAllSeatingTemplates(@PathVariable String cinema){
-        return new ResponseEntity<>(dropdownSelection.getAllSeatingTemplates(cinema), HttpStatus.OK);
+        Set<SeatingTemplate> seatingTemplates = new HashSet<>();
+        seatingTemplateRepository.findAll().forEach(seatingTemplates::add);
+        return new ResponseEntity<>(seatingTemplates, HttpStatus.OK);
     }
 }
