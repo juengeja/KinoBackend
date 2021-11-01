@@ -19,7 +19,7 @@ public class CheckAdmin {
 
         if(adminUser != null && adminUser.equals(adminPW)){
             return adminUser.get();
-        }
+        }else{
         admin.setSuccessful(false);
         return admin;}
-}
+}}
