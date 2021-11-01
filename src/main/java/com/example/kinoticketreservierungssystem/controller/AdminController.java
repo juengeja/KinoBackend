@@ -28,6 +28,7 @@ public class AdminController {
 
     @PostMapping("/createmovie")
     public ResponseEntity<Movie> createShowEvent(@RequestBody Movie movie){
-        return new ResponseEntity<Movie>(movieRepository.save(movie), HttpStatus.OK);
+        Movie successfulMovie = movie;
+        return new ResponseEntity<Movie>(movieRepository.save(successfulMovie), HttpStatus.OK);
     }
 }
