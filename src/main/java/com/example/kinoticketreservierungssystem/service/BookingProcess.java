@@ -122,7 +122,6 @@ public class BookingProcess {
 
     public Booking bookSeats(Booking booking){
         customerRepository.save(booking.getCustomerInfo());
-        booking.setBookingStatus("paid");
         for(String ticketID : booking.getTickets()){
             Ticket ticket = ticketRepository.findByTicketID(ticketID).get();
             String seatID = ticket.getSeatInfo();

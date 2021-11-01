@@ -45,7 +45,9 @@ public class BookingController {
     @PutMapping("/successfulpayment")
     public ResponseEntity<Booking> seatsBooked(@RequestBody Booking booking) throws MessagingException {
         Booking bookedSeats = bookingProcess.bookSeats(booking);
+        if(bookedSeats.getBookingStatus()!="denied"){
         sendMail.ticketEmail(booking);
+        booking.setBookingStatus("paid");}
         return new ResponseEntity<Booking>(bookedSeats, HttpStatus.OK);
     }
 }
