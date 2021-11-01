@@ -24,19 +24,13 @@ public class Movie {
     private String description;
     private boolean successful = true;
 
-    public Movie(String movieId, String movieName, String mainGenre, List<String> genres, int duration, String trailer, List<String> actors, String producer, String director, String img, String description, boolean successful) {
+    public Movie(String movieId, String movieName, String mainGenre, int duration, String img, String description) {
         this.movieId = movieId;
         this.movieName = movieName;
         this.mainGenre = mainGenre;
-        this.genres = genres;
         this.duration = duration;
-        this.trailer = trailer;
-        this.actors = actors;
-        this.producer = producer;
-        this.director = director;
         this.img = img;
         this.description = description;
-        this.successful = successful;
     }
 
     public Movie() {
