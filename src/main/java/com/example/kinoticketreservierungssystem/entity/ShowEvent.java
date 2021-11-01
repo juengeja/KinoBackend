@@ -17,7 +17,6 @@ public class ShowEvent {
     @PartitionKey
     private boolean is3D;
     private boolean live = true;
-    private boolean successful;
 
     public ShowEvent(String showEventID, Movie movieInfo, SeatingTemplate seatingTemplateInfo, LocalDateTime eventStart, boolean is3D, boolean isLive) {
         this.showEventID = showEventID;
