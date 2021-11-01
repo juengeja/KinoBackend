@@ -107,7 +107,7 @@ public class BookingProcess {
             public void run(){
                 Booking booking = bookingRepository.findByBookingID(reservation.getBookingInfo()).get();
                 if(booking.getBookingStatus()=="paid"){ reservedTimer.cancel();}
-                ShowEvent deselectedSeatingPlan = seatingPlan.deselectSeats(reservation.getSeats(), showEventRepository.findByShowEventID(reservation.getShowEventInfo()).get());
+                seatingPlan.deselectSeats(reservation.getSeats(), showEventRepository.findByShowEventID(reservation.getShowEventInfo()).get());
                 Set<String> clearSeats = new HashSet<>();
                 reservation.setSeats(clearSeats);
                 Set <Reservation> removeReservation = booking.getReservations();
@@ -120,10 +120,19 @@ public class BookingProcess {
         reservedTimer.schedule(deselectSeatsTimerTask, 900000);
     }
 
-    public Booking bookSeats(Booking paidBooking){
-        customerRepository.save(paidBooking.getCustomerInfo());
-        paidBooking.setBookingStatus("paid");
-        return bookingRepository.save(paidBooking);
+    public Booking bookSeats(Booking booking){
+        customerRepository.save(booking.getCustomerInfo());
+        booking.setBookingStatus("paid");
+        for(String ticketID : booking.getTickets()){
+            Ticket ticket = ticketRepository.findByTicketID(ticketID).get();
+            String seatID = ticket.getSeatInfo();
+            ShowEvent showEvent = showEventRepository.findByShowEventID(ticket.getShowEventInfo()).get();
+            if(!showEvent.getSeatingTemplateInfo().getSeatMap().get(seatID).isBooked()) {
+                booking.setBookingStatus("denied");
+                break;
+            }
+        }
+        return bookingRepository.save(booking);
     }
 
     public Booking removeReservation(String reservationID) {
