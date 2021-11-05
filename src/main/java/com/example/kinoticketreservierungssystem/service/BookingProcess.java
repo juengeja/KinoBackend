@@ -106,7 +106,7 @@ public class BookingProcess {
         TimerTask deselectSeatsTimerTask = new TimerTask(){
             public void run(){
                 Booking booking = bookingRepository.findByBookingID(reservation.getBookingInfo()).get();
-                if(booking.getBookingStatus()=="paid"){ reservedTimer.cancel();}
+                if(booking.getBookingStatus().equals("paid")){ reservedTimer.cancel();}
                 seatingPlan.deselectSeats(reservation.getSeats(), showEventRepository.findByShowEventID(reservation.getShowEventInfo()).get());
                 Set<String> clearSeats = new HashSet<>();
                 reservation.setSeats(clearSeats);
