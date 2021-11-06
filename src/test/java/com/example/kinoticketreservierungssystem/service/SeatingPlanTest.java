@@ -6,6 +6,8 @@ import com.example.kinoticketreservierungssystem.entity.SeatingTemplate;
 import com.example.kinoticketreservierungssystem.entity.ShowEvent;
 import com.example.kinoticketreservierungssystem.repository.SeatingTemplateRepository;
 import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,10 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 @SpringBootTest
 class SeatingPlanTest {
@@ -29,9 +30,9 @@ class SeatingPlanTest {
     @Autowired
     SeatingPlan seatingPlan;
 
-    //SelectSeatObjekte
+    //SelectSeatObjekten
     ShowEvent showEvent;
-    HashSet<String> seats;
+    HashSet seats;
 
     //Testklasen
     ShowEvent testEvent;
@@ -47,13 +48,18 @@ class SeatingPlanTest {
     void selectSeats() {
 
         showEvent = showEventRepository.findByShowEventID("thirdEvent").get();
-        seats = new HashSet<String>();
+
+        seats = new HashSet();
         seats.add("AstraG15");
         seats.add("AstraG13");
 
         seatingPlan.selectSeats(seats, showEvent);
 
-        assertTrue(showEvent.getSeatingTemplateInfo().getSeatMap().get("AstraG15").isBooked());
+        assertFalse(showEvent.getSeatingTemplateInfo().getSeatMap().isEmpty());
+
+        assertTrue(showEvent.getSeatingTemplateInfo().getSeatMap().get("AstraG15").isBooked() == true);
+
+
 
     }
 
@@ -68,7 +74,14 @@ class SeatingPlanTest {
 
         seatingPlan.deselectSeats(seats, showEvent);
 
+        assertFalse(showEvent.getSeatingTemplateInfo().getSeatMap().isEmpty());
+
         assertFalse(showEvent.getSeatingTemplateInfo().getSeatMap().get("AstraG15").isBooked());
+
+
+
+
+
 
     }
 }
