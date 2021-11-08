@@ -47,7 +47,7 @@ public class BookingController {
         Booking bookedSeats = bookingProcess.bookSeats(booking);
         if(!bookedSeats.getBookingStatus().equals("denied")){
             bookedSeats.setBookingStatus("paid");
-            bookingRepository.save(bookedSeats);
+            bookingRepository.save(bookedSeats);    
             sendMail.ticketEmail(bookedSeats);
         }
         return new ResponseEntity<>(bookedSeats, HttpStatus.OK);
