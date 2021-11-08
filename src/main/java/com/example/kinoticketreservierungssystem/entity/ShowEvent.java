@@ -27,9 +27,6 @@ public class ShowEvent {
         this.live = isLive;
     }
 
-    public ShowEvent(String firstEvent, String s, String action, int i, String s1) {
-    }
-
     public ShowEvent(String showEventID, LocalDateTime eventStart, boolean is3D, boolean isLive) {
         this.showEventID = showEventID;
         this.eventStart = eventStart;
