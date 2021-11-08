@@ -18,6 +18,8 @@ public class ShowEvent {
     private boolean is3D;
     private boolean live = true;
 
+    public ShowEvent();
+    
     public ShowEvent(String showEventID, Movie movieInfo, SeatingTemplate seatingTemplateInfo, LocalDateTime eventStart, boolean is3D, boolean isLive) {
         this.showEventID = showEventID;
         this.movieInfo = movieInfo;
