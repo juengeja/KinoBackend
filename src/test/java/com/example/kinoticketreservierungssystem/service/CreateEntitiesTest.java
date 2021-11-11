@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -83,6 +84,14 @@ class CreateEntitiesTest {
         assertEquals(eventRoom, eventRoomRepository.findByEventRoomID("Eventtest-ID").get());
 
     }
+
+    @Test
+    void createMovie() {
+        movie = new Movie("Movietest2-ID", "Name", "Genre", 164, "Image", "Description");
+        createEntities.createMovie(movie);
+        assertEquals(movie, movieRepository.findByMovieId("Movietest2-ID").get());
+    }
+
 
 
     @Test
@@ -161,19 +170,48 @@ class CreateEntitiesTest {
 
     @Test
     void createSeatingTemplate() {
+        seatMod = new SeatMod(8,false);
+        seatMap = new HashMap<>();
+        seatMap.put("Eventtest-IDA1", seatMod);
+        seatMap.put("Eventtest-IDA2", seatMod);
+        seatMap.put("Eventtest-IDA3", seatMod);
+        seatMap.put("Eventtest-IDA4", seatMod);
+        seatMap.put("Eventtest-IDA5", seatMod);
+        seatMap.put("Eventtest-IDA6", seatMod);
+        seatMap.put("Eventtest-IDB1", seatMod);
+        seatMap.put("Eventtest-IDB2", seatMod);
+        seatMap.put("Eventtest-IDB3", seatMod);
+        seatMap.put("Eventtest-IDB4", seatMod);
+        seatMap.put("Eventtest-IDB5", seatMod);
+        seatMap.put("Eventtest-IDB6", seatMod);
+        seatMap.put("Eventtest-IDC1", seatMod);
+        seatMap.put("Eventtest-IDC2", seatMod);
+        seatMap.put("Eventtest-IDC3", seatMod);
+        seatMap.put("Eventtest-IDC4", seatMod);
+        seatMap.put("Eventtest-IDC5", seatMod);
+        seatMap.put("Eventtest-IDC6", seatMod);
+        seatMap.put("Eventtest-IDD1", seatMod);
+        seatMap.put("Eventtest-IDD2", seatMod);
+        seatMap.put("Eventtest-IDD3", seatMod);
+        seatMap.put("Eventtest-IDD4", seatMod);
+        seatMap.put("Eventtest-IDD5", seatMod);
+        seatMap.put("Eventtest-IDD6", seatMod);
+
+        seatingTemplate = new SeatingTemplate("Eventtest-IDTemplate2021-11-11T19:26:06.819991700", "Eventtest-ID", seatMap);
+        assertEquals(seatingTemplate, seatingTemplateRepository.findBySeatingTemplateID("Eventtest-IDTemplate2021-11-11T19:26:06.819991700").get());
 
 
     }
 
     @Test
     void createShowEvent() {
-        seatingTemplate = seatingTemplateRepository.findBySeatingTemplateID("Test-IDTemplate2021-10-31T13:53:44.875012800").get();
-        eventStart = LocalDateTime.of(2021,10,31,14,10);
-        movie = new Movie("Test-ID", "Test-Name", "Test-Genre", 164, "Test-Image", "Test-Description");
-        showEvent = new ShowEvent("Test-ID", movie, seatingTemplate, eventStart, true, false );
+        seatingTemplate = seatingTemplateRepository.findBySeatingTemplateID("Eventtest-IDTemplate2021-11-11T19:26:06.819991700").get();
+        eventStart = LocalDateTime.of(2021,12,31,00,00);
+        movie = new Movie("Movietest-ID", "Name", "Genre", 164, "Image", "Description");
+        showEvent = new ShowEvent("Showevent-ID", movie, seatingTemplate, eventStart, true, false );
 
-        createEntities.createShowEvent("Test-ID","Test-ID", "Test-IDTemplate2021-10-31T13:53:44.875012800", eventStart, true, false);
-        assertEquals(showEvent, showEventRepository.findByShowEventID("Test-ID").get());
+        createEntities.createShowEvent("Showevent-ID","Movietest-ID", "Eventtest-IDTemplate2021-11-11T19:26:06.819991700", eventStart, true, false);
+        assertEquals(showEvent, showEventRepository.findByShowEventID("Showevent-ID").get());
 
     }
 
