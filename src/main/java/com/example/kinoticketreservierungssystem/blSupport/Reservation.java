@@ -29,6 +29,14 @@ public class Reservation {
         this.totalAmount = totalAmount;
     }
 
+    public Reservation(String reservationID, String showEventInfo, String bookingInfo, String seat, double totalAmount) {
+        this.reservationID = reservationID;
+        this.showEventInfo = showEventInfo;
+        this.bookingInfo = bookingInfo;
+        this.seats.add(seat);
+        this.totalAmount = totalAmount;
+    }
+
     public Reservation() {
 
     }

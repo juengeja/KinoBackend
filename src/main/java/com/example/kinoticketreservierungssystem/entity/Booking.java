@@ -36,6 +36,14 @@ public class Booking {
         this.quickCheckout = quickCheckout;
     }
 
+    public Booking(String bookingID, boolean quickCheckout, String bookingStatus, Reservation reservation, double totalPrice) {
+        this.bookingID = bookingID;
+        this.quickCheckout = quickCheckout;
+        this.bookingStatus = bookingStatus;
+        this.reservations.add(reservation);
+        this.totalPrice = totalPrice;
+    }
+
     public Booking() {
     }
 

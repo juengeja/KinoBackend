@@ -56,7 +56,7 @@ class SeatingPlanTest {
 
         assertFalse(showEvent.getSeatingTemplateInfo().getSeatMap().isEmpty());
 
-        assertTrue(showEvent.getSeatingTemplateInfo().getSeatMap().get("AstraG15").isBooked() == true);
+        assertTrue(showEvent.getSeatingTemplateInfo().getSeatMap().get("Eventtest-IDB1").isBooked() == true);
 
 
 
@@ -75,7 +75,7 @@ class SeatingPlanTest {
 
         assertFalse(showEvent.getSeatingTemplateInfo().getSeatMap().isEmpty());
 
-        assertFalse(showEvent.getSeatingTemplateInfo().getSeatMap().get("AstraG15").isBooked());
+        assertFalse(showEvent.getSeatingTemplateInfo().getSeatMap().get("Eventtest-IDC1").isBooked());
 
 
 
