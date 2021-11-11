@@ -27,9 +27,8 @@ public class ShoppingCartController {
         return new ResponseEntity<Booking>(bookingProcess.removeReservation(reservation), HttpStatus.OK);
     }
 
-    @PutMapping("{bookingID}")
-    public ResponseEntity<Booking> backUndoMenu (@PathVariable String bookingID){
-        Booking booking = bookingRepository.findByBookingID(bookingID).get();
+    @PutMapping()
+    public ResponseEntity<Booking> backUndoMenu (@RequestBody Booking booking){
         Menu menu = menuRepository.findById(booking.getMenu()).get();
         booking.setTotalPrice(booking.getTotalPrice()- menu.getPrice());
         booking.setMenu(null);
