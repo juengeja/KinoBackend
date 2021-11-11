@@ -22,7 +22,8 @@ public class MenuController {
 MenuRepository menuRepository;
 @Autowired
 BookingRepository bookingRepository;
-    @GetMapping()
+
+    @PutMapping()
     public ResponseEntity<Booking> frontSelectMenu(@RequestBody Booking booking){
         Menu menu = menuRepository.findById(booking.getMenu()).get();
         booking.setTotalPrice(booking.getTotalPrice()+menu.getPrice());
