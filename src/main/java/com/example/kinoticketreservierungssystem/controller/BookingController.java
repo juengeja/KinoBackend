@@ -1,6 +1,6 @@
 package com.example.kinoticketreservierungssystem.controller;
 
-import com.example.kinoticketreservierungssystem.blSupport.Reservation;
+import com.example.kinoticketreservierungssystem.entity.Reservation;
 import com.example.kinoticketreservierungssystem.entity.*;
 import com.example.kinoticketreservierungssystem.repository.BookingRepository;
 import com.example.kinoticketreservierungssystem.repository.CustomerRepository;

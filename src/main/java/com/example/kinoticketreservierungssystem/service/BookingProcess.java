@@ -1,6 +1,6 @@
 package com.example.kinoticketreservierungssystem.service;
 
-import com.example.kinoticketreservierungssystem.blSupport.Reservation;
+import com.example.kinoticketreservierungssystem.entity.Reservation;
 import com.example.kinoticketreservierungssystem.entity.*;
 import com.example.kinoticketreservierungssystem.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
