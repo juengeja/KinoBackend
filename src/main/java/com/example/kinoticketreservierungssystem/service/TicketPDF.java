@@ -7,12 +7,12 @@ import com.example.kinoticketreservierungssystem.repository.SeatRepository;
 import com.example.kinoticketreservierungssystem.repository.ShowEventRepository;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
-import net.glxn.qrgen.javase.QRCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.imageio.ImageIO;
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.Set;
 
 @Service
@@ -67,7 +67,7 @@ public class TicketPDF {
                 document.add(p4);
 
                 try {
-                    document.add(generateQRCodeImage(ticket.getTicketID()));
+                   // document.add(generateQRCodeImage(ticket.getTicketID()));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -85,7 +85,7 @@ public class TicketPDF {
     return file;
     }
 
-    public static Image generateQRCodeImage(String barcodeText) throws Exception {
+    /*public static Image generateQRCodeImage(String barcodeText) throws Exception {
         ByteArrayOutputStream stream = QRCode
                 .from(barcodeText)
                 .withSize(250, 250)
@@ -96,6 +96,7 @@ public class TicketPDF {
         Image iTextImage = Image.getInstance(baos.toByteArray());
         return iTextImage;
     }
+     */
 
     private static void addEmptyLine(Paragraph paragraph, int number) {
         for (int i = 0; i < number; i++) {
