@@ -25,7 +25,7 @@ BookingRepository bookingRepository;
     @GetMapping()
     public ResponseEntity<Booking> frontSelectMenu(@RequestBody Booking booking){
         Menu menu = menuRepository.findById(booking.getMenu()).get();
-        booking.setTotalPrice(booking.getTotalPrice()-menu.getPrice());
+        booking.setTotalPrice(booking.getTotalPrice()+menu.getPrice());
         return new ResponseEntity<>(bookingRepository.save(booking), HttpStatus.OK);
     }
 }
