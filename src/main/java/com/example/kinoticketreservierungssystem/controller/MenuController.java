@@ -26,7 +26,6 @@ BookingRepository bookingRepository;
     public ResponseEntity<Booking> frontSelectMenu(@RequestBody Booking booking){
         Menu menu = menuRepository.findById(booking.getMenu()).get();
         booking.setTotalPrice(booking.getTotalPrice()-menu.getPrice());
-        bookingRepository.save(booking);
-        return new ResponseEntity<>(booking, HttpStatus.OK);
+        return new ResponseEntity<>(bookingRepository.save(booking), HttpStatus.OK);
     }
 }

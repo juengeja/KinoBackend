@@ -33,7 +33,6 @@ public class ShoppingCartController {
         Menu menu = menuRepository.findById(booking.getMenu()).get();
         booking.setTotalPrice(booking.getTotalPrice()- menu.getPrice());
         booking.setMenu(null);
-        bookingRepository.save(booking);
-        return new ResponseEntity<Booking>(booking, HttpStatus.OK);
+        return new ResponseEntity<Booking>(bookingRepository.save(booking), HttpStatus.OK);
     }
 }
