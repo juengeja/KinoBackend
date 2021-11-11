@@ -23,7 +23,7 @@ MenuRepository menuRepository;
 @Autowired
 BookingRepository bookingRepository;
     @GetMapping()
-    public ResponseEntity<Booking> frontShowAllMovies(@RequestBody Booking booking){
+    public ResponseEntity<Booking> frontSelectMenu(@RequestBody Booking booking){
         Menu menu = menuRepository.findById(booking.getMenu()).get();
         booking.setTotalPrice(booking.getTotalPrice()-menu.getPrice());
         bookingRepository.save(booking);
