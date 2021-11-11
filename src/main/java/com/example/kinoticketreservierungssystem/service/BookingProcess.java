@@ -83,7 +83,7 @@ public class BookingProcess {
                     reservations.add(reservation);
                     booking.setReservations(reservations);
                     seatingPlan.selectSeats(seatsAdded, showEvent);
-                    bookingProcess.seatsReservedTimer(reservation);
+                    bookingProcess.seatsReservedTimer(reservation, 900000);
                     booking.setBookingStatus("reserved");
 
                 }
@@ -100,7 +100,7 @@ public class BookingProcess {
         }
     }
 
-    public void seatsReservedTimer(Reservation reservation){
+    public void seatsReservedTimer(Reservation reservation, long delay){
         Timer reservedTimer = new Timer();
 
         TimerTask deselectSeatsTimerTask = new TimerTask(){
@@ -117,7 +117,7 @@ public class BookingProcess {
                 bookingRepository.save(booking);
                 }
         };
-        reservedTimer.schedule(deselectSeatsTimerTask, 900000);
+        reservedTimer.schedule(deselectSeatsTimerTask, delay);
     }
 
     public Booking bookSeats(Booking booking){
