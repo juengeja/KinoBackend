@@ -1,6 +1,6 @@
 package com.example.kinoticketreservierungssystem.tempController;
 
-import com.example.kinoticketreservierungssystem.blSupport.Reservation;
+import com.example.kinoticketreservierungssystem.entity.Reservation;
 import com.example.kinoticketreservierungssystem.blSupport.SeatMod;
 import com.example.kinoticketreservierungssystem.entity.*;
 import com.example.kinoticketreservierungssystem.repository.*;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.kinoticketreservierungssystem.entity.Movie;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
