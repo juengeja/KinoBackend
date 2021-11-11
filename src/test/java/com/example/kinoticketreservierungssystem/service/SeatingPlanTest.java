@@ -46,11 +46,11 @@ class SeatingPlanTest {
     @Test
     void selectSeats() {
 
-        showEvent = showEventRepository.findByShowEventID("thirdEvent").get();
+        showEvent = showEventRepository.findByShowEventID("Showevent-ID").get();
 
         seats = new HashSet();
-        seats.add("AstraG15");
-        seats.add("AstraG13");
+        seats.add("Eventtest-IDB1");
+        seats.add("Eventtest-IDC2");
 
         seatingPlan.selectSeats(seats, showEvent);
 
@@ -65,11 +65,11 @@ class SeatingPlanTest {
     @Test
     void deselectSeats() {
 
-        showEvent = showEventRepository.findByShowEventID("thirdEvent").get();
+        showEvent = showEventRepository.findByShowEventID("Showevent-ID").get();
 
         seats = new HashSet<String>();
-        seats.add("AstraG15");
-        seats.add("AstraG13");
+        seats.add("Eventtest-IDC1");
+        seats.add("Eventtest-IDD2");
 
         seatingPlan.deselectSeats(seats, showEvent);
 
