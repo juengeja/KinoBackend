@@ -30,10 +30,8 @@ public class SendMail {
     private final JavaMailSender javaMailSender;
     private static Semaphore semaphore;
 
-    public SendMail(JavaMailSender javaMailSender) {
-        this.javaMailSender = javaMailSender;
-        semaphore = new Semaphore(1);
-    }
+    public SendMail(JavaMailSender javaMailSender) { this.javaMailSender = javaMailSender;
+    semaphore = new Semaphore(1); }
 
 
     public void sendMail(Mail mail) {

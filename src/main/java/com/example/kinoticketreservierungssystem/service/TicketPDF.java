@@ -68,20 +68,14 @@ public class TicketPDF {
 
                 try {
                    // document.add(generateQRCodeImage(ticket.getTicketID()));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if (tickets.iterator().hasNext()) {
-                    document.newPage();
-                }
+                } catch (Exception e) { e.printStackTrace(); }
+                if (tickets.iterator().hasNext()) { document.newPage(); }
             }
             //close
             document.close();
 
 
-        } catch (FileNotFoundException | DocumentException e) {
-            e.printStackTrace();
-        }
+        } catch (FileNotFoundException | DocumentException e) { e.printStackTrace(); }
     return file;
     }
 

@@ -18,10 +18,6 @@ public class CreateMovie {
     @Autowired
     MovieRepository movieRepository;
 
-    public void createMovie(Movie movie){
-        movieRepository.save(movie);
-
-
-    }
+    public void createMovie(Movie movie){ movieRepository.save(movie); }
 
 }
