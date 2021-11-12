@@ -92,30 +92,6 @@ class BookingProcessTest{
         }
     }
 
-    @Test
-    void bookSeats() {
-        seats = new HashSet<>();
-        seats.add("Eventtest-IDC5");
-        reservation = new Reservation("BookSeat-Reservationtest", seats, "Showevent-ID", "BookSeats-Bookingtest", 8, false );
-        reservationRepository.save(reservation);
-        customer = new Customer("Costumertest-ID");
-        customerRepository.save(customer);
-        ticket = new Ticket("TicketTestA1", "Eventtest-IDC5", "BookSeat-Reservationtest", "Showevent-ID", "reserved" );
-        ticketRepository.save(ticket);
-        tickets = new HashSet<>();
-        tickets.add("TicketTestA1");
-
-        newBooking = new Booking("BookSeats-Bookingtest", customer, tickets, "couponCode", "paymentMethod", 8, "reserved");
-        bookingRepository.save(newBooking);
-
-        booking = new Booking("BookSeats-Bookingtest", customer, tickets, "couponCode", "paymentMethod", 8, "denied");
-
-        bookingProcess.bookSeats(newBooking);
-        assertEquals(booking, bookingRepository.findByBookingID("BookSeats-Bookingtest").get());
-
-
-
-    }
 
 
     @Test
