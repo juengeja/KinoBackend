@@ -31,17 +31,37 @@ public class Booking {
         this.totalPrice = totalPrice;
     }
 
+    public Booking(String bookingID, Customer customerInfo, Set<String> ticketInfo, String couponCode, String paymentMethod, double totalPrice, Set<Reservation> reservation) {
+        this.bookingID = bookingID;
+        this.customerInfo = customerInfo;
+        this.tickets = ticketInfo;
+        this.couponCode = couponCode;
+        this.paymentMethod = paymentMethod;
+        this.totalPrice = totalPrice;
+        this.reservations = reservation;
+    }
+
+    public Booking(String bookingID, Customer customerInfo, Set<String> ticketInfo, String couponCode, String paymentMethod, double totalPrice, String bookingStatus) {
+        this.bookingID = bookingID;
+        this.customerInfo = customerInfo;
+        this.tickets = ticketInfo;
+        this.couponCode = couponCode;
+        this.paymentMethod = paymentMethod;
+        this.totalPrice = totalPrice;
+    }
+
     public Booking(String bookingID, boolean quickCheckout) {
         this.bookingID = bookingID;
         this.quickCheckout = quickCheckout;
     }
 
-    public Booking(String bookingID, boolean quickCheckout, String bookingStatus, Reservation reservation, double totalPrice) {
+    public Booking(String bookingID, boolean quickCheckout, String bookingStatus, Set<Reservation> reservation, double totalPrice, String paymentMethod) {
         this.bookingID = bookingID;
         this.quickCheckout = quickCheckout;
         this.bookingStatus = bookingStatus;
-        this.reservations.add(reservation);
+        this.reservations = reservation;
         this.totalPrice = totalPrice;
+        this.paymentMethod = paymentMethod;
     }
 
     public Booking() {

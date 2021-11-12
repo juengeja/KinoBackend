@@ -29,6 +29,14 @@ public class Reservation {
         this.totalAmount = totalAmount;
     }
 
+    public Reservation(String reservationID, Set<String> seats, String showEventInfo, String bookingInfo, double totalAmount, boolean quickCheckout) {
+        this.reservationID = reservationID;
+        this.seats = seats;
+        this.showEventInfo = showEventInfo;
+        this.bookingInfo = bookingInfo;
+        this.totalAmount = totalAmount;
+    }
+
     public Reservation(String reservationID, String showEventInfo, String bookingInfo, String seat, double totalAmount) {
         this.reservationID = reservationID;
         this.showEventInfo = showEventInfo;

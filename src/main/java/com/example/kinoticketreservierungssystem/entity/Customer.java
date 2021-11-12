@@ -42,6 +42,12 @@ public class Customer{
         this.user = user;
     }
 
+    public Customer(String customerID) {
+        this.customerID = customerID;
+
+    }
+
+
     public Customer() {
 
     }
