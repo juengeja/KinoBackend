@@ -4,7 +4,6 @@ import com.example.kinoticketreservierungssystem.blSupport.Mail;
 import com.example.kinoticketreservierungssystem.entity.Booking;
 import com.example.kinoticketreservierungssystem.entity.Ticket;
 import com.example.kinoticketreservierungssystem.repository.TicketRepository;
-import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Semaphore;
@@ -69,7 +67,7 @@ public class SendMail {
                 File file = ticketPDF.createTicketPDF(tickets, booking.getMenu());
                 helper.addAttachment("ticket.pdf", file);
             javaMailSender.send(msg);
-        } catch (InterruptedException | FileNotFoundException | DocumentException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             semaphore.release();
