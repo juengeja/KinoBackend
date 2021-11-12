@@ -37,5 +37,6 @@ class SendMailTest {
 
     @Test
     void ticketEmail() {
+
     }
 }
