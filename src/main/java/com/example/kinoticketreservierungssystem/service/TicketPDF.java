@@ -34,16 +34,14 @@ public class TicketPDF {
 
 
 
-    public File createTicketPDF(Set<Ticket> tickets, String menu) {
+    public File createTicketPDF(Set<Ticket> tickets, String menu) throws FileNotFoundException, DocumentException {
 
         Document document = new Document();
         File file = new File("webapps/ticket.pdf");
 
-        try {
             PdfWriter.getInstance(document, new FileOutputStream(file));
 
-
-        //open
+            //open
             document.open();
             for (Ticket ticket : tickets) {
                 Seat seat = seatRepository.findBySeatID(ticket.getSeatInfo()).get();
@@ -100,11 +98,8 @@ public class TicketPDF {
             }
             //close
             document.close();
-        } catch (DocumentException | FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
-        return file;
+    return file;
     }
 
     public static Image generateQRCodeImage(String barcodeText) throws Exception {
