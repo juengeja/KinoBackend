@@ -31,9 +31,7 @@ public class AddSeats {
     }
 
     public void createSeats(List<Seat> seats){
-        for(Seat seat:seats){
-    seatRepository.save(seat);
-        }
+        for(Seat seat:seats){ seatRepository.save(seat);}
     }
 }
 //A,B,C,D,E,F,G,H,I,J
