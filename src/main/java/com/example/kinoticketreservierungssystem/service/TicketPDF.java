@@ -34,7 +34,7 @@ public class TicketPDF {
 
 
 
-    public File createTicketPDF(Set<Ticket> tickets, String menu) {
+    public File createTicketPDF(Set<Ticket> tickets) {
 
         Document document = new Document();
         File file = new File("webapps/ticket.pdf");
@@ -84,19 +84,19 @@ public class TicketPDF {
                     document.newPage();
                 }
             }
-            if(menu != null) {
-                document.newPage();
-                Paragraph p5 = new Paragraph();
-                p5.add("Menu Voucher");
-                p5.setAlignment(Element.ALIGN_CENTER);
-                document.add(p5);
+          //  if(menu != null) {
+            //    document.newPage();
+              //  Paragraph p5 = new Paragraph();
+               // p5.add("Menu Voucher");
+                //p5.setAlignment(Element.ALIGN_CENTER);
+                //document.add(p5);
 
-                try {
-                    document.add(generateQRCodeImage(menuRepository.findById(menu).get().getMenuId()));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+               // try {
+                 //   document.add(generateQRCodeImage(menuRepository.findById(menu).get().getMenuId()));
+                //} catch (Exception e) {
+                 //   e.printStackTrace();
+                //}
+            //}
             //close
             document.close();
 
