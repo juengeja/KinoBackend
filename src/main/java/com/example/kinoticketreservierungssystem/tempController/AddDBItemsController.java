@@ -125,7 +125,7 @@ public class AddDBItemsController {
        //Ticket ticket2 = new Ticket("testticket2","AstraB1","firstEvent","reserved");
      //  tickets.add(ticket);
        //tickets.add(ticket2);
-       ticketPDF.createTicketPDF(tickets);
+       ticketPDF.createTicketPDF(tickets, "menu");
    }
     }
 
