@@ -34,12 +34,15 @@ public class TicketPDF {
 
 
 
-    public File createTicketPDF(Set<Ticket> tickets, String menu) throws FileNotFoundException, DocumentException {
+    public File createTicketPDF(Set<Ticket> tickets, String menu) {
 
         Document document = new Document();
         File file = new File("webapps/ticket.pdf");
 
+
+        try {
             PdfWriter.getInstance(document, new FileOutputStream(file));
+
 
             //open
             document.open();
@@ -83,9 +86,9 @@ public class TicketPDF {
                     document.newPage();
                 }
             }
-          if(menu != null) {
-            document.newPage();
-               Paragraph p5 = new Paragraph();
+            if (menu != null) {
+                document.newPage();
+                Paragraph p5 = new Paragraph();
                 p5.add("Menu Voucher");
                 p5.setAlignment(Element.ALIGN_CENTER);
                 document.add(p5);
@@ -99,8 +102,17 @@ public class TicketPDF {
             //close
             document.close();
 
-    return file;
+
+            return file;
+        } catch (DocumentException e) {
+            e.printStackTrace();
+            return null;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
+
 
     public static Image generateQRCodeImage(String barcodeText) throws Exception {
         ByteArrayOutputStream stream = QRCode
